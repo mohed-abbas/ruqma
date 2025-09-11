@@ -28,4 +28,6 @@
 body {
   background: var(--background);
   font-family: var(--font-nunito) , var(--font-ibm), sans-serif;
+  scroll-behavior: smooth;
+  scroll-snap-type: mandatory;
 }

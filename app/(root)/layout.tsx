@@ -1,11 +1,19 @@
 import Navbar from "@/components/Navbar";
-export default function layout(
-    { children }: { children: React.ReactNode }
-) {
+
+export default function RootLayout({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     return (
-        <main className="min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
+        <div className="min-h-screen bg-black text-white">
+            {/* Fixed Navbar overlaying all sections with transparent background */}
             <Navbar />
-            {children}
-        </main>
+            
+            {/* Main content area with sections */}
+            <main className="relative">
+                {children}
+            </main>
+        </div>
     );
 }
