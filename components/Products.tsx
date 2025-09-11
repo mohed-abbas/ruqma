@@ -9,11 +9,7 @@ export default function Products() {
     >
       <div className="text-center max-w-4xl px-4">
         <h2 
-          className="text-6xl font-bold mb-6"
-          style={{ 
-            fontFamily: 'var(--font-ibm)',
-            color: '#d4af37'
-          }}
+          className="text-6xl font-bold mb-6 font-[var(--font-ibm)] text-[var(--primary)]"
         >
           Products
         </h2>

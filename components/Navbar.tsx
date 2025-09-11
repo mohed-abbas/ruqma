@@ -22,11 +22,20 @@ export default function Navbar() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.replace('#', ''));
     if (element) {
-      const navHeight = 80; // Approximate navbar height
-      const elementPosition = element.offsetTop - navHeight;
+      const navHeight = 80; // Fixed navbar height
+      let scrollOffset = navHeight;
+      
+      // Add enhanced offset for sections that need visual prominence
+      if (sectionId === 'products') {
+        // Additional offset to show more of Products white background
+        scrollOffset += 200; // Total offset: 280px
+      }
+      // Future sections can be added here with custom offsets
+      
+      const elementPosition = element.offsetTop - scrollOffset;
       
       window.scrollTo({
-        top: elementPosition,
+        top: Math.max(0, elementPosition), // Prevent negative scroll
         behavior: 'smooth'
       });
     }
@@ -73,22 +82,22 @@ export default function Navbar() {
       case 'hero':
         return {
           textColor: 'text-white',
-          logoColor: 'text-[#d4af37]',
-          hoverColor: 'hover:text-[#d4af37]',
+          logoColor: 'text-[var(--primary)]',
+          hoverColor: 'hover:text-[var(--primary)]',
           mobileIconColor: 'text-white'
         };
       case 'products':
         return {
           textColor: 'text-gray-900',
-          logoColor: 'text-[#d4af37]',
-          hoverColor: 'hover:text-[#d4af37]',
+          logoColor: 'text-[var(--primary)]',
+          hoverColor: 'hover:text-[var(--primary)]',
           mobileIconColor: 'text-gray-900'
         };
       default:
         return {
           textColor: 'text-white',
-          logoColor: 'text-[#d4af37]',
-          hoverColor: 'hover:text-[#d4af37]',
+          logoColor: 'text-[var(--primary)]',
+          hoverColor: 'hover:text-[var(--primary)]',
           mobileIconColor: 'text-white'
         };
     }
@@ -125,7 +134,7 @@ export default function Navbar() {
                 key={item.href}
                 onClick={() => handleNavClick(item)}
                 className={`flex flex-col justify-center transition-all duration-300 ${colors.hoverColor} font-bold ${
-                  isActive ? 'text-[#d4af37]' : colors.textColor
+                  isActive ? 'text-[var(--primary)]' : colors.textColor
                 }`}
                 style={{ fontFamily: 'var(--font-nunito)' }}
                 aria-current={isActive ? 'page' : undefined}
@@ -142,7 +151,7 @@ export default function Navbar() {
               key={item.href}
               href={item.href}
               className={`flex flex-col justify-center transition-all duration-300 ${colors.hoverColor} font-bold ${
-                isActive ? 'text-[#d4af37]' : colors.textColor
+                isActive ? 'text-[var(--primary)]' : colors.textColor
               }`}
               style={{ fontFamily: 'var(--font-nunito)' }}
               aria-current={isActive ? 'page' : undefined}
@@ -203,8 +212,8 @@ export default function Navbar() {
                       handleNavClick(item);
                       setIsMobileMenuOpen(false);
                     }}
-                    className={`block w-full text-left py-3 px-4 rounded-lg text-[16px] transition-all duration-300 hover:bg-[#d4af37]/10 hover:text-[#d4af37] ${
-                      isActive ? 'text-[#d4af37]' : colors.textColor
+                    className={`block w-full text-left py-3 px-4 rounded-lg text-[16px] transition-all duration-300 hover:bg-[#d4af37]/10 hover:text-[var(--primary)] ${
+                      isActive ? 'text-[var(--primary)]' : colors.textColor
                     }`}
                     aria-current={isActive ? 'page' : undefined}
                   >
@@ -217,8 +226,8 @@ export default function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`block py-3 px-4 rounded-lg text-[16px] transition-all duration-300 hover:bg-[#d4af37]/10 hover:text-[#d4af37] ${
-                    isActive ? 'text-[#d4af37]' : colors.textColor
+                  className={`block py-3 px-4 rounded-lg text-[16px] transition-all duration-300 hover:bg-[#d4af37]/10 hover:text-[var(--primary)] ${
+                    isActive ? 'text-[var(--primary)]' : colors.textColor
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                   onClick={() => setIsMobileMenuOpen(false)}

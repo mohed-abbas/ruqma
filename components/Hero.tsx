@@ -19,11 +19,20 @@ export default function Hero() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navHeight = 80; // Account for sticky navbar
-      const elementPosition = element.offsetTop - navHeight;
+      const navHeight = 80; // Fixed navbar height
+      let scrollOffset = navHeight;
+      
+      // Add enhanced offset for sections that need visual prominence
+      if (sectionId === 'products') {
+        // Additional offset to show more of Products white background
+        scrollOffset += 200; // Total offset: 280px
+      }
+      // Future sections can be added here with custom offsets
+      
+      const elementPosition = element.offsetTop - scrollOffset;
       
       window.scrollTo({
-        top: elementPosition,
+        top: Math.max(0, elementPosition), // Prevent negative scroll
         behavior: 'smooth'
       });
     }
@@ -63,20 +72,12 @@ export default function Hero() {
             <hgroup className="mb-12">
               <h1 
                 id="hero-title"
-                className="text-7xl sm:text-8xl md:text-9xl lg:text-[100px] font-medium leading-[1.2] mb-6 capitalize"
-                style={{ 
-                  fontFamily: 'var(--font-ibm)',
-                  color: '#d4af37'
-                }}
+                className="text-7xl sm:text-8xl md:text-9xl lg:text-[100px] font-medium leading-[1.2] mb-6 capitalize font-[var(--font-ibm)] text-[var(--primary)]"
               >
                 Ruqma
               </h1>
               <p 
-                className="text-4xl sm:text-5xl md:text-6xl font-normal text-white leading-[1.2]"
-                style={{ 
-                  fontFamily: 'var(--font-nunito)',
-                  fontVariationSettings: "'YTLC' 500, 'wdth' 100"
-                }}
+                className="text-4xl sm:text-5xl md:text-6xl font-normal text-white leading-[1.2] font-[var(--font-nunito)] "
               >
                 Beyond Ordinary
               </p>
