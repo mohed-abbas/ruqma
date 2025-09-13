@@ -2,7 +2,7 @@ interface ArrowIconProps {
   className?: string;
 }
 
-export default function ArrowIcon({ className = "w-10 h-10" }: ArrowIconProps) {
+export default function ArrowIcon({ className = "w-8 h-8" }: ArrowIconProps) {
   return (
     <svg
       className={className}
@@ -13,7 +13,7 @@ export default function ArrowIcon({ className = "w-10 h-10" }: ArrowIconProps) {
     >
       <path
         d="M10 30L30 10M30 10H14M30 10V26"
-        stroke="currentColor"
+        stroke="#d4af37"
         strokeWidth="2.5"
         strokeLinecap="round"
         strokeLinejoin="round"
