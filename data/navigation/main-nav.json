@@ -2,6 +2,7 @@
   "items": [
     { "href": "#hero", "label": "Home", "type": "scroll" },
     { "href": "#products", "label": "Products", "type": "scroll" },
+    { "href": "#testimonials", "label": "Testimonials", "type": "scroll" },
     { "href": "/our-story", "label": "Our Story", "type": "page" },
     { "href": "/contact", "label": "Contact", "type": "page" }
   ]

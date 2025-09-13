@@ -12,7 +12,6 @@
     ],
     "support": [
       { "href": "/contact", "label": "Contact Us" },
-      { "href": "/live-chat", "label": "Live Chat" },
       { "href": "/community", "label": "Community" }
     ]
   }

@@ -31,6 +31,10 @@ export default function Navbar() {
         // Additional offset to show more of Products white background
         scrollOffset += 200; // Total offset: 280px
       }
+      if (sectionId === 'testimonials') {
+        // Additional offset to show more of Testimonials white background
+        scrollOffset += 200; // Total offset: 280px
+      }
       // Future sections can be added here with custom offsets
       
       const elementPosition = element.offsetTop - scrollOffset;
@@ -52,7 +56,7 @@ export default function Navbar() {
   // Scroll detection for adaptive text colors
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'products'];
+      const sections = ['hero', 'products', 'testimonials'];
       const navHeight = 80;
       
       for (const sectionId of sections) {
@@ -88,6 +92,7 @@ export default function Navbar() {
           mobileIconColor: 'text-white'
         };
       case 'products':
+      case 'testimonials':
         return {
           textColor: 'text-gray-900',
           logoColor: 'text-[var(--primary)]',

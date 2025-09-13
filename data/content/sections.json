@@ -2,5 +2,9 @@
   "products": {
     "title": "Our",
     "titleAccent": "Lineup"
+  },
+  "testimonials": {
+    "title": "What Our Users Say About",
+    "titleAccent": "Ruqma"
   }
 }

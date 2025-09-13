@@ -25,7 +25,7 @@ export default function ProductCard({
 }: ProductCardProps) {
   return (
     <article 
-      className={`bg-white overflow-hidden relative rounded-[10px] shadow-[0px_4px_7.2px_0px_rgba(0,0,0,0.25)] w-[542px] h-[552px] ${className}`}
+      className={`bg-white overflow-hidden relative rounded-[10px] shadow-[var(--ruqma-shadow)] w-[542px] h-[552px] ${className}`}
       data-product-id={id}
     >
       {/* Inner card with subtle shadow */}
@@ -71,7 +71,7 @@ export default function ProductCard({
       {/* Arrow button - matching Figma positioning and styling */}
       <Link
         href={href}
-        className="absolute left-[484px] top-[494px] w-[58px] h-[58px] bg-[#1e1e1e] rounded-tl-[15px] rounded-tr-[4px] rounded-br-[4px] rounded-bl-[4px] shadow-[0px_4px_6.4px_0px_inset_rgba(0,0,0,0.25)] flex items-center justify-center group hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2"
+        className="absolute left-[484px] top-[494px] w-[58px] h-[58px] bg-[#1e1e1e] rounded-tl-[15px] rounded-tr-[4px] rounded-br-[4px] rounded-bl-[4px] shadow-[0 4px 15.8px 0 rgba(0, 0, 0, 0.10)] flex items-center justify-center group hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2"
         aria-label={`View details for ${name}`}
       >
         <div className="w-8 h-8 flex items-center justify-center">

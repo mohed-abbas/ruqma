@@ -1,0 +1,98 @@
+{
+  "section": {
+    "title": "What Our Users Say About",
+    "titleAccent": "Ruqma"
+  },
+  "testimonials": [
+    {
+      "id": "istiak-ahmed",
+      "name": "Istiak Ahmed",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 1
+    },
+    {
+      "id": "rahul-deb",
+      "name": "Rahul Deb",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam",
+      "avatar": "/testimonials/testimonial2.jpg",
+      "cardType": "wide",
+      "priority": 2
+    },
+    {
+      "id": "nazmul-karim",
+      "name": "Nazmul Karim",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt",
+      "avatar": "/testimonials/testimonial3.svg",
+      "cardType": "compact",
+      "priority": 3
+    },
+    {
+      "id": "jon-sari",
+      "name": "Jon Sari",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam",
+      "avatar": "/testimonials/testimonial4.svg",
+      "cardType": "compact",
+      "priority": 4
+    },
+    {
+      "id": "ahmed-saimoon",
+      "name": "Ahmed Saimoon",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 5
+    },
+    {
+      "id": "ahmed-saimoon4",
+      "name": "Ahmed Saimoon",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 6
+    },
+    {
+      "id": "ahmed-saimoon-44",
+      "name": "Ahmed Saimoon",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 7
+    },
+    {
+      "id": "ahmed-saimoon-4333",
+      "name": "Ahmed Saimoon",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 8
+    },
+    {
+      "id": "ahmed-saimoon-4400",
+      "name": "Ahmed Saimoon",
+      "company": "CEO, Avito",
+      "rating": 5,
+      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "tall",
+      "priority": 9
+    }
+  ]
+}

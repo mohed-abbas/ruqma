@@ -28,6 +28,7 @@
     --footer-bg-old: rgba(212, 175, 55, 0.29);
     --font-ibm: var(--font-ibm-plex-sans);
     --font-nunito: var(--font-nunito-sans);
+    --ruqma-shadow: 0 4px 15.8px 0 rgba(0, 0, 0, 0.10);
   }
 }
 
