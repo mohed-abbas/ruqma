@@ -1,0 +1,12 @@
+{
+  "buttons": {
+    "whereToBuy": {
+      "text": "Where to buy ?",
+      "ariaLabel": "Find where to buy Ruqma products"
+    },
+    "discoverMore": {
+      "text": "Discover More",
+      "ariaLabel": "Discover more about Ruqma products"
+    }
+  }
+}

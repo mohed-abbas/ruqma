@@ -1,31 +1,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FooterNavigation, BrandIdentity, LegalContent } from '@/types/content';
+import footerNavData from '@/data/navigation/footer-nav.json';
+import brandData from '@/data/brand/identity.json';
+import legalData from '@/data/legal/copyright.json';
 
 // Using relative paths for SVG assets that would be placed in the public folder
 const logoSrc = "/logo.svg";
-const dividerLineSrc = "/divider-line.svg";
-
-const footerLinks = {
-  useful: [
-    { href: '/', label: 'Home' },
-    { href: '#products', label: 'Products' },
-    { href: '/where-to-buy', label: 'Where to buy?' },
-  ],
-  company: [
-    { href: '/our-story', label: 'Our Story' },
-    { href: '/terms', label: 'Terms of Service' },
-    { href: '/privacy', label: 'Privacy Policy' },
-  ],
-  support: [
-    { href: '/contact', label: 'Contact Us' },
-    { href: '/live-chat', label: 'Live Chat' },
-    { href: '/community', label: 'Community' },
-  ],
-};
 
 export default function Footer() {
+  const footerNav: FooterNavigation = footerNavData as FooterNavigation;
+  const brand: BrandIdentity = brandData as BrandIdentity;
+  const legal: LegalContent = legalData as LegalContent;
+
   return (
-    <footer 
+    <footer
       className="bg-[var(--footer-bg)] border-t border-gray-200 pt-[60px] md:pt-[60px] pb-5 px-6 md:px-[100px] relative"
     >
       <div className="max-w-[1240px] mx-auto">
@@ -43,24 +32,24 @@ export default function Footer() {
                   priority
                 />
               </div>
-              <h2 
+              <h2
                 id="brand-heading"
                 className="text-[var(--primary)] text-2xl font-bold font-ibm leading-none"
               >
-                Ruqma
+                {brand.name}
               </h2>
             </div>
             
             <p className="text-2xl md:text-[36px] leading-[1.5] font-medium font-nunito capitalize">
               <span className="text-[#1e1e1e]">Take It beyond ordinary with our products as </span>
-              <span className="text-[var(--primary)] font-bold">Ruqma</span>
+              <span className="text-[var(--primary)] font-bold">{brand.name}</span>
               <span className="text-[#1e1e1e]"> makes you feel special.</span>
             </p>
           </section>
 
           {/* Navigation Links */}
           <nav className="flex flex-col md:flex-row gap-8 md:gap-12 lg:gap-[100px] w-full lg:w-auto" aria-label="Footer navigation">
-            {Object.entries(footerLinks).map(([section, links]) => (
+            {Object.entries(footerNav.sections).map(([section, links]) => (
               <div className="min-w-[120px]" key={section}>
                 <h3 className="text-xl font-medium font-ibm text-black mb-6">
                   {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -91,7 +80,7 @@ export default function Footer() {
           
           {/* Copyright */}
           <p className="text-sm text-gray-800 font-nunito leading-[22px] text-center">
-            © 2025 Ruqma. All rights reserved.
+            {legal.copyright}
           </p>
         </div>
       </div>

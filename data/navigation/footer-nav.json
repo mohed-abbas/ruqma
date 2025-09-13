@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "useful": [
+      { "href": "/", "label": "Home" },
+      { "href": "#products", "label": "Products" },
+      { "href": "/where-to-buy", "label": "Where to buy?" }
+    ],
+    "company": [
+      { "href": "/our-story", "label": "Our Story" },
+      { "href": "/terms", "label": "Terms of Service" },
+      { "href": "/privacy", "label": "Privacy Policy" }
+    ],
+    "support": [
+      { "href": "/contact", "label": "Contact Us" },
+      { "href": "/live-chat", "label": "Live Chat" },
+      { "href": "/community", "label": "Community" }
+    ]
+  }
+}

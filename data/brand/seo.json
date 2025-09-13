@@ -1,0 +1,11 @@
+{
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Ruqma",
+    "description": "Beyond Ordinary - Luxury goods platform",
+    "url": "https://ruqma.com",
+    "logo": "https://ruqma.com/logo.svg",
+    "sameAs": []
+  }
+}

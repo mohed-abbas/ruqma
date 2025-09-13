@@ -4,6 +4,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { MainNavigation, BrandIdentity, ActionButtons } from '@/types/content'
+import navData from '@/data/navigation/main-nav.json'
+import brandData from '@/data/brand/identity.json'
+import actionsData from '@/data/content/actions.json'
 
 const imgLogo = "/logo.svg";
 
@@ -11,13 +15,10 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentSection, setCurrentSection] = useState('hero')
-  
-  const navItems = [
-    { href: '#hero', label: 'Home', type: 'scroll' },
-    { href: '#products', label: 'Products', type: 'scroll' },
-    { href: '/our-story', label: 'Our Story', type: 'page' },
-    { href: '/contact', label: 'Contact', type: 'page' },
-  ]
+
+  const navigation: MainNavigation = navData as MainNavigation
+  const brand: BrandIdentity = brandData as BrandIdentity
+  const actions: ActionButtons = actionsData as ActionButtons
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.replace('#', ''));
@@ -41,7 +42,7 @@ export default function Navbar() {
     }
   };
 
-  const handleNavClick = (item: typeof navItems[0]) => {
+  const handleNavClick = (item: typeof navigation.items[0]) => {
     if (item.type === 'scroll') {
       scrollToSection(item.href);
     }
@@ -119,13 +120,13 @@ export default function Navbar() {
           />
         </div>
         <h1 className={`font-extrabold text-[24px] leading-none ${colors.logoColor} w-[89px] transition-colors duration-300`} style={{ fontFamily: 'var(--font-ibm)' }}>
-          Ruqma
+          {brand.name}
         </h1>
       </div>
       
       {/* Navigation links */}
       <div className={`hidden md:flex items-center gap-10 text-[16px] ${colors.textColor} transition-colors duration-300`}>
-        {navItems.map((item) => {
+        {navigation.items.map((item) => {
           const isActive = pathname === item.href || (item.type === 'scroll' && pathname === '/')
           
           if (item.type === 'scroll') {
@@ -165,12 +166,12 @@ export default function Navbar() {
       </div>
       
       {/* CTA Button */}
-      <button 
+      <button
         className="bg-[#d4af37] hover:bg-[#b8951f] transition-colors duration-200 px-6 py-3 rounded-[52px] relative overflow-hidden shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2 focus:ring-offset-transparent"
-        aria-label="Find where to buy Ruqma products"
+        aria-label={actions.buttons.whereToBuy.ariaLabel}
       >
         <span className="capitalize text-[14px] leading-[22px] text-black relative z-10 font-bold">
-          Where to buy ?
+          {actions.buttons.whereToBuy.text}
         </span>
         <div className="absolute inset-0 pointer-events-none shadow-[0px_-4px_5.8px_0px_inset_rgba(161,161,161,0.25),0px_4px_2.6px_0px_inset_rgba(255,255,255,0.25)] group-hover:shadow-[0px_-2px_3px_0px_inset_rgba(161,161,161,0.25),0px_2px_1px_0px_inset_rgba(255,255,255,0.25)] transition-shadow duration-200" />
       </button>
@@ -201,7 +202,7 @@ export default function Navbar() {
       {isMobileMenuOpen && (
         <div className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm md:hidden z-50">
           <div className="px-6 py-4 space-y-3">
-            {navItems.map((item) => {
+            {navigation.items.map((item) => {
               const isActive = pathname === item.href || (item.type === 'scroll' && pathname === '/')
               
               if (item.type === 'scroll') {
@@ -237,13 +238,13 @@ export default function Navbar() {
               )
             })}
             <div className="pt-4 border-t border-[#d4af37]/20">
-              <button 
+              <button
                 className="w-full bg-[#d4af37] hover:bg-[#b8951f] transition-colors duration-200 px-6 py-3 rounded-[52px] relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-[#d4af37] focus:ring-offset-2 focus:ring-offset-black"
-                aria-label="Find where to buy Ruqma products"
+                aria-label={actions.buttons.whereToBuy.ariaLabel}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <span className="capitalize text-[14px] leading-[22px] text-black relative z-10">
-                  Where to buy ?
+                  {actions.buttons.whereToBuy.text}
                 </span>
                 <div className="absolute inset-0 pointer-events-none shadow-[0px_-4px_5.8px_0px_inset_rgba(161,161,161,0.25),0px_4px_2.6px_0px_inset_rgba(255,255,255,0.25)] group-hover:shadow-[0px_-2px_3px_0px_inset_rgba(161,161,161,0.25),0px_2px_1px_0px_inset_rgba(255,255,255,0.25)] transition-shadow duration-200" />
               </button>

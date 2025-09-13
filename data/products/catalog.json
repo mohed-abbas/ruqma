@@ -1,0 +1,64 @@
+{
+  "products": [
+    {
+      "id": "glidex-mouse-pad",
+      "name": "GlideX",
+      "description": "Discover the ultimate mouse movement experience with glass mouse pads.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "GlideX glass mouse pad with premium tracking surface",
+      "href": "/products/glidex",
+      "brand": "Ruqma",
+      "additionalDescription": "Designed to deliver unparalleled tracking and gliding performance for amateurs and gamers alike"
+    },
+    {
+      "id": "luxe-pro-keyboard",
+      "name": "LuxePro",
+      "description": "Experience premium typing with our mechanical keyboard crafted by master artisans.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "LuxePro mechanical keyboard with premium switches and luxury finish",
+      "href": "/products/luxepro",
+      "brand": "Ruqma",
+      "additionalDescription": "Featuring custom-engineered switches and handcrafted keycaps for the ultimate typing experience"
+    },
+    {
+      "id": "zenith-headset",
+      "name": "Zenith",
+      "description": "Immerse yourself in crystal-clear audio with our flagship wireless headset.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "Zenith wireless headset with premium noise cancellation",
+      "href": "/products/zenith",
+      "brand": "Ruqma",
+      "additionalDescription": "Advanced noise cancellation and studio-grade drivers deliver pristine audio quality"
+    },
+    {
+      "id": "apex-gaming-mouse",
+      "name": "Apex",
+      "description": "Precision redefined with our ultra-lightweight gaming mouse engineered for victory.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "Apex gaming mouse with precision sensor and ergonomic design",
+      "href": "/products/apex",
+      "brand": "Ruqma",
+      "additionalDescription": "Ultra-responsive sensor technology and customizable weight system for competitive edge"
+    },
+    {
+      "id": "elite-monitor-stand",
+      "name": "Elite Stand",
+      "description": "Elevate your workspace with our adjustable monitor stand crafted from premium materials.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "Elite monitor stand with adjustable height and premium aluminum construction",
+      "href": "/products/elite-stand",
+      "brand": "Ruqma",
+      "additionalDescription": "Precision-machined aluminum construction with smooth height adjustment for optimal ergonomics"
+    },
+    {
+      "id": "prism-desk-lamp",
+      "name": "Prism",
+      "description": "Illuminate your creativity with our smart LED desk lamp featuring adaptive lighting.",
+      "imageUrl": "/Va005 Image 2000x2000 2.png",
+      "imageAlt": "Prism smart LED desk lamp with adjustable color temperature",
+      "href": "/products/prism",
+      "brand": "Ruqma",
+      "additionalDescription": "Intelligent light sensors automatically adjust brightness and color temperature throughout the day"
+    }
+  ]
+}
