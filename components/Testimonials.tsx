@@ -1,18 +1,14 @@
 'use client';
 
 import React from 'react';
-import DynamicGrid from './ui/testimonial/DynamicGrid';
-import { TestimonialsContent } from './ui/testimonial/types';
 import testimonialsData from '@/data/content/testimonials.json';
 
 export default function Testimonials() {
-  const content: TestimonialsContent = testimonialsData as TestimonialsContent;
 
   return (
     <section
       id="testimonials"
       className="min-h-screen bg-white py-20"
-      style={{ scrollMarginTop: '80px' }}
       aria-labelledby="testimonials-heading"
     >
       <div className="w-full max-w-[1280px] mx-auto px-4">
@@ -23,8 +19,8 @@ export default function Testimonials() {
             className="text-[65px] leading-[1.2] text-[#151715] font-semibold"
             style={{ fontFamily: 'var(--font-ibm)' }}
           >
-            <span className="text-[#151715]">{content.section.title}</span>
-            <span className="text-[var(--color-primary)] ml-2">{content.section.titleAccent}</span>
+            <span className="text-[#151715]">What Our Users Say About</span>
+            <span className="text-[var(--color-primary)] ml-2">Ruqma</span>
           </h2>
         </header>
       </div>
