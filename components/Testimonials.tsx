@@ -27,12 +27,6 @@ export default function Testimonials() {
             <span className="text-[var(--color-primary)] ml-2">{content.section.titleAccent}</span>
           </h2>
         </header>
-
-        {/* Dynamic Testimonial Grid - CMS-compatible, responsive, accessible */}
-        <DynamicGrid
-          testimonials={content.testimonials}
-          className="testimonials-container"
-        />
       </div>
     </section>
   );

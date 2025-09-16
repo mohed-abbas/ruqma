@@ -1,9 +1,38 @@
 {
   "items": [
-    { "href": "#hero", "label": "Home", "type": "scroll" },
-    { "href": "#products", "label": "Products", "type": "scroll" },
-    { "href": "#testimonials", "label": "Testimonials", "type": "scroll" },
-    { "href": "/our-story", "label": "Our Story", "type": "page" },
-    { "href": "/contact", "label": "Contact", "type": "page" }
-  ]
+    {
+      "href": "#hero",
+      "label": "Home",
+      "isExternal": false,
+      "isActive": true
+    },
+    {
+      "href": "#products",
+      "label": "Products",
+      "isExternal": false,
+      "isActive": false
+    },
+    {
+      "href": "/our-story",
+      "label": "Our Story",
+      "isExternal": true,
+      "isActive": false
+    },
+    {
+      "href": "/contact",
+      "label": "Contact",
+      "isExternal": true,
+      "isActive": false
+    }
+  ],
+  "cta": {
+    "label": "Where To Buy?",
+    "href": "/buyfrom",
+    "isExternal": true
+  },
+  "settings": {
+    "scrollThreshold": 50,
+    "activeOffset": 80,
+    "mobileBreakpoint": 1024
+  }
 }

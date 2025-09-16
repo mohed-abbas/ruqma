@@ -81,6 +81,7 @@ export interface Product {
   href: string;
   brand: string;
   additionalDescription: string;
+  showOnHome: boolean;
 }
 
 export interface ProductCatalog {

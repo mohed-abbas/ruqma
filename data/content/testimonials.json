@@ -51,7 +51,7 @@
       "rating": 5,
       "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
       "avatar": "/testimonials/testimonial1.jpg",
-      "cardType": "tall",
+      "cardType": "compact",
       "priority": 5
     },
     {
@@ -73,26 +73,6 @@
       "avatar": "/testimonials/testimonial1.jpg",
       "cardType": "tall",
       "priority": 7
-    },
-    {
-      "id": "ahmed-saimoon-4333",
-      "name": "Ahmed Saimoon",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-      "avatar": "/testimonials/testimonial1.jpg",
-      "cardType": "tall",
-      "priority": 8
-    },
-    {
-      "id": "ahmed-saimoon-4400",
-      "name": "Ahmed Saimoon",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-      "avatar": "/testimonials/testimonial1.jpg",
-      "cardType": "tall",
-      "priority": 9
     }
   ]
 }

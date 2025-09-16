@@ -15,7 +15,9 @@ export default function Footer() {
 
   return (
     <footer
+      id="footer"
       className="bg-[var(--footer-bg)] border-t border-gray-200 pt-[60px] md:pt-[60px] pb-5 px-6 md:px-[100px] relative"
+      style={{ scrollMarginTop: '80px' }}
     >
       <div className="max-w-[1240px] mx-auto">
         {/* Main Footer Content */}

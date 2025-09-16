@@ -24,41 +24,13 @@ export default function Products() {
         </div>
 
         {/* Products grid container - matching Figma layout */}
-        <div className="flex flex-col gap-[70px] w-full max-w-[1234px]">
-          {/* First row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 lg:gap-x-[150px] gap-y-8 lg:gap-y-0 justify-items-center lg:justify-items-start w-full">
-            {catalog.products.slice(0, 2).map((product) => (
-              <ProductCard 
-                key={product.id} 
-                {...product}
-                className="w-full max-w-[542px]"
-              />
-            ))}
-          </div>
-          
-          {/* Second row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 lg:gap-x-[150px] gap-y-8 lg:gap-y-0 justify-items-center lg:justify-items-start w-full">
-            {catalog.products.slice(2, 4).map((product) => (
-              <ProductCard 
-                key={product.id} 
-                {...product}
-                className="w-full max-w-[542px]"
-              />
-            ))}
-          </div>
+        <div className="flex flex-wrap gap-[9.375rem] w-full justify-center">
+          {catalog.products.map((product) => {
+            if (product.showOnHome) {
+              return <ProductCard key={product.id} {...product} />;
+            }
+          })}
 
-          {/* Additional rows for remaining products */}
-          {catalog.products.length > 4 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-4 lg:gap-x-[150px] gap-y-8 lg:gap-y-0 justify-items-center lg:justify-items-start w-full">
-              {catalog.products.slice(4, 6).map((product) => (
-                <ProductCard 
-                  key={product.id} 
-                  {...product}
-                  className="w-full max-w-[542px]"
-                />
-              ))}
-            </div>
-          )}
         </div>
       </div>
     </section>
