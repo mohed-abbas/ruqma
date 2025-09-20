@@ -51,19 +51,13 @@ export default function Hero() {
         <div className="absolute inset-0 w-full h-full" aria-hidden="true">
           <DarkVeil 
             hueShift={210}
-            speed={1}
+            speed={1.5}
             noiseIntensity={0}
             scanlineIntensity={0}
             scanlineFrequency={0}
             warpAmount={0}
           />
         </div>
-        <motion.div
-            
-            
-        />
-
-
         {/* Hero Content */}
         <div className="relative z-10 flex items-center justify-center h-full">
           <motion.div 

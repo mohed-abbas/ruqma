@@ -47,8 +47,6 @@ export default function Navbar() {
 
   const navData = navigationData as NavigationData;
 
-  // Removed GSAP refs as parallax effects are no longer used
-
   // Handle scroll effect for navbar background and active section detection
   useEffect(() => {
     const handleScroll = () => {

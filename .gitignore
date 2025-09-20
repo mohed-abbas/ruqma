@@ -47,3 +47,4 @@ next-env.d.ts
 # Ignore .claude and .serena directories
 .claude/
 .serena/
+.playwright-mcp/
