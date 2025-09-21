@@ -40,11 +40,18 @@ import type {
 export { default as StarRating } from './StarRating';
 export type { StarRatingProps } from './StarRating';
 
+// Component exports - Phase 3: Basic Card Components
+export { default as TallTestimonial } from './TallTestimonial';
+export { default as WideTestimonial } from './WideTestimonial';
+export { default as CompactTestimonial } from './CompactTestimonial';
+export type { TallTestimonialProps } from './TallTestimonial';
+export type { WideTestimonialProps } from './WideTestimonial';
+export type { CompactTestimonialProps } from './CompactTestimonial';
+
+// Smart Card Router - Phase 3
+export { default as TestimonialCard } from './TestimonialCard';
+
 // Future component exports
-// export { TallTestimonial } from './TallTestimonial';
-// export { WideTestimonial } from './WideTestimonial';
-// export { CompactTestimonial } from './CompactTestimonial';
-// export { TestimonialCard } from './TestimonialCard';
 // export { TestimonialsGrid } from './TestimonialsGrid';
 
 // Utility exports will be added in future phases
