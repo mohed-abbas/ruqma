@@ -51,14 +51,35 @@ export type { CompactTestimonialProps } from './CompactTestimonial';
 // Smart Card Router - Phase 3
 export { default as TestimonialCard } from './TestimonialCard';
 
-// Future component exports
-// export { TestimonialsGrid } from './TestimonialsGrid';
+// Main Grid Component - Phase 4
+export { default as TestimonialsGrid } from './TestimonialsGrid';
 
-// Utility exports will be added in future phases
-// export { IntelligentPlacement } from './utils/IntelligentPlacement';
-// export { calculateTestimonialWeight } from './utils/calculateWeight';
-// export { validateTestimonialData } from './utils/validation';
-// export { responsiveConfigDefaults } from './utils/defaults';
+// Utility exports - Phase 4: Intelligent Placement Algorithm
+export {
+  calculateTestimonialWeight,
+  calculatePlacementScore,
+  sortTestimonialsByPriority,
+  validateTestimonialForWeight,
+  calculateWeightStatistics,
+} from './utils/calculateWeight';
+
+export {
+  calculateIntelligentPlacement,
+  calculateResponsivePlacement,
+  optimizePlacementSettings,
+} from './utils/IntelligentPlacement';
+
+export {
+  generateGridTemplate,
+  generateGridStyles,
+  generateCellStyles,
+  calculateResponsiveColumns,
+  optimizeGridLayout,
+  validateGridLayout,
+  generateCSSCustomProperties,
+  generateResponsiveStyles,
+  calculateLayoutPerformance,
+} from './utils/gridLayout';
 
 // Constants and default configurations
 export const TESTIMONIAL_CARD_TYPES = ['tall', 'wide', 'compact'] as const;

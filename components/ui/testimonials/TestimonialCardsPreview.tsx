@@ -89,13 +89,13 @@ const TestimonialCardsPreview: React.FC = () => {
           Smart TestimonialCard Component
         </h2>
         <p className="text-[var(--testimonials-text-secondary)] mb-6">
-          The TestimonialCard component automatically routes to the appropriate card type based on the testimonial's cardType property.
+          The TestimonialCard component automatically routes to the appropriate card type based on the testimonial&apos;s cardType property.
         </p>
         <div className="flex flex-wrap gap-8 items-start">
           {sampleTestimonials.map((testimonial) => (
             <div key={testimonial.id}>
               <h3 className="text-lg font-medium mb-4 text-[var(--testimonials-text-secondary)]">
-                cardType: "{testimonial.cardType}"
+                cardType: &ldquo;{testimonial.cardType}&rdquo;
               </h3>
               <TestimonialCard testimonial={testimonial} />
             </div>
