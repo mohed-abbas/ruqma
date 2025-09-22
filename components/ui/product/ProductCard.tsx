@@ -10,7 +10,6 @@ interface ProductCardProps {
   brand?: string;
   additionalDescription?: string;
   className?: string;
-  showOnHome?: boolean;
 }
 
 export default function ProductCard({
@@ -22,7 +21,6 @@ export default function ProductCard({
   brand = 'Ruqma',
   additionalDescription = 'Designed to deliver unparalleled tracking and gliding performance for amateurs and gamers alike',
   className = '',
-  showOnHome = true,
 }: ProductCardProps) {
   return (
     <article

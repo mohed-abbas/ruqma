@@ -17,7 +17,7 @@
 
 import React, { useMemo, useEffect, useState } from 'react';
 import TestimonialCard from './TestimonialCard';
-import { calculateIntelligentPlacement, calculateResponsivePlacement } from './utils/IntelligentPlacement';
+import { calculateResponsivePlacement } from './utils/IntelligentPlacement';
 import { generateGridStyles, generateCellStyles, validateGridLayout } from './utils/gridLayout';
 import {
   useAnimation,
@@ -25,11 +25,9 @@ import {
   generateHoverStyles,
   createAnimationStylesheet,
   ANIMATION_PRESETS,
-  type AdvancedAnimationConfig,
 } from './utils/animations';
 import type {
   Testimonial,
-  TestimonialsGridConfig,
   PlacementAlgorithm,
   ResponsiveConfig,
   AnimationConfig,
@@ -75,8 +73,7 @@ export interface TestimonialsGridProps {
  */
 function useResponsiveLayout(
   testimonials: Testimonial[],
-  placement: PlacementAlgorithm,
-  responsive: ResponsiveConfig
+  placement: PlacementAlgorithm
 ) {
   const [currentBreakpoint, setCurrentBreakpoint] = useState<'mobile' | 'tablet' | 'desktop'>('desktop');
 
@@ -205,10 +202,9 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
   }, [testimonials, maxTestimonials]);
 
   // Calculate responsive layouts
-  const { layouts, currentLayout, currentBreakpoint } = useResponsiveLayout(
+  const { currentLayout, currentBreakpoint } = useResponsiveLayout(
     limitedTestimonials,
-    placement,
-    responsive
+    placement
   );
 
   // Validate layout and handle errors

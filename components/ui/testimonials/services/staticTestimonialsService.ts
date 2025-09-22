@@ -7,7 +7,7 @@
 
 'use client';
 
-import type { Testimonial, ValidationResult } from '../types';
+import type { Testimonial } from '../types';
 
 /**
  * Simple query configuration for static data
@@ -72,7 +72,7 @@ export class StaticTestimonialsService {
             data = { testimonials: contentData.testimonials || [] };
           }
         }
-      } catch (error) {
+      } catch {
         // Try content testimonials as final fallback
         response = await fetch('/data/content/testimonials.json');
         if (response.ok) {
@@ -347,6 +347,7 @@ export function useStaticTestimonials(config: StaticQueryConfig = {}) {
     total: 0,
   });
 
+
   React.useEffect(() => {
     let mounted = true;
 
@@ -380,7 +381,7 @@ export function useStaticTestimonials(config: StaticQueryConfig = {}) {
     return () => {
       mounted = false;
     };
-  }, [JSON.stringify(config)]);
+  }, [config]);
 
   const refresh = React.useCallback(async () => {
     staticTestimonialsService.clearCache();
@@ -391,7 +392,7 @@ export function useStaticTestimonials(config: StaticQueryConfig = {}) {
       error: null,
       total: result.total,
     });
-  }, [JSON.stringify(config)]);
+  }, [config]);
 
   return {
     ...data,

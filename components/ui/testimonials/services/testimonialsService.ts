@@ -10,13 +10,11 @@
 import type {
   Testimonial,
   SanityTestimonial,
-  ValidationResult,
   PerformanceMetrics,
 } from '../types';
 import {
   transformSanityTestimonial,
   validateSanityTestimonial,
-  generateTestimonialsQuery,
   batchProcessTestimonials,
   type QueryConfig,
   type CacheConfig,
@@ -26,7 +24,7 @@ import {
 /**
  * Cache entry structure
  */
-interface CacheEntry<T = any> {
+interface CacheEntry<T = unknown> {
   data: T;
   timestamp: number;
   ttl: number;
@@ -115,7 +113,7 @@ export class TestimonialsService {
     metrics: Partial<PerformanceMetrics>;
   }> {
     const startTime = performance.now();
-    const cacheKey = this.generateCacheKey('testimonials', queryConfig);
+    const cacheKey = this.generateCacheKey('testimonials', queryConfig as Record<string, unknown>);
     const { forceRefresh = false, enableCache = true, timeout = 5000 } = options;
 
     this.metrics.totalRequests++;
@@ -331,7 +329,7 @@ export class TestimonialsService {
     }
   }
 
-  private applyFilters(testimonials: any[], filterBy: NonNullable<QueryConfig['filterBy']>): any[] {
+  private applyFilters(testimonials: Testimonial[], filterBy: NonNullable<QueryConfig['filterBy']>): Testimonial[] {
     return testimonials.filter(testimonial => {
       if (filterBy.minRating && testimonial.rating < filterBy.minRating) {
         return false;
@@ -353,7 +351,7 @@ export class TestimonialsService {
     });
   }
 
-  private applySorting(testimonials: any[], orderBy: NonNullable<QueryConfig['orderBy']>): any[] {
+  private applySorting(testimonials: Testimonial[], orderBy: NonNullable<QueryConfig['orderBy']>): Testimonial[] {
     const sorted = [...testimonials];
 
     switch (orderBy) {
@@ -393,7 +391,7 @@ export class TestimonialsService {
       }
 
       const data = await response.json();
-      const testimonial = data.testimonials?.find((t: any) => t.id === id);
+      const testimonial = data.testimonials?.find((t: Testimonial) => t.id === id);
 
       if (!testimonial) {
         return null;
@@ -450,7 +448,7 @@ export class TestimonialsService {
     return results;
   }
 
-  private generateCacheKey(type: string, config: any): string {
+  private generateCacheKey(type: string, config: Record<string, unknown>): string {
     return `${type}:${JSON.stringify(config)}`;
   }
 
@@ -473,7 +471,7 @@ export class TestimonialsService {
     entry.accessCount++;
     entry.lastAccessed = now;
 
-    return entry.data;
+    return entry.data as T;
   }
 
   private setCachedData<T>(key: string, data: T): void {
@@ -547,7 +545,7 @@ export class TestimonialsService {
     return Math.round(size / 1024); // KB
   }
 
-  private handleError(error: any): void {
+  private handleError(error: unknown): void {
     this.metrics.errorRate =
       (this.metrics.errorRate * (this.metrics.totalRequests - 1) + 1) /
       this.metrics.totalRequests;
@@ -623,6 +621,7 @@ export function useTestimonials(
     refreshInterval = 300000, // 5 minutes
   } = options;
 
+
   React.useEffect(() => {
     let mounted = true;
     let refreshTimer: NodeJS.Timeout;
@@ -668,14 +667,14 @@ export function useTestimonials(
         clearInterval(refreshTimer);
       }
     };
-  }, [JSON.stringify(queryConfig), enableCache, autoRefresh, refreshInterval]);
+  }, [queryConfig, enableCache, autoRefresh, refreshInterval]);
 
   const refresh = React.useCallback(() => {
     return testimonialsService.fetchTestimonials(queryConfig, {
       enableCache,
       forceRefresh: true,
     });
-  }, [JSON.stringify(queryConfig), enableCache]);
+  }, [queryConfig, enableCache]);
 
   return {
     ...data,

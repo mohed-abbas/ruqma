@@ -19,31 +19,58 @@ const sampleTestimonials = [
     id: "test-tall",
     name: "Sarah Johnson",
     company: "Tech Innovators Inc.",
+    role: "CTO",
     rating: 5,
     text: "This platform has completely transformed our workflow. The intuitive design and powerful features make it indispensable for our team. We've seen a 40% increase in productivity since implementation.",
     avatar: "/testimonials/testimonial1.jpg",
     cardType: "tall" as const,
-    priority: 1
+    priority: 1,
+    featured: true,
+    tags: ["productivity", "workflow"],
+    metadata: {
+      source: "preview",
+      version: "1.0",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
   },
   {
     id: "test-wide",
     name: "Michael Chen",
     company: "Digital Solutions Ltd.",
+    role: "CEO",
     rating: 4.5,
     text: "Excellent service and support. The team is responsive and the product delivers exactly what was promised.",
     avatar: "/testimonials/testimonial2.jpg",
     cardType: "wide" as const,
-    priority: 2
+    priority: 2,
+    featured: false,
+    tags: ["support", "service"],
+    metadata: {
+      source: "preview",
+      version: "1.0",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
   },
   {
     id: "test-compact",
     name: "Emily Rodriguez",
     company: "Creative Agency",
+    role: "Creative Director",
     rating: 5,
     text: "Simple, effective, and reliable. Exactly what we needed.",
     avatar: "/testimonials/testimonial3.svg",
     cardType: "compact" as const,
-    priority: 3
+    priority: 3,
+    featured: false,
+    tags: ["simplicity", "reliable"],
+    metadata: {
+      source: "preview",
+      version: "1.0",
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    }
   }
 ];
 

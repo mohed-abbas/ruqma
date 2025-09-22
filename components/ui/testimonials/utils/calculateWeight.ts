@@ -15,7 +15,6 @@ import { VISUAL_WEIGHTS } from '../index';
  */
 export function calculateReadabilityScore(text: string): number {
   const wordCount = text.split(/\s+/).length;
-  const avgSentenceLength = text.split(/[.!?]+/).filter(Boolean).length;
   const sentences = text.split(/[.!?]+/).filter(Boolean);
 
   // Calculate average sentence length

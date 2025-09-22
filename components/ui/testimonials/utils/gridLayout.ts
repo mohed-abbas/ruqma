@@ -5,7 +5,7 @@
  * adaptation, and performance optimization of testimonial bento grids.
  */
 
-import type { GridLayout, GridCell, ResponsiveConfig, TestimonialCardType } from '../types';
+import type { GridLayout, GridCell, ResponsiveConfig } from '../types';
 
 /**
  * Generate CSS Grid template areas string from grid layout
@@ -262,10 +262,6 @@ export function generateResponsiveStyles(
   },
   responsive: ResponsiveConfig
 ): string {
-  const mobileStyles = generateGridStyles(layouts.mobile, responsive, 'mobile');
-  const tabletStyles = generateGridStyles(layouts.tablet, responsive, 'tablet');
-  const desktopStyles = generateGridStyles(layouts.desktop, responsive, 'desktop');
-
   return `
     /* Mobile styles */
     @media (max-width: 767px) {

@@ -92,7 +92,7 @@ const TestimonialsDemo: React.FC = () => {
             </label>
             <select
               value={selectedCardType}
-              onChange={(e) => setSelectedCardType(e.target.value as any)}
+              onChange={(e) => setSelectedCardType(e.target.value as 'all' | 'tall' | 'wide' | 'compact')}
               className="w-full px-3 py-1 border border-[var(--testimonials-border)] rounded text-sm"
             >
               <option value="all">All Types</option>

@@ -266,7 +266,7 @@ export function createMotionSafeConfig(config: AdvancedAnimationConfig): Advance
 export function optimizeForPerformance(config: AdvancedAnimationConfig): AdvancedAnimationConfig {
   const isLowPower = typeof window !== 'undefined' &&
     'deviceMemory' in navigator &&
-    (navigator as any).deviceMemory < 4;
+    (navigator as { deviceMemory?: number }).deviceMemory && (navigator as { deviceMemory: number }).deviceMemory < 4;
 
   if (config.performance === 'auto' && isLowPower) {
     return {
@@ -370,7 +370,7 @@ export function useAnimation(
 } {
   const [isVisible, setIsVisible] = React.useState(false);
   const [element, setElement] = React.useState<HTMLElement | null>(null);
-  const observerRef = React.useRef<AnimationObserver>();
+  const observerRef = React.useRef<AnimationObserver | undefined>(undefined);
 
   // Create motion-safe and performance-optimized config
   const optimizedConfig = React.useMemo(() => {

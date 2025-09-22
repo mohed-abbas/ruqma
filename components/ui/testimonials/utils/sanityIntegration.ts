@@ -9,8 +9,21 @@ import type {
   Testimonial,
   SanityTestimonial,
   ValidationResult,
+  ValidationError,
   TestimonialCardType
 } from '../types';
+
+/**
+ * Sanity asset reference types
+ */
+interface SanityAssetReference {
+  _ref: string;
+  _type: 'reference';
+}
+
+interface SanityAsset {
+  asset?: SanityAssetReference;
+}
 
 /**
  * Sanity client configuration interface
@@ -93,18 +106,18 @@ export function transformSanityTestimonial(sanityTestimonial: SanityTestimonial)
   } = sanityTestimonial;
 
   // Generate avatar URL from Sanity asset reference
-  const avatarUrl = avatar?.asset?._ref
-    ? generateSanityImageUrl(avatar.asset._ref, { width: 200, height: 200, quality: 90 })
-    : '/testimonials/default-avatar.svg';
+  const avatarUrl = (avatar && typeof avatar === 'object' && 'asset' in avatar && (avatar as SanityAsset).asset?._ref)
+    ? generateSanityImageUrl((avatar as SanityAsset).asset!._ref, { width: 200, height: 200, quality: 90 })
+    : (typeof avatar === 'string' ? avatar : '/testimonials/default-avatar.svg');
 
   // Determine card type based on content or explicit setting
   const determinedCardType = cardType || determineOptimalCardType(text, company, role);
 
   // Calculate priority with fallback
-  const calculatedPriority = priority || calculatePriorityFromMetadata(rating, featured, _createdAt);
+  const calculatedPriority = priority || calculatePriorityFromMetadata(rating, featured, _createdAt || new Date().toISOString());
 
   return {
-    id: _id,
+    id: _id || `testimonial-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     name,
     company,
     role,
@@ -118,8 +131,8 @@ export function transformSanityTestimonial(sanityTestimonial: SanityTestimonial)
     metadata: {
       ...metadata,
       source: 'sanity',
-      createdAt: _createdAt,
-      updatedAt: _updatedAt,
+      createdAt: _createdAt || new Date().toISOString(),
+      updatedAt: _updatedAt || new Date().toISOString(),
       version: metadata?.version || '1.0',
     },
   };
@@ -130,7 +143,6 @@ export function transformSanityTestimonial(sanityTestimonial: SanityTestimonial)
  */
 export function transformToSanityTestimonial(testimonial: Testimonial): Partial<SanityTestimonial> {
   const {
-    id,
     name,
     company,
     role,
@@ -261,7 +273,6 @@ export function generateSanityImageUrl(
 
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id';
   const assetId = parts[1];
-  const extension = parts[2].split('.')[1];
 
   const baseUrl = `https://cdn.sanity.io/images/${projectId}/production/${assetId}-${parts[2]}`;
   const params = new URLSearchParams({
@@ -322,11 +333,15 @@ function calculatePriorityFromMetadata(
  * Validate Sanity testimonial data
  */
 export function validateSanityTestimonial(data: unknown): ValidationResult {
-  const errors: string[] = [];
-  const warnings: string[] = [];
+  const errors: ValidationError[] = [];
+  const warnings: ValidationError[] = [];
 
   if (!data || typeof data !== 'object') {
-    errors.push('Invalid testimonial data structure');
+    errors.push({
+      field: 'data',
+      message: 'Invalid testimonial data structure',
+      severity: 'critical'
+    });
     return { isValid: false, errors, warnings };
   }
 
@@ -334,36 +349,36 @@ export function validateSanityTestimonial(data: unknown): ValidationResult {
 
   // Required fields validation
   if (!testimonial.name || testimonial.name.trim().length === 0) {
-    errors.push('Name is required');
+    errors.push({ field: 'name', message: 'Name is required', severity: 'critical' });
   }
 
   if (!testimonial.text || testimonial.text.trim().length === 0) {
-    errors.push('Testimonial text is required');
+    errors.push({ field: 'text', message: 'Testimonial text is required', severity: 'critical' });
   }
 
   if (typeof testimonial.rating !== 'number' || testimonial.rating < 0 || testimonial.rating > 5) {
-    errors.push('Rating must be a number between 0 and 5');
+    errors.push({ field: 'rating', message: 'Rating must be a number between 0 and 5', severity: 'error' });
   }
 
   // Optional fields validation
   if (testimonial.company && testimonial.company.trim().length === 0) {
-    warnings.push('Company name is empty');
+    warnings.push({ field: 'company', message: 'Company name is empty', severity: 'warning' });
   }
 
   if (testimonial.role && testimonial.role.trim().length === 0) {
-    warnings.push('Role is empty');
+    warnings.push({ field: 'role', message: 'Role is empty', severity: 'warning' });
   }
 
   if (testimonial.text && testimonial.text.length < 20) {
-    warnings.push('Testimonial text is very short (< 20 characters)');
+    warnings.push({ field: 'text', message: 'Testimonial text is very short (< 20 characters)', severity: 'warning' });
   }
 
   if (testimonial.text && testimonial.text.length > 500) {
-    warnings.push('Testimonial text is very long (> 500 characters)');
+    warnings.push({ field: 'text', message: 'Testimonial text is very long (> 500 characters)', severity: 'warning' });
   }
 
   if (testimonial.priority && (testimonial.priority < 1 || testimonial.priority > 10)) {
-    warnings.push('Priority should be between 1 and 10');
+    warnings.push({ field: 'priority', message: 'Priority should be between 1 and 10', severity: 'warning' });
   }
 
   return {

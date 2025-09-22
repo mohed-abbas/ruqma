@@ -451,7 +451,7 @@ describe('Testimonials Integration Tests', () => {
       // This should not crash the component
       render(
         <TestimonialsGrid
-          testimonials={malformedData as any}
+          testimonials={malformedData as Testimonial[]}
           animationPreset="disabled"
         />
       );
