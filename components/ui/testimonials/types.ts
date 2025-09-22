@@ -9,11 +9,21 @@ export interface Testimonial {
   id: string;
   name: string;
   company: string;
+  role: string;
   rating: number; // 1-5 stars
   text: string;
   avatar: string;
   cardType: TestimonialCardType;
   priority: number; // 1-10 business priority for intelligent placement
+  featured: boolean;
+  tags: string[];
+  metadata: {
+    source: string;
+    version: string;
+    createdAt: string;
+    updatedAt: string;
+    [key: string]: string | number | boolean | null;
+  };
 }
 
 /**
@@ -117,13 +127,12 @@ export interface SanityTestimonial extends Testimonial {
   _type?: 'testimonial';
   _createdAt?: string;
   _updatedAt?: string;
-  featured?: boolean;           // Algorithm priority boost
   seasonality?: string[];       // Holiday-specific display
   productCategory?: string[];   // Filtering capability
   autoCardType?: boolean;       // Let algorithm choose type
-  tags?: string[];             // Content categorization
   publishedAt?: string;        // Content scheduling
 }
+
 
 /**
  * Layout calculation results for intelligent placement
@@ -165,11 +174,24 @@ export interface TestimonialsGridProps {
  * Performance monitoring types
  */
 export interface PerformanceMetrics {
-  renderTime: number;
-  layoutCalculationTime: number;
-  totalTestimonials: number;
-  gridComplexity: number;
+  // Grid-specific metrics
+  renderTime?: number;
+  layoutCalculationTime?: number;
+  totalTestimonials?: number;
+  gridComplexity?: number;
   memoryUsage?: number;
+
+  // Service-specific metrics (required for service)
+  totalRequests: number;
+  cacheHits: number;
+  cacheMisses: number;
+  averageResponseTime: number;
+  errorRate: number;
+  lastUpdated: string;
+
+  // Optional service metrics
+  cacheHitRate?: number;
+  cacheSizeKB?: number;
 }
 
 /**

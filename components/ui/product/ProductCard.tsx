@@ -42,7 +42,7 @@ export default function ProductCard({
                       w-full sm:w-[450px] md:w-[480px] lg:w-[492px]">
         
         {/* Product image section - responsive golden background */}
-        <div className="aspect-[492/266] bg-[#d4af37] overflow-hidden relative rounded-[10px] w-full">
+        <div className="aspect-[492/266] bg-[var(--color-primary)] overflow-hidden relative rounded-[10px] w-full">
           <div className="absolute flex items-center justify-center
                           w-full h-full p-4
                           sm:w-[285px] sm:h-[285px] sm:left-1/2 sm:top-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2">

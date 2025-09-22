@@ -12,67 +12,70 @@
       "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
       "avatar": "/testimonials/testimonial1.jpg",
       "cardType": "tall",
+      "date": "2023-10-01"
+    },
+    {
+      "id": "jane-doe",
+      "name": "Jane Doe",
+      "company": "CTO, TechCorp",
+      "rating": 4,
+      "text": "Ruqma has transformed the way we manage our projects. The intuitive interface and powerful features have significantly boosted our productivity.",
+      "avatar": "/testimonials/testimonial2.jpg",
+      "cardType": "wide",
+      "date": "2023-11-15"
+    },
+    {
+      "id": "john-smith",
+      "name": "John Smith",
+      "company": "Product Manager, InnovateX",
+      "rating": 5,
+      "text": "The customer support team at Ruqma is outstanding. They are always ready to help and provide quick solutions to any issues we encounter.",
+      "avatar": "/testimonials/testimonial3.svg",
+      "cardType": "compact",
+      "priority": 2,
+      "date": "2024-01-20"
+    },
+    {
+      "id": "michael-brown",
+      "name": "Michael Brown",
+      "company": "Founder, StartupHub",
+      "rating": 5,
+      "text": "Ruqma's analytics tools have provided us with valuable insights into our operations, enabling us to make data-driven decisions that enhance our business performance.",
+      "avatar": "/testimonials/testimonial5.svg",
+      "cardType": "compact",
+      "date": "2024-04-10",
       "priority": 1
     },
     {
-      "id": "rahul-deb",
-      "name": "Rahul Deb",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam",
-      "avatar": "/testimonials/testimonial2.jpg",
-      "cardType": "wide",
-      "priority": 2
-    },
-    {
-      "id": "nazmul-karim",
-      "name": "Nazmul Karim",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt",
+      "id": "sarah-wilson",
+      "name": "Sarah Wilson",
+      "company": "Marketing Director, BrandBoost",
+      "rating": 4,
+      "text": "The user experience of Ruqma is top-notch. Our team finds it easy to navigate and utilize all the features effectively.",
       "avatar": "/testimonials/testimonial3.svg",
       "cardType": "compact",
-      "priority": 3
+      "priority": 3,
+      "date": "2024-05-22"
     },
     {
-      "id": "jon-sari",
-      "name": "Jon Sari",
-      "company": "CEO, Avito",
+      "id": "david-lee-22",
+      "name": "David Lee",
+      "company": "Operations Manager, LogiTech",
       "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam",
+      "text": "Ruqma has been a game-changer for our operations. The efficiency and organization it brings to our team are unparalleled.",
       "avatar": "/testimonials/testimonial4.svg",
-      "cardType": "compact",
-      "priority": 4
-    },
-    {
-      "id": "ahmed-saimoon",
-      "name": "Ahmed Saimoon",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-      "avatar": "/testimonials/testimonial1.jpg",
-      "cardType": "compact",
-      "priority": 5
-    },
-    {
-      "id": "ahmed-saimoon4",
-      "name": "Ahmed Saimoon",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-      "avatar": "/testimonials/testimonial1.jpg",
       "cardType": "tall",
-      "priority": 6
+      "date": "2024-06-15"
     },
     {
-      "id": "ahmed-saimoon-44",
-      "name": "Ahmed Saimoon",
-      "company": "CEO, Avito",
-      "rating": 5,
-      "text": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.",
-      "avatar": "/testimonials/testimonial1.jpg",
-      "cardType": "tall",
-      "priority": 7
+      "id": "emma-thomas",
+      "name": "Emma Thomas",
+      "company": "HR Specialist, PeopleFirst",
+      "rating": 4,
+      "text": "Managing our team has never been easier since we started using Ruqma. The collaboration features have improved our communication significantly.",
+      "avatar": "/testimonials/testimonial5.svg",
+      "cardType": "compact",
+      "date": "2024-06-20"
     }
   ]
 }

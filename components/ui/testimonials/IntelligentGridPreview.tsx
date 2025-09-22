@@ -27,9 +27,23 @@ import {
   DEFAULT_ACCESSIBILITY_CONFIG,
 } from './index';
 
+// Helper to create complete testimonial objects
+const createTestimonial = (base: Partial<Testimonial>): Testimonial => ({
+  role: base.company || 'Customer',
+  featured: (base.priority || 5) <= 7,
+  tags: ['sample'],
+  metadata: {
+    source: 'sample',
+    version: '1.0',
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z',
+  },
+  ...base,
+} as Testimonial);
+
 // Enhanced sample testimonials for algorithm testing
 const sampleTestimonials: Testimonial[] = [
-  {
+  createTestimonial({
     id: "ceo-techcorp",
     name: "Sarah Chen",
     company: "TechCorp Industries",
@@ -38,8 +52,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial1.jpg",
     cardType: "tall",
     priority: 10
-  },
-  {
+  }),
+  createTestimonial({
     id: "founder-startup",
     name: "Michael Rodriguez",
     company: "Startup Accelerator",
@@ -48,8 +62,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial2.jpg",
     cardType: "wide",
     priority: 9
-  },
-  {
+  }),
+  createTestimonial({
     id: "dev-agency",
     name: "Emily Johnson",
     company: "Digital Agency Plus",
@@ -58,8 +72,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial3.svg",
     cardType: "compact",
     priority: 7
-  },
-  {
+  }),
+  createTestimonial({
     id: "manager-fortune500",
     name: "David Park",
     company: "Fortune 500 Corporation",
@@ -68,8 +82,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial1.jpg",
     cardType: "tall",
     priority: 8
-  },
-  {
+  }),
+  createTestimonial({
     id: "consultant-freelance",
     name: "Lisa Zhang",
     company: "Independent Consultant",
@@ -78,8 +92,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial2.jpg",
     cardType: "wide",
     priority: 6
-  },
-  {
+  }),
+  createTestimonial({
     id: "student-university",
     name: "Alex Kim",
     company: "University Research Lab",
@@ -88,8 +102,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial3.svg",
     cardType: "compact",
     priority: 5
-  },
-  {
+  }),
+  createTestimonial({
     id: "cto-biotech",
     name: "Dr. Maria Silva",
     company: "BioTech Innovations",
@@ -98,8 +112,8 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial1.jpg",
     cardType: "tall",
     priority: 9
-  },
-  {
+  }),
+  createTestimonial({
     id: "designer-creative",
     name: "James Wilson",
     company: "Creative Studios",
@@ -108,7 +122,7 @@ const sampleTestimonials: Testimonial[] = [
     avatar: "/testimonials/testimonial2.jpg",
     cardType: "wide",
     priority: 6
-  }
+  })
 ];
 
 const IntelligentGridPreview: React.FC = () => {

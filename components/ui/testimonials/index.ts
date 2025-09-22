@@ -54,6 +54,21 @@ export { default as TestimonialCard } from './TestimonialCard';
 // Main Grid Component - Phase 4
 export { default as TestimonialsGrid } from './TestimonialsGrid';
 
+// Demo Components - Phase 5: Design Showcase
+export { default as TestimonialsDemo } from './TestimonialsDemo';
+
+// Services - Phase 5: Production Features
+export {
+  staticTestimonialsService,
+  useStaticTestimonials,
+  type StaticQueryConfig
+} from './services/staticTestimonialsService';
+export {
+  testimonialsService,
+  useTestimonials,
+  TestimonialsService
+} from './services/testimonialsService';
+
 // Utility exports - Phase 4: Intelligent Placement Algorithm
 export {
   calculateTestimonialWeight,

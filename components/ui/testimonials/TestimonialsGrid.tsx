@@ -19,6 +19,14 @@ import React, { useMemo, useEffect, useState } from 'react';
 import TestimonialCard from './TestimonialCard';
 import { calculateIntelligentPlacement, calculateResponsivePlacement } from './utils/IntelligentPlacement';
 import { generateGridStyles, generateCellStyles, validateGridLayout } from './utils/gridLayout';
+import {
+  useAnimation,
+  generateAnimationStyles,
+  generateHoverStyles,
+  createAnimationStylesheet,
+  ANIMATION_PRESETS,
+  type AdvancedAnimationConfig,
+} from './utils/animations';
 import type {
   Testimonial,
   TestimonialsGridConfig,
@@ -44,6 +52,8 @@ export interface TestimonialsGridProps {
   responsive?: ResponsiveConfig;
   /** Animation and transition settings */
   animation?: AnimationConfig;
+  /** Advanced animation preset */
+  animationPreset?: 'luxury' | 'minimal' | 'playful' | 'disabled';
   /** Accessibility configuration */
   accessibility?: AccessibilityConfig;
   /** Custom className for the grid container */
@@ -117,7 +127,7 @@ const DebugInfo: React.FC<{ calculation: LayoutCalculation; className?: string }
 }) => (
   <div className={`bg-gray-100 border border-gray-300 rounded p-4 text-xs font-mono ${className}`}>
     <h4 className="font-bold mb-2">Layout Debug Info</h4>
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid grid-cols-2 gap-2">
       <div>
         <h5 className="font-semibold">Layout</h5>
         <p>Rows: {calculation.layout.rows}</p>
@@ -158,7 +168,7 @@ const GridSkeleton: React.FC<{ responsive: ResponsiveConfig; className?: string 
     style={{
       display: 'grid',
       gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-      gap: responsive.desktop.cardSpacing,
+      gap: responsive.desktop.cardSpacing ?? "1rem",
       maxWidth: responsive.desktop.maxWidth,
       margin: '0 auto',
     }}
@@ -177,6 +187,7 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
   placement = DEFAULT_PLACEMENT_ALGORITHM,
   responsive = DEFAULT_RESPONSIVE_CONFIG,
   animation = DEFAULT_ANIMATION_CONFIG,
+  animationPreset = 'luxury',
   accessibility = DEFAULT_ACCESSIBILITY_CONFIG,
   className = '',
   loading = false,
@@ -224,6 +235,21 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
     }
   }, [currentLayout, onError, onLayoutCalculated]);
 
+  // Advanced animation configuration
+  const advancedAnimationConfig = useMemo(() => {
+    const preset = ANIMATION_PRESETS[animationPreset] || ANIMATION_PRESETS.luxury;
+    return {
+      ...preset,
+      enabled: preset.enabled && animation.enabled,
+    };
+  }, [animationPreset, animation.enabled]);
+
+  // Animation hook for grid container
+  const { ref: animationRef, isVisible, animationConfig } = useAnimation(
+    advancedAnimationConfig,
+    !loading && !!currentLayout?.success
+  );
+
   // Generate grid styles
   const gridStyles = useMemo(() => {
     if (!currentLayout || !currentLayout.success) {
@@ -232,6 +258,11 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
 
     return generateGridStyles(currentLayout.layout, responsive, currentBreakpoint);
   }, [currentLayout, responsive, currentBreakpoint]);
+
+  // Generate animation stylesheet
+  const animationStylesheet = useMemo(() => {
+    return createAnimationStylesheet([animationConfig]);
+  }, [animationConfig]);
 
   // Handle loading state
   if (loading) {
@@ -294,6 +325,7 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
 
       {/* Main grid container */}
       <div
+        ref={animationRef}
         className="testimonials-grid"
         style={gridStyles}
         role="region"
@@ -308,16 +340,41 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
             return null;
           }
 
+          const cellAnimationStyles = isVisible
+            ? generateAnimationStyles(animationConfig.entrance, index, animationConfig)
+            : {};
+
+          const cellHoverStyles = generateHoverStyles(animationConfig.hover, animationConfig);
+
           return (
             <div
               key={cell.id}
               style={{
                 ...generateCellStyles(cell),
-                ...(animation.enabled && {
-                  animation: `fadeInUp ${animation.duration}ms ${animation.easing} ${index * animation.stagger}ms both`,
-                }),
+                ...cellAnimationStyles,
+                ...cellHoverStyles,
               }}
               className="testimonial-grid-cell"
+              onMouseEnter={(e) => {
+                if (animationConfig.enabled && animationConfig.hover.name !== 'none') {
+                  e.currentTarget.style.transform = animationConfig.hover.transform || '';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (animationConfig.enabled) {
+                  e.currentTarget.style.transform = '';
+                }
+              }}
+              onFocus={(e) => {
+                if (animationConfig.enabled && animationConfig.focus.name !== 'none') {
+                  e.currentTarget.style.transform = animationConfig.focus.transform || '';
+                }
+              }}
+              onBlur={(e) => {
+                if (animationConfig.enabled) {
+                  e.currentTarget.style.transform = '';
+                }
+              }}
             >
               <TestimonialCard
                 testimonial={testimonial}
@@ -329,20 +386,9 @@ const TestimonialsGrid: React.FC<TestimonialsGridProps> = ({
         })}
       </div>
 
-      {/* CSS animations */}
-      {animation.enabled && (
-        <style jsx>{`
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(20px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-        `}</style>
+      {/* Advanced CSS animations */}
+      {animationConfig.enabled && animationStylesheet && (
+        <style jsx>{animationStylesheet}</style>
       )}
     </div>
   );

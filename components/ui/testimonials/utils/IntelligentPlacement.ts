@@ -301,18 +301,69 @@ export function calculateIntelligentPlacement(
   // Sort testimonials by placement priority
   const sortedTestimonials = sortTestimonialsByPriority(testimonials);
 
-  // Initialize grid (start with reasonable size, expand as needed)
-  const maxPossibleRows = Math.min(maxRows, Math.ceil(testimonials.length * 2));
+  // Enhanced grid sizing for mobile/narrow layouts
+  const isMobileLayout = targetColumns <= 1;
+  const baseRows = isMobileLayout ? Math.ceil(testimonials.length * 1.5) : Math.ceil(testimonials.length * 2);
+  const maxPossibleRows = Math.min(maxRows, Math.max(baseRows, testimonials.length + 2));
+  
   const grid: boolean[][] = Array(maxPossibleRows)
     .fill(null)
     .map(() => Array(targetColumns).fill(false));
 
   const cells: GridCell[] = [];
   const unplacedTestimonials: Testimonial[] = [];
+  const placementAttempts: { testimonial: Testimonial; attempts: number }[] = [];
 
-  // Place testimonials using intelligent algorithm
+  // Place testimonials using intelligent algorithm with fallback strategies
   for (const testimonial of sortedTestimonials) {
-    const position = findBestPosition(grid, testimonial, algorithm, cells);
+    let position = findBestPosition(grid, testimonial, algorithm, cells);
+    let attempts = 1;
+
+    // Fallback Strategy 1: Try with simplified algorithm if mobile layout
+    if (!position && isMobileLayout) {
+      const simplifiedAlgorithm = {
+        balanceRows: false,
+        preventClustering: false,
+        maintainReadingFlow: true,
+        prioritizeHighValue: false,
+      };
+      position = findBestPosition(grid, testimonial, simplifiedAlgorithm, cells);
+      attempts++;
+    }
+
+    // Fallback Strategy 2: Force placement by expanding grid if needed
+    if (!position && cells.length < testimonials.length) {
+      const expandedGrid: boolean[][] = Array(maxPossibleRows + 5)
+        .fill(null)
+        .map(() => Array(targetColumns).fill(false));
+      
+      // Copy existing occupancy
+      cells.forEach(cell => {
+        occupyPosition(expandedGrid, cell.rowStart, cell.colStart, 
+          cell.rowEnd - cell.rowStart, cell.colEnd - cell.colStart);
+      });
+
+      position = findBestPosition(expandedGrid, testimonial, algorithm, cells);
+      if (position) {
+        // Update the main grid reference
+        grid.length = expandedGrid.length;
+        for (let i = 0; i < expandedGrid.length; i++) {
+          grid[i] = expandedGrid[i];
+        }
+      }
+      attempts++;
+    }
+
+    // Fallback Strategy 3: Simple sequential placement for mobile
+    if (!position && isMobileLayout) {
+      const nextRow = cells.length > 0 ? Math.max(...cells.map(c => c.rowEnd)) : 0;
+      if (nextRow < grid.length) {
+        position = { row: nextRow, col: 0, score: 0.5 };
+      }
+      attempts++;
+    }
+
+    placementAttempts.push({ testimonial, attempts });
 
     if (position) {
       const { rowSpan, colSpan } = getCardGridSpan(testimonial.cardType, targetColumns);
@@ -332,6 +383,11 @@ export function calculateIntelligentPlacement(
 
       cells.push(cell);
       occupyPosition(grid, position.row, position.col, rowSpan, colSpan);
+
+      // Add debug info for mobile troubleshooting
+      if (isMobileLayout && attempts > 1) {
+        warnings.push(`${testimonial.id} placed after ${attempts} attempts`);
+      }
     } else {
       unplacedTestimonials.push(testimonial);
       warnings.push(`Could not place testimonial: ${testimonial.id}`);
@@ -405,11 +461,60 @@ export function calculateResponsivePlacement(
     prioritizeHighValue: true,
   }
 ) {
-  const layouts = {
-    mobile: calculateIntelligentPlacement(testimonials, algorithm, GRID_CONFIGURATIONS.mobile.columns, 8),
-    tablet: calculateIntelligentPlacement(testimonials, algorithm, GRID_CONFIGURATIONS.tablet.columns, 6),
-    desktop: calculateIntelligentPlacement(testimonials, algorithm, GRID_CONFIGURATIONS.desktop.columns, 5),
+  // Mobile-optimized algorithm for single column layout
+  const mobileAlgorithm: PlacementAlgorithm = {
+    balanceRows: false,        // Not applicable for single column
+    preventClustering: false,  // Less important on mobile
+    maintainReadingFlow: true, // Still important for UX
+    prioritizeHighValue: true, // Keep high-value testimonials prominent
   };
+
+  // Calculate dynamic row limits based on testimonial count
+  const mobileRows = Math.max(10, testimonials.length + 3);
+  const tabletRows = Math.max(8, Math.ceil(testimonials.length / 2) + 2);
+  const desktopRows = Math.max(6, Math.ceil(testimonials.length / 4) + 1);
+
+  const layouts = {
+    mobile: calculateIntelligentPlacement(testimonials, mobileAlgorithm, GRID_CONFIGURATIONS.mobile.columns, mobileRows),
+    tablet: calculateIntelligentPlacement(testimonials, algorithm, GRID_CONFIGURATIONS.tablet.columns, tabletRows),
+    desktop: calculateIntelligentPlacement(testimonials, algorithm, GRID_CONFIGURATIONS.desktop.columns, desktopRows),
+  };
+
+  // Add enhanced error handling and recovery
+  if (!layouts.mobile.success && testimonials.length > 0) {
+    console.warn('Mobile layout failed, attempting recovery...');
+    // Force simple sequential layout for mobile as ultimate fallback
+    const fallbackCells: GridCell[] = testimonials.map((testimonial, index) => ({
+      id: `cell-${testimonial.id}`,
+      testimonialId: testimonial.id,
+      rowStart: index,
+      rowEnd: index + 1,
+      colStart: 0,
+      colEnd: 1,
+      cardType: testimonial.cardType,
+      visualWeight: VISUAL_WEIGHTS[testimonial.cardType as keyof typeof VISUAL_WEIGHTS] || 1,
+      position: { x: 0, y: index },
+    }));
+
+    layouts.mobile = {
+      success: true,
+      layout: {
+        rows: testimonials.length,
+        columns: 1,
+        cells: fallbackCells,
+        totalVisualWeight: fallbackCells.reduce((sum, cell) => sum + cell.visualWeight, 0),
+        balanceScore: 1, // Perfect balance for single column
+      },
+      metrics: {
+        balanceScore: 1,
+        readabilityScore: 0.9,
+        visualHarmony: 0.8,
+        performanceScore: 1,
+      },
+      warnings: ['Using fallback sequential layout for mobile'],
+      recommendations: ['Consider reducing testimonial count for better mobile experience'],
+    };
+  }
 
   return layouts;
 }

@@ -47,7 +47,7 @@ const TestimonialCardFallback: React.FC<{
     <article
       className={`
         w-[319px] h-[241px]
-        bg-[var(--testimonials-card-bg)]
+        bg-[#E9ECF2]
         border border-red-300
         rounded-[var(--testimonials-card-radius)]
         p-4
