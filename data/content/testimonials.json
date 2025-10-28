@@ -21,7 +21,7 @@
       "rating": 4,
       "text": "Ruqma has transformed the way we manage our projects. The intuitive interface and powerful features have significantly boosted our productivity.",
       "avatar": "/testimonials/testimonial2.jpg",
-      "cardType": "wide",
+      "cardType": "compact",
       "date": "2023-11-15"
     },
     {
@@ -64,18 +64,18 @@
       "rating": 5,
       "text": "Ruqma has been a game-changer for our operations. The efficiency and organization it brings to our team are unparalleled.",
       "avatar": "/testimonials/testimonial4.svg",
-      "cardType": "tall",
+      "cardType": "wide",
       "date": "2024-06-15"
     },
     {
-      "id": "emma-thomas",
-      "name": "Emma Thomas",
-      "company": "HR Specialist, PeopleFirst",
-      "rating": 4,
-      "text": "Managing our team has never been easier since we started using Ruqma. The collaboration features have improved our communication significantly.",
-      "avatar": "/testimonials/testimonial5.svg",
-      "cardType": "compact",
-      "date": "2024-06-20"
+      "id": "oliver-james",
+      "name": "Oliver James",
+      "company": "Sales Lead, MarketMakers",
+      "rating": 5,
+      "text": "Ruqma's integration capabilities have allowed us to seamlessly connect with our existing tools, streamlining our workflow and enhancing productivity.",
+      "avatar": "/testimonials/testimonial1.jpg",
+      "cardType": "wide",
+      "date": "2024-06-25"
     }
   ]
 }

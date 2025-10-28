@@ -1,0 +1,155 @@
+{
+  "hero": {
+    "title": "Where to",
+    "titleAccent": "Buy?",
+    "subtitle": "Discover Our Trusted Partner Stores"
+  },
+  "introduction": {
+    "heading": "Experience Ruqma In Person",
+    "paragraphs": [
+      "Visit our carefully selected partner stores to experience Ruqma products firsthand. Our retail partners share our commitment to exceptional service and luxury presentation.",
+      "Each location offers expert consultation, allowing you to touch, feel, and fully appreciate the craftsmanship that defines Ruqma. Discover the difference that comes from experiencing luxury in person."
+    ],
+    "image": {
+      "src": "/images/stores/retail-experience.jpg",
+      "alt": "Luxury retail store interior featuring Ruqma products"
+    }
+  },
+  "storeLocator": {
+    "heading": "Find a Store Near You",
+    "description": "Enter your location to discover partner stores in your area",
+    "comingSoon": true,
+    "placeholder": "City, State, or ZIP Code"
+  },
+  "stores": [
+    {
+      "id": "luxury-gallery-ny",
+      "storeName": "Luxury Gallery Downtown",
+      "location": {
+        "address": "123 Main Street",
+        "city": "New York",
+        "state": "NY",
+        "zipCode": "10001",
+        "country": "USA"
+      },
+      "contact": {
+        "phone": "+1 (555) 123-4567",
+        "email": "info@luxurygallery.com",
+        "website": "https://luxurygallery.com"
+      },
+      "hours": {
+        "weekday": "Monday - Friday: 10am - 8pm",
+        "weekend": "Saturday - Sunday: 11am - 6pm"
+      },
+      "image": {
+        "src": "/images/stores/luxury-gallery.jpg",
+        "alt": "Luxury Gallery Downtown storefront"
+      },
+      "featured": true
+    },
+    {
+      "id": "prestige-boutique-la",
+      "storeName": "Prestige Boutique LA",
+      "location": {
+        "address": "456 Rodeo Drive",
+        "city": "Los Angeles",
+        "state": "CA",
+        "zipCode": "90210",
+        "country": "USA"
+      },
+      "contact": {
+        "phone": "+1 (555) 234-5678",
+        "email": "contact@prestigeboutique.com",
+        "website": "https://prestigeboutique.com"
+      },
+      "hours": {
+        "weekday": "Monday - Saturday: 10am - 7pm",
+        "weekend": "Sunday: 12pm - 6pm"
+      },
+      "image": {
+        "src": "/images/stores/prestige-boutique.jpg",
+        "alt": "Prestige Boutique LA exterior"
+      },
+      "featured": true
+    },
+    {
+      "id": "elite-living-miami",
+      "storeName": "Elite Living Miami",
+      "location": {
+        "address": "789 Ocean Drive",
+        "city": "Miami",
+        "state": "FL",
+        "zipCode": "33139",
+        "country": "USA"
+      },
+      "contact": {
+        "phone": "+1 (555) 345-6789",
+        "email": "hello@eliteliving.com",
+        "website": "https://eliteliving.com"
+      },
+      "hours": {
+        "weekday": "Monday - Friday: 11am - 8pm",
+        "weekend": "Saturday - Sunday: 10am - 9pm"
+      },
+      "image": {
+        "src": "/images/stores/elite-living.jpg",
+        "alt": "Elite Living Miami beachfront location"
+      },
+      "featured": false
+    },
+    {
+      "id": "highland-luxury-chicago",
+      "storeName": "Highland Luxury Chicago",
+      "location": {
+        "address": "321 Michigan Avenue",
+        "city": "Chicago",
+        "state": "IL",
+        "zipCode": "60601",
+        "country": "USA"
+      },
+      "contact": {
+        "phone": "+1 (555) 456-7890",
+        "email": "info@highlandluxury.com",
+        "website": "https://highlandluxury.com"
+      },
+      "hours": {
+        "weekday": "Monday - Friday: 10am - 7pm",
+        "weekend": "Saturday - Sunday: 11am - 6pm"
+      },
+      "image": {
+        "src": "/images/stores/highland-luxury.jpg",
+        "alt": "Highland Luxury Chicago storefront"
+      },
+      "featured": false
+    }
+  ],
+  "features": [
+    {
+      "icon": "consultation",
+      "title": "Expert Consultation",
+      "description": "Receive personalized guidance from knowledgeable staff who understand our products and can help you make the perfect choice."
+    },
+    {
+      "icon": "demonstration",
+      "title": "Product Demonstrations",
+      "description": "Experience our products firsthand with detailed demonstrations that showcase quality, craftsmanship, and functionality."
+    },
+    {
+      "icon": "events",
+      "title": "Exclusive Events",
+      "description": "Attend private shopping experiences, product launch events, and exclusive gatherings at partner locations."
+    },
+    {
+      "icon": "availability",
+      "title": "Immediate Availability",
+      "description": "Take your purchase home the same day from our partner locations with immediate product availability."
+    }
+  ],
+  "partnerCTA": {
+    "heading": "Become a Ruqma Partner",
+    "subheading": "Join our network of distinguished retailers and bring Ruqma excellence to your customers",
+    "buttonText": "Partner Inquiry",
+    "buttonLink": "/contact?inquiry=partnership",
+    "buttonAriaLabel": "Submit partnership inquiry"
+  }
+}

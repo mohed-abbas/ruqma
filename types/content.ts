@@ -92,3 +92,122 @@ export interface ProductCatalog {
 export interface LegalContent {
   copyright: string;
 }
+
+// Our Story Types
+export interface OurStoryHero {
+  title: string;
+  titleAccent: string;
+  subtitle: string;
+}
+
+export interface ImageContent {
+  src: string;
+  alt: string;
+}
+
+export interface StoryIntroduction {
+  heading: string;
+  paragraphs: string[];
+  image: ImageContent;
+}
+
+export interface ValueCard {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TimelineMilestone {
+  year: string;
+  title: string;
+  description: string;
+}
+
+export interface Craftsmanship {
+  heading: string;
+  description: string;
+  image: ImageContent;
+}
+
+export interface StoryCTA {
+  heading: string;
+  subheading: string;
+  buttonText: string;
+  buttonLink: string;
+  buttonAriaLabel: string;
+}
+
+export interface OurStoryContent {
+  hero: OurStoryHero;
+  introduction: StoryIntroduction;
+  values: ValueCard[];
+  timeline: TimelineMilestone[];
+  craftsmanship: Craftsmanship;
+  cta: StoryCTA;
+}
+
+// Where to Buy Types
+export interface WhereToBuyHero {
+  title: string;
+  titleAccent: string;
+  subtitle: string;
+}
+
+export interface StoreLocation {
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
+}
+
+export interface StoreContact {
+  phone: string;
+  email: string;
+  website: string;
+}
+
+export interface StoreHours {
+  weekday: string;
+  weekend: string;
+}
+
+export interface PartnerStore {
+  id: string;
+  storeName: string;
+  location: StoreLocation;
+  contact: StoreContact;
+  hours: StoreHours;
+  image: ImageContent;
+  featured: boolean;
+}
+
+export interface StoreLocator {
+  heading: string;
+  description: string;
+  comingSoon: boolean;
+  placeholder: string;
+}
+
+export interface StoreFeature {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface PartnerCTA {
+  heading: string;
+  subheading: string;
+  buttonText: string;
+  buttonLink: string;
+  buttonAriaLabel: string;
+}
+
+export interface WhereToBuyContent {
+  hero: WhereToBuyHero;
+  introduction: StoryIntroduction;
+  storeLocator: StoreLocator;
+  stores: PartnerStore[];
+  features: StoreFeature[];
+  partnerCTA: PartnerCTA;
+}

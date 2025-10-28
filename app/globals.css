@@ -50,6 +50,30 @@
   --testimonials-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --testimonials-animation-duration: 300ms;
   --testimonials-animation-stagger: 100ms;
+
+  /* Product Page Design System Variables */
+  --product-page-bg: #151715;
+  --product-page-text-primary: var(--white);
+  --product-page-text-accent: var(--color-primary);
+  --product-page-text-secondary: rgba(255, 255, 255, 0.8);
+  --product-page-button-bg: var(--color-primary);
+  --product-page-button-text: var(--black);
+  --product-page-button-shadow: 0px -4px 5.8px 0px inset rgba(161,161,161,0.25), 0px 4px 2.6px 0px inset rgba(255,255,255,0.25);
+  --product-page-button-border: var(--white);
+
+  /* Product Page Typography */
+  --product-page-title-size: clamp(3rem, 8vw, 6.25rem);
+  --product-page-body-size: clamp(1rem, 2vw, 1.25rem);
+  --product-page-nav-size: 1rem;
+  --product-page-button-size: 0.875rem;
+
+  /* Product Page Layout */
+  --product-page-container-padding: clamp(1.25rem, 5vw, 5rem);
+  --product-page-section-gap: clamp(4rem, 8vw, 6.25rem);
+  --product-page-content-gap: clamp(1.5rem, 3vw, 4rem);
+  --product-page-button-radius: 3.25rem;
+  --product-page-button-padding-x: 1.5rem;
+  --product-page-button-padding-y: 0.75rem;
 }
 
 @media (prefers-color-scheme: dark) {
