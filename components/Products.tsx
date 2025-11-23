@@ -1,12 +1,16 @@
 import React from 'react'
 import { ProductCard } from './ui/product';
-import { SectionContent, ProductCatalog } from '@/types/content';
+import { SectionContent } from '@/types/content';
 import sectionData from '@/data/content/sections.json';
-import catalogData from '@/data/products/catalog.json';
+import { getProducts } from '@/lib/sanity/fetch';
+import { urlForImage } from '@/lib/sanity/client';
+import { SanityProduct } from '@/lib/sanity/fetch';
 
-export default function Products() {
+export default async function Products() {
   const sections: SectionContent = sectionData as SectionContent;
-  const catalog: ProductCatalog = catalogData as ProductCatalog;
+
+  // Fetch products from Sanity CMS
+  const sanityProducts: SanityProduct[] = await getProducts();
 
   return (
     <section 
@@ -23,25 +27,25 @@ export default function Products() {
           </h2>
         </div>
 
-        {/* Products container - Figma-accurate desktop layout with responsive fallbacks */}
+        {/* Products container - Dynamic grid showing all products that have showOnHome=true */}
         <div className="content-stretch flex flex-col gap-[70px] w-full">
-          {/* First row of products */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-[150px] items-center justify-center w-full">
-            {catalog.products.slice(0, 2).map((product) => {
-              if (product.showOnHome) {
-                return <ProductCard key={product.id} {...product} />;
-              }
-            })}
-          </div>
-
-          {/* Second row of products */}
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-[150px] items-center justify-center w-full">
-            {catalog.products.slice(2, 4).map((product) => {
-              if (product.showOnHome) {
-                return <ProductCard key={product.id} {...product} />;
-              }
-            })}
-          </div>
+          {/* Dynamically render products in rows of 2 */}
+          {Array.from({ length: Math.ceil(sanityProducts.length / 2) }, (_, rowIndex) => (
+            <div key={rowIndex} className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-[150px] items-center justify-center w-full">
+              {sanityProducts.slice(rowIndex * 2, rowIndex * 2 + 2).map((product: SanityProduct) => (
+                <ProductCard
+                  key={product._id}
+                  id={product.slug}
+                  name={product.name}
+                  description={product.description}
+                  imageUrl={urlForImage(product.mainImage).width(800).url()}
+                  href={`/products/${product.slug}`}
+                  brand={product.brand}
+                  additionalDescription={product.additionalDescription}
+                />
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </section>

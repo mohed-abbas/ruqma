@@ -44,7 +44,7 @@ export default function ProductCard({
           <div className="absolute flex items-center justify-center
                           w-full h-full p-4
                           sm:w-[285px] sm:h-[285px] sm:left-1/2 sm:top-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2">
-            <div className="flex-none scale-y-[-1] w-full h-full max-w-[285px] max-h-[285px]">
+            <div className="flex-none w-full h-full max-w-[285px] max-h-[285px]">
               <div
                 className="bg-center bg-cover bg-no-repeat w-full h-full"
                 style={{ backgroundImage: `url('${imageUrl}')` }}

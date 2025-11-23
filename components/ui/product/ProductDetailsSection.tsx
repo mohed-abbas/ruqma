@@ -1,19 +1,15 @@
-'use client';
-
-import { ProductDetailsSectionProps } from './types';
+import { ProductDetailsData } from './types';
 import FeatureCardGrid from './FeatureCardGrid';
-import { getProductDetails } from '@/data/products/products';
 
 /**
  * Product details section with card-based grid layout
  * Matches Figma design with asymmetric card positioning
+ * Now receives data as props instead of fetching hardcoded data
  */
 export default function ProductDetailsSection({
-  productSlug,
+  productDetails,
   className
-}: ProductDetailsSectionProps) {
-  const productDetails = getProductDetails(productSlug);
-
+}: { productDetails: ProductDetailsData | null; className?: string }) {
   if (!productDetails) {
     return (
       <section className="w-full py-[120px] flex items-center justify-center">

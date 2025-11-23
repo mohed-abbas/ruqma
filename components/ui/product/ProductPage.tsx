@@ -3,9 +3,6 @@
 import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { ProductPageProps } from './types';
-import ProductDetailsSection from './ProductDetailsSection';
-import ProductGallery from './ProductGallery';
-import PartnerStoresCTA from './PartnerStoresCTA';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -27,14 +24,14 @@ const scaleOnHover = {
 };
 
 interface ExtendedProductPageProps extends ProductPageProps {
-  productSlug?: string;
+  productSlug: string;
 }
 
 export default function ProductPage({
   product,
   className,
   onLearnMoreClick,
-  productSlug
+  productSlug, // eslint-disable-line @typescript-eslint/no-unused-vars
 }: ExtendedProductPageProps) {
   const router = useRouter();
   const {
@@ -174,7 +171,7 @@ export default function ProductPage({
             >
               {/* Main Product Image */}
               <div className="absolute flex h-[559px] items-center justify-center left-0 top-0 w-[674px]">
-                <div className="flex-none scale-y-[-100%]">
+                <div className="flex-none">
                   <div
                     className="h-[559px] w-[674px]"
                     style={{
@@ -189,7 +186,7 @@ export default function ProductPage({
 
               {/* Secondary/Shadow Product Image */}
               <div className="absolute flex h-[559px] items-center justify-center left-[-35px] top-[25px] w-[674px]">
-                <div className="flex-none scale-y-[-100%]">
+                <div className="flex-none">
                   <div
                     className="h-[559px] w-[674px]"
                     style={{
@@ -205,19 +202,6 @@ export default function ProductPage({
           </motion.div>
         </div>
       </section>
-
-      {/* Product Details Section */}
-      {productSlug && (
-        <ProductDetailsSection productSlug={productSlug} />
-      )}
-
-      {/* Product Gallery Section */}
-      {productSlug && (
-        <ProductGallery productSlug={productSlug} />
-      )}
-
-      {/* Partner Stores CTA Section */}
-      <PartnerStoresCTA />
     </div>
   );
 }

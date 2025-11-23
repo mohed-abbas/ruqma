@@ -29,7 +29,7 @@ export function GlideXProductExample() {
     }
   };
 
-  return <ProductPage {...glideXProduct} />;
+  return <ProductPage {...glideXProduct} productSlug="glidex" />;
 }
 
 /**
@@ -60,7 +60,7 @@ export function CustomProductExample() {
     }
   };
 
-  return <ProductPage {...customProduct} />;
+  return <ProductPage {...customProduct} productSlug="precision-pro" />;
 }
 
 /**
@@ -79,7 +79,7 @@ export function MinimalProductExample() {
     // No background elements, uses default navigation, no custom callbacks
   };
 
-  return <ProductPage {...minimalProduct} />;
+  return <ProductPage {...minimalProduct} productSlug="essential" />;
 }
 
 /**

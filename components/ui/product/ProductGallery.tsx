@@ -2,94 +2,21 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { ProductGalleryProps, GalleryImage } from './types';
+import { ProductGalleryData, GalleryImage } from './types';
 
 /**
  * Product Gallery with masonry-style layout matching Figma design
  * Features "A Closer Look" section with asymmetric image grid
+ * Now receives data as props instead of using hardcoded data
  */
 export default function ProductGallery({
-  productSlug, // eslint-disable-line @typescript-eslint/no-unused-vars
+  galleryData,
   className
-}: ProductGalleryProps) {
-  // Mock gallery data based on Figma design - using existing product images for demonstration
-  const galleryData = {
-    title: "A Closer Look",
-    images: [
-      {
-        id: "gallery-1",
-        src: "/products/featureImage1.png",
-        alt: "GlideX mouse pad texture detail close-up view",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1",
-        priority: true
-      },
-      {
-        id: "gallery-2",
-        src: "/products/featureImage2.png",
-        alt: "Gaming mouse on GlideX pad showing tracking precision",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-3",
-        src: "/products/product.png",
-        alt: "GlideX product packaging and branding detail",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-4",
-        src: "/products/featureImage1.png",
-        alt: "Side profile view of GlideX glass mouse pad thickness",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-5",
-        src: "/products/featureImage2.png",
-        alt: "GlideX mouse pad edge detail with precision cutting",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "4/3"
-      },
-      {
-        id: "gallery-6",
-        src: "/products/featureImage1.png",
-        alt: "Gaming setup with GlideX mouse pad in professional environment",
-        gridSpan: { cols: 2, rows: 1 },
-        aspectRatio: "16/9",
-        priority: true
-      },
-      {
-        id: "gallery-7",
-        src: "/products/product.png",
-        alt: "Botanical elements with GlideX mouse pad artistic composition",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-8",
-        src: "/products/featureImage2.png",
-        alt: "Gaming mouse and GlideX pad from above showing scale",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-9",
-        src: "/products/featureImage1.png",
-        alt: "Minimalist workspace featuring GlideX mouse pad with coffee",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      },
-      {
-        id: "gallery-10",
-        src: "/products/product.png",
-        alt: "GlideX mouse pad corner detail showing build quality",
-        gridSpan: { cols: 1, rows: 1 },
-        aspectRatio: "1/1"
-      }
-    ]
-  };
+}: { galleryData: ProductGalleryData | null; className?: string }) {
+  // Default gallery data if none provided
+  if (!galleryData || !galleryData.images || galleryData.images.length === 0) {
+    return null; // Don't render gallery if no images
+  }
 
   // Animation variants
   const containerVariants = {
@@ -134,8 +61,13 @@ export default function ProductGallery({
             "
             style={{ fontFamily: 'IBM Plex Sans, sans-serif' }}
           >
-            {galleryData.title}
+            {galleryData.title || 'A Closer Look'}
           </h2>
+          {galleryData.subtitle && (
+            <p className="text-center text-gray-400 mt-4 text-lg">
+              {galleryData.subtitle}
+            </p>
+          )}
         </motion.div>
 
         {/* Masonry Grid Layout */}
@@ -150,7 +82,7 @@ export default function ProductGallery({
           animate="animate"
           variants={containerVariants}
         >
-          {galleryData.images.map((image: GalleryImage, index: number) => (
+          {galleryData.images.map((image: GalleryImage) => (
             <motion.div
               key={image.id}
               className={`
@@ -158,7 +90,7 @@ export default function ProductGallery({
                 rounded-[12px]
                 overflow-hidden
                 shadow-[0px_8px_32px_rgba(0,0,0,0.3)]
-                ${getGridSpanClasses(image, index)}
+                ${getGridSpanClasses(image)}
               `}
               variants={imageVariants}
               whileHover={{
@@ -217,22 +149,12 @@ export default function ProductGallery({
 }
 
 /**
- * Get appropriate grid span classes based on image configuration and position
+ * Get appropriate grid span classes based on image configuration
  */
-function getGridSpanClasses(image: GalleryImage, index: number): string {
-  // Specific layout pattern based on Figma design
-  const layoutMap: Record<number, string> = {
-    0: "col-span-1 row-span-1", // Top left
-    1: "col-span-1 row-span-1", // Top center-left
-    2: "col-span-1 row-span-1", // Top center-right
-    3: "col-span-1 row-span-1", // Top right
-    4: "col-span-1 row-span-1", // Middle left
-    5: "col-span-2 lg:col-span-2 row-span-1", // Large center image
-    6: "col-span-1 row-span-1", // Middle right
-    7: "col-span-1 row-span-1", // Bottom left
-    8: "col-span-1 row-span-1", // Bottom center-left
-    9: "col-span-1 row-span-1", // Bottom center-right
-  };
-
-  return layoutMap[index] || "col-span-1 row-span-1";
+function getGridSpanClasses(image: GalleryImage): string {
+  // Use grid span from image data if available
+  const cols = image.gridSpan?.cols || 1;
+  const rows = image.gridSpan?.rows || 1;
+  
+  return `col-span-${cols} row-span-${rows}`;
 }

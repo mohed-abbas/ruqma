@@ -1,29 +1,32 @@
-'use client';
-
 import React from 'react';
 import { TestimonialsGrid } from '@/components/ui/testimonials';
 import testimonialsData from '@/data/content/testimonials.json';
+import { getTestimonials, SanityTestimonial } from '@/lib/sanity/fetch';
+import { urlForImage } from '@/lib/sanity/client';
 
-export default function Testimonials() {
+export default async function Testimonials() {
   const { section } = testimonialsData;
 
-  // Transform imported data to match expected format
-  const transformedTestimonials = React.useMemo(() => {
-    return testimonialsData.testimonials.map(testimonial => ({
-      ...testimonial,
-      priority: testimonial.priority ?? 0,
-      cardType: testimonial.cardType as 'tall' | 'wide' | 'compact',
-      role: testimonial.company || 'Customer',
-      featured: (testimonial.priority ?? 5) <= 3,
-      tags: ['general'],
-      metadata: {
-        source: 'static',
-        version: '1.0',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    }));
-  }, []);
+  // Fetch testimonials from Sanity CMS
+  const sanityTestimonials: SanityTestimonial[] = await getTestimonials();
+
+  // Transform Sanity data to match expected format
+  const transformedTestimonials = sanityTestimonials.map((testimonial: SanityTestimonial) => ({
+    ...testimonial,
+    id: testimonial._id,
+    avatar: urlForImage(testimonial.avatar).width(200).height(200).url(),
+    priority: testimonial.priority ?? 0,
+    cardType: testimonial.cardType as 'tall' | 'wide' | 'compact',
+    role: testimonial.company || 'Customer',
+    featured: (testimonial.priority ?? 5) <= 3,
+    tags: ['general'],
+    metadata: {
+      source: 'sanity',
+      version: '1.0',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    },
+  }));
 
   const testimonials = transformedTestimonials.slice(0, 8);
   const loading = false;
@@ -98,7 +101,7 @@ export default function Testimonials() {
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Ruqma",
-            "review": testimonials.slice(0, 5).map(testimonial => ({
+            "review": testimonials.slice(0, 5).map((testimonial: typeof transformedTestimonials[0]) => ({
               "@type": "Review",
               "author": {
                 "@type": "Person",

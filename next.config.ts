@@ -14,14 +14,14 @@ const nextConfig: NextConfig = {
     // Image sizes for different breakpoints
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 
-    // Allow images from external domains (if needed)
+    // Allow images from external domains
     remotePatterns: [
-      // Example: Uncomment and configure if using external image CDN
-      // {
-      //   protocol: 'https',
-      //   hostname: 'cdn.example.com',
-      //   pathname: '/images/**',
-      // },
+      // Sanity CDN for CMS images
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+        pathname: '/images/**',
+      },
     ],
   },
 

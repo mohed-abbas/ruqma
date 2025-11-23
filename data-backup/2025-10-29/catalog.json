@@ -1,0 +1,286 @@
+{
+  "products": [
+    {
+      "id": "glidex-mouse-pad",
+      "name": "Glide",
+      "model": "X",
+      "description": "Designed with a high-density pyramid-shaped microstructure matrix, the mouse pad minimizes the contact points between your mouse and the pad.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "GlideX glass mouse pad with premium tracking surface",
+      "href": "/products/glidex",
+      "slug": "glidex",
+      "brand": "Ruqma",
+      "additionalDescription": "Designed to deliver unparalleled tracking and gliding performance for amateurs and gamers alike",
+      "showOnHome": true,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Micro textured for",
+          "highlight": "smooth glide",
+          "description": "Designed with a high-density pyramid-shaped microstructure matrix, the mouse pad minimizes the contact points between your mouse and the pad.",
+          "image": "/products/featureImage1.png",
+          "imageAlt": "GlideX mouse pad micro texture detail showing pyramid-shaped microstructure"
+        },
+        "features": [
+          {
+            "id": "consistent-surface",
+            "title": "Consistent",
+            "highlight": "surface",
+            "description": "Uniform texture across the entire pad ensures consistent tracking performance regardless of mouse position."
+          },
+          {
+            "id": "tempered-glass",
+            "title": "Tempered glass",
+            "highlight": "for strength",
+            "description": "Military-grade tempered glass construction provides durability and resistance to scratches and wear."
+          },
+          {
+            "id": "large-size",
+            "title": "400x450mm",
+            "highlight": "large size",
+            "description": "Generous surface area accommodates both high and low sensitivity gaming styles with room for large movements."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/featureImage2.png",
+          "alt": "GlideX mouse pad with gaming mouse in action showing precision tracking"
+        }
+      }
+    },
+    {
+      "id": "luxe-pro-keyboard",
+      "name": "Luxe",
+      "model": "Pro",
+      "description": "Experience premium typing with our mechanical keyboard crafted by master artisans, featuring custom-engineered switches and handcrafted keycaps.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "LuxePro mechanical keyboard with premium switches and luxury finish",
+      "href": "/products/luxepro",
+      "slug": "luxepro",
+      "brand": "Ruqma",
+      "additionalDescription": "Featuring custom-engineered switches and handcrafted keycaps for the ultimate typing experience",
+      "showOnHome": true,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Engineered switches for",
+          "highlight": "premium typing",
+          "description": "Experience premium typing with our mechanical keyboard crafted by master artisans, featuring custom-engineered switches and handcrafted keycaps.",
+          "image": "/products/luxepro-detail-1.jpg",
+          "imageAlt": "LuxePro keyboard custom-engineered mechanical switches detail"
+        },
+        "features": [
+          {
+            "id": "custom-switches",
+            "title": "Custom",
+            "highlight": "switches",
+            "description": "Precision-engineered tactile switches deliver consistent actuation force and superior key feel with 50-million keystroke lifespan."
+          },
+          {
+            "id": "handcrafted-keycaps",
+            "title": "Handcrafted",
+            "highlight": "keycaps",
+            "description": "Double-shot PBT keycaps with precision-machined legends that never fade, crafted by master artisans for superior durability."
+          },
+          {
+            "id": "ergonomic-design",
+            "title": "Ergonomic",
+            "highlight": "design",
+            "description": "Sculpted profile and adjustable typing angle reduce strain during long typing sessions while maintaining professional aesthetics."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/luxepro-detail-2.jpg",
+          "alt": "LuxePro mechanical keyboard full glamour shot with premium lighting"
+        }
+      }
+    },
+    {
+      "id": "zenith-headset",
+      "name": "Zen",
+      "model": "ith",
+      "description": "Immerse yourself in crystal-clear audio with our flagship wireless headset, featuring advanced noise cancellation and studio-grade drivers.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "Zenith wireless headset with premium noise cancellation",
+      "href": "/products/zenith",
+      "slug": "zenith",
+      "brand": "Ruqma",
+      "additionalDescription": "Advanced noise cancellation and studio-grade drivers deliver pristine audio quality",
+      "showOnHome": true,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Studio-grade drivers for",
+          "highlight": "immersive audio",
+          "description": "Immerse yourself in crystal-clear audio with our flagship wireless headset, featuring advanced noise cancellation and studio-grade drivers.",
+          "image": "/products/zenith-detail-1.jpg",
+          "imageAlt": "Zenith headset studio-grade driver technology detail"
+        },
+        "features": [
+          {
+            "id": "noise-cancellation",
+            "title": "Advanced",
+            "highlight": "noise cancellation",
+            "description": "Hybrid ANC technology with dual-microphone array eliminates up to 95% of ambient noise for pristine listening experience."
+          },
+          {
+            "id": "wireless-freedom",
+            "title": "Wireless",
+            "highlight": "freedom",
+            "description": "Industry-leading Bluetooth 5.3 connectivity with 30-hour battery life and rapid charging for uninterrupted audio."
+          },
+          {
+            "id": "comfort-design",
+            "title": "Comfort",
+            "highlight": "design",
+            "description": "Memory foam ear cushions and lightweight aluminum construction ensure comfort during extended listening sessions."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/zenith-detail-2.jpg",
+          "alt": "Zenith wireless headset lifestyle usage showing comfort and style"
+        }
+      }
+    },
+    {
+      "id": "apex-gaming-mouse",
+      "name": "A",
+      "model": "pex",
+      "description": "Precision redefined with our ultra-lightweight gaming mouse engineered for victory, featuring ultra-responsive sensor technology.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "Apex gaming mouse with precision sensor and ergonomic design",
+      "href": "/products/apex",
+      "slug": "apex",
+      "brand": "Ruqma",
+      "additionalDescription": "Ultra-responsive sensor technology and customizable weight system for competitive edge",
+      "showOnHome": true,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Ultra-responsive sensor for",
+          "highlight": "precision gaming",
+          "description": "Precision redefined with our ultra-lightweight gaming mouse engineered for victory, featuring ultra-responsive sensor technology.",
+          "image": "/products/apex-detail-1.jpg",
+          "imageAlt": "Apex gaming mouse ultra-responsive sensor technology detail"
+        },
+        "features": [
+          {
+            "id": "precision-sensor",
+            "title": "Precision",
+            "highlight": "sensor",
+            "description": "PixArt PMW3389 gaming sensor with 16,000 DPI and zero acceleration delivers pixel-perfect tracking for competitive advantage."
+          },
+          {
+            "id": "lightweight-design",
+            "title": "Ultra-lightweight",
+            "highlight": "59g design",
+            "description": "Honeycomb shell construction reduces weight to just 59 grams while maintaining structural integrity for swift movements."
+          },
+          {
+            "id": "customizable-weights",
+            "title": "Customizable",
+            "highlight": "weight system",
+            "description": "Modular weight system allows fine-tuning from 59g to 85g to match your preferred gaming style and grip preference."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/apex-detail-2.jpg",
+          "alt": "Apex gaming mouse in competitive gaming setup with RGB lighting"
+        }
+      }
+    },
+    {
+      "id": "elite-monitor-stand",
+      "name": "Elite",
+      "model": "Stand",
+      "description": "Elevate your workspace with our adjustable monitor stand crafted from premium materials, featuring precision-machined aluminum construction.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "Elite monitor stand with adjustable height and premium aluminum construction",
+      "href": "/products/elite-stand",
+      "slug": "elite-stand",
+      "brand": "Ruqma",
+      "additionalDescription": "Precision-machined aluminum construction with smooth height adjustment for optimal ergonomics",
+      "showOnHome": false,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Precision-machined for",
+          "highlight": "optimal ergonomics",
+          "description": "Elevate your workspace with our adjustable monitor stand crafted from premium materials, featuring precision-machined aluminum construction.",
+          "image": "/products/elite-stand-detail-1.jpg",
+          "imageAlt": "Elite monitor stand precision-machined aluminum construction detail"
+        },
+        "features": [
+          {
+            "id": "aluminum-construction",
+            "title": "Premium",
+            "highlight": "aluminum",
+            "description": "CNC-machined 6061-T6 aluminum construction ensures structural integrity while supporting monitors up to 32 inches and 20kg."
+          },
+          {
+            "id": "smooth-adjustment",
+            "title": "Smooth height",
+            "highlight": "adjustment",
+            "description": "Gas-spring mechanism provides effortless height adjustment from 100mm to 180mm with secure locking at any position."
+          },
+          {
+            "id": "cable-management",
+            "title": "Integrated",
+            "highlight": "cable management",
+            "description": "Hidden cable routing system keeps your workspace organized with dedicated channels for power and data cables."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/elite-stand-detail-2.jpg",
+          "alt": "Elite monitor stand in modern workspace setup showing height adjustment"
+        }
+      }
+    },
+    {
+      "id": "prism-desk-lamp",
+      "name": "Pris",
+      "model": "m",
+      "description": "Illuminate your creativity with our smart LED desk lamp featuring adaptive lighting and intelligent sensors that adjust automatically.",
+      "imageUrl": "/products/product.png",
+      "imageAlt": "Prism smart LED desk lamp with adjustable color temperature",
+      "href": "/products/prism",
+      "slug": "prism",
+      "brand": "Ruqma",
+      "additionalDescription": "Intelligent light sensors automatically adjust brightness and color temperature throughout the day",
+      "showOnHome": false,
+      "ctaText": "Learn More",
+      "productDetails": {
+        "mainFeature": {
+          "title": "Intelligent sensors for",
+          "highlight": "adaptive lighting",
+          "description": "Illuminate your creativity with our smart LED desk lamp featuring adaptive lighting and intelligent sensors that adjust automatically.",
+          "image": "/products/prism-detail-1.jpg",
+          "imageAlt": "Prism smart LED desk lamp intelligent sensor technology detail"
+        },
+        "features": [
+          {
+            "id": "adaptive-lighting",
+            "title": "Adaptive",
+            "highlight": "lighting",
+            "description": "AI-powered ambient light detection automatically adjusts brightness and color temperature from 2700K to 6500K throughout the day."
+          },
+          {
+            "id": "wireless-control",
+            "title": "Wireless",
+            "highlight": "control",
+            "description": "Touch-sensitive controls and smartphone app integration allow precise lighting customization with preset modes and scheduling."
+          },
+          {
+            "id": "eye-care-technology",
+            "title": "Eye care",
+            "highlight": "technology",
+            "description": "Flicker-free LED panel with CRI 95+ color accuracy reduces eye strain during extended work sessions and creative tasks."
+          }
+        ],
+        "detailImage": {
+          "src": "/products/prism-detail-2.jpg",
+          "alt": "Prism smart LED desk lamp in creative workspace with adaptive lighting demo"
+        }
+      }
+    }
+  ]
+}
