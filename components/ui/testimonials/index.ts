@@ -111,9 +111,9 @@ export const DEFAULT_RESPONSIVE_CONFIG: ResponsiveConfig = {
     cardSpacing: '1.5rem',
   },
   desktop: {
-    columns: 4,
+    columns: 3,
     maxWidth: '1200px',
-    cardSpacing: '2rem',
+    cardSpacing: '1.5rem',
   },
 };
 
@@ -163,8 +163,8 @@ export const GRID_CONFIGURATIONS = {
     maxCardHeight: 350,
   },
   desktop: {
-    columns: 4,
-    minCardHeight: 240,
+    columns: 3,
+    minCardHeight: 200,
     maxCardHeight: 430,
   },
 } as const;

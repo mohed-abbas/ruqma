@@ -13,10 +13,10 @@ export default async function Products() {
   const sanityProducts: SanityProduct[] = await getProducts();
 
   return (
-    <section 
-      id="products" 
+    <section
+      id="products"
       className="min-h-screen bg-white py-20"
-      style={{ scrollMarginTop: '80px' }}
+      style={{ scrollMarginTop: '56px' }}
     >
       <div className="w-full max-w-[1234px] mx-auto px-4">
         {/* Header section - matching Figma typography exactly */}

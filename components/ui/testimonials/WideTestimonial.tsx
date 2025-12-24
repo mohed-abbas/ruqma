@@ -40,7 +40,7 @@ const WideTestimonial: React.FC<WideTestimonialProps> = ({
     return (
       <article
         className={`
-          w-[589px] max-h-[241px]
+          w-full h-full min-h-[200px]
           bg-[var(--testimonials-card-bg)]
           border border-[var(--testimonials-border)]
           rounded-[var(--testimonials-card-radius)]
@@ -80,7 +80,7 @@ const WideTestimonial: React.FC<WideTestimonialProps> = ({
   return (
     <article
       className={`
-        w-[589px] h-[241px]
+        w-full h-full min-h-[200px]
         bg-[var(--testimonials-card-bg)]
         border border-[var(--testimonials-border)]
         rounded-[var(--testimonials-card-radius)]

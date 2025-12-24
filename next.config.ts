@@ -78,6 +78,18 @@ const nextConfig: NextConfig = {
   },
 
   // =============================================================================
+  // WEBPACK CONFIGURATION
+  // =============================================================================
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // Disable filesystem cache in development to prevent corruption
+      // when files are modified by external tools (like Claude Code)
+      config.cache = false;
+    }
+    return config;
+  },
+
+  // =============================================================================
   // REDIRECTS (if needed)
   // =============================================================================
   // async redirects() {

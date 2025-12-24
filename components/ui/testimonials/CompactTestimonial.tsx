@@ -45,7 +45,7 @@ const CompactTestimonial: React.FC<CompactTestimonialProps> = ({
     return (
       <article
         className={`
-          w-[319px] h-[241px]
+          w-full h-full min-h-[200px]
           bg-[var(--testimonials-card-bg)]
           border border-[var(--testimonials-border)]
           rounded-[var(--testimonials-card-radius)]
@@ -80,7 +80,7 @@ const CompactTestimonial: React.FC<CompactTestimonialProps> = ({
   return (
     <article
       className={`
-        w-[319px] h-[241px]
+        w-full h-full min-h-[200px]
         bg-[var(--testimonials-card-bg)]
         border border-[var(--testimonials-border)]
         rounded-[var(--testimonials-card-radius)]

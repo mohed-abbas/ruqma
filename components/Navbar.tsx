@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import navigationData from '@/data/navigation/main-nav.json';
 
 // TypeScript interfaces for navigation data
@@ -46,6 +46,7 @@ export default function Navbar() {
   });
 
   const navData = navigationData as NavigationData;
+  const prefersReducedMotion = useReducedMotion();
 
   // Handle scroll effect for navbar background and active section detection
   useEffect(() => {
@@ -119,14 +120,11 @@ export default function Navbar() {
       // Handle internal section scrolling
       const element = document.querySelector(href);
       if (element) {
-        const navbarHeight = navData.settings.activeOffset;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navbarHeight;
-
-        window.scrollTo({
-          top: Math.max(0, offsetPosition),
-          behavior: 'smooth'
-        });
+        // On homepage - scroll directly to section
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Not on homepage - navigate to homepage with hash anchor
+        window.location.href = '/' + href;
       }
     }
 
@@ -146,52 +144,52 @@ export default function Navbar() {
     setState(prev => ({ ...prev, isMobileMenuOpen: !prev.isMobileMenuOpen }));
   };
 
-  // Enhanced mobile menu animation variants
+  // Modern slide + fade animation variants (Option A)
+  // Using expo-out easing for smooth, professional feel
+  const easeOutExpo = [0.16, 1, 0.3, 1] as const;
+  const easeInOutQuart = [0.76, 0, 0.24, 1] as const;
+
+  // Reduced motion variants - instant transitions
+  const reducedMotionTransition = { duration: 0.01 };
+
   const mobileMenuVariants = {
     closed: {
-      x: '100%',
-      scale: 0.95,
+      x: prefersReducedMotion ? 0 : '100%',
       opacity: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 600,
-        damping: 40,
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.3,
+        ease: easeInOutQuart,
         when: 'afterChildren'
       }
     },
     open: {
       x: 0,
-      scale: 1,
       opacity: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 500,
-        damping: 50,
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.4,
+        ease: easeOutExpo,
         when: 'beforeChildren',
-        staggerChildren: 0.08
+        staggerChildren: 0.05,
+        delayChildren: 0.1
       }
     }
   };
 
   const menuItemVariants = {
     closed: {
-      x: 60,
+      y: prefersReducedMotion ? 0 : 16,
       opacity: 0,
-      scale: 0.8,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 300,
-        damping: 30
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.2,
+        ease: easeInOutQuart
       }
     },
     open: {
-      x: 0,
+      y: 0,
       opacity: 1,
-      scale: 1,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 400,
-        damping: 25
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.3,
+        ease: easeOutExpo
       }
     }
   };
@@ -199,42 +197,45 @@ export default function Navbar() {
   const backdropVariants = {
     closed: {
       opacity: 0,
-      backdropFilter: 'blur(0px)',
-      transition: {
-        duration: 0.3,
-        ease: 'easeInOut' as const
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.25,
+        ease: 'easeOut' as const
       }
     },
     open: {
       opacity: 1,
-      backdropFilter: 'blur(8px)',
-      transition: {
-        duration: 0.4,
-        ease: 'easeInOut' as const
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.35,
+        ease: 'easeOut' as const
       }
     }
   };
 
-  // Smooth CTA button animation variants for mobile menu
+  // CTA button slides up with slight delay for polished sequencing
   const ctaButtonVariants = {
     closed: {
-      y: 40,
+      y: prefersReducedMotion ? 0 : 20,
       opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: [0.4, 0.0, 0.2, 1] as const // Tailwind's ease-out equivalent
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.2,
+        ease: easeInOutQuart
       }
     },
     open: {
       y: 0,
       opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: [0.0, 0.0, 0.2, 1] as const, // Tailwind's ease-out equivalent
-        delay: 0.1 // Slight delay after menu items for polished feel
+      transition: prefersReducedMotion ? reducedMotionTransition : {
+        duration: 0.4,
+        ease: easeOutExpo,
+        delay: 0.15
       }
     }
   };
+
+  // Hamburger animation duration (respects reduced motion)
+  const hamburgerTransition = prefersReducedMotion
+    ? { duration: 0.01 }
+    : { duration: 0.3, ease: easeOutExpo };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -337,12 +338,13 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu Button - Animated Hamburger */}
             <div className="lg:hidden">
               <button
                 onClick={toggleMobileMenu}
                 className={`
-                  transition-colors duration-200 p-2 rounded-lg
+                  relative w-10 h-10 flex items-center justify-center rounded-lg
+                  transition-colors duration-200
                   focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2
                   ${state.isScrolled
                     ? 'text-gray-900 hover:text-[var(--color-primary)] focus:ring-offset-white'
@@ -352,21 +354,50 @@ export default function Navbar() {
                 aria-label={state.isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={state.isMobileMenuOpen}
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  {state.isMobileMenuOpen ? (
-                    <path d="M6 18L18 6M6 6l12 12" />
-                  ) : (
-                    <path d="M4 6h16M4 12h16M4 18h16" />
-                  )}
-                </svg>
+                <div className="w-6 h-5 relative flex flex-col justify-between">
+                  {/* Top bar */}
+                  <motion.span
+                    className={`
+                      block h-0.5 rounded-full origin-center
+                      ${state.isScrolled ? 'bg-gray-900' : 'bg-white'}
+                    `}
+                    animate={{
+                      rotate: state.isMobileMenuOpen ? 45 : 0,
+                      y: state.isMobileMenuOpen ? 9 : 0,
+                      backgroundColor: state.isMobileMenuOpen
+                        ? 'rgb(17 24 39)'
+                        : state.isScrolled ? 'rgb(17 24 39)' : 'rgb(255 255 255)'
+                    }}
+                    transition={hamburgerTransition}
+                  />
+                  {/* Middle bar */}
+                  <motion.span
+                    className={`
+                      block h-0.5 rounded-full
+                      ${state.isScrolled ? 'bg-gray-900' : 'bg-white'}
+                    `}
+                    animate={{
+                      opacity: state.isMobileMenuOpen ? 0 : 1,
+                      scaleX: state.isMobileMenuOpen ? 0 : 1
+                    }}
+                    transition={prefersReducedMotion ? reducedMotionTransition : { duration: 0.2, ease: 'easeOut' }}
+                  />
+                  {/* Bottom bar */}
+                  <motion.span
+                    className={`
+                      block h-0.5 rounded-full origin-center
+                      ${state.isScrolled ? 'bg-gray-900' : 'bg-white'}
+                    `}
+                    animate={{
+                      rotate: state.isMobileMenuOpen ? -45 : 0,
+                      y: state.isMobileMenuOpen ? -9 : 0,
+                      backgroundColor: state.isMobileMenuOpen
+                        ? 'rgb(17 24 39)'
+                        : state.isScrolled ? 'rgb(17 24 39)' : 'rgb(255 255 255)'
+                    }}
+                    transition={hamburgerTransition}
+                  />
+                </div>
               </button>
             </div>
           </div>
@@ -387,28 +418,19 @@ export default function Navbar() {
               className="fixed inset-0 bg-black/30 z-40 lg:hidden"
             />
 
-            {/* Enhanced Mobile Menu with Drag Gestures */}
+            {/* Mobile Menu Panel - Clean Slide Animation */}
             <motion.div
               variants={mobileMenuVariants}
               initial="closed"
               animate="open"
               exit="closed"
-              drag="x"
-              dragConstraints={{ left: 0, right: 300 }}
-              dragElastic={{ left: 0, right: 0.2 }}
-              onDragEnd={(_, info) => {
-                if (info.offset.x > 100) {
-                  setState(prev => ({ ...prev, isMobileMenuOpen: false }));
-                }
-              }}
               className="
-                fixed top-0 right-0 h-full w-80 max-w-[80vw]
-                bg-white shadow-2xl z-50 lg:hidden
-                flex flex-col cursor-grab active:cursor-grabbing
-                rounded-l-2xl overflow-hidden
+                fixed top-0 right-0 h-full w-80 max-w-[85vw]
+                bg-white z-50 lg:hidden
+                flex flex-col overflow-hidden
               "
               style={{
-                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.05)'
+                boxShadow: '-4px 0 24px rgba(0, 0, 0, 0.12)'
               }}
               role="dialog"
               aria-modal="true"
@@ -446,40 +468,23 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Enhanced Mobile Menu Items */}
-              <motion.div
-                className="flex-1 py-6"
-                variants={{
-                  open: {
-                    transition: { staggerChildren: 0.1, delayChildren: 0.1 }
-                  },
-                  closed: {
-                    transition: { staggerChildren: 0.05, staggerDirection: -1 }
-                  }
-                }}
+              {/* Mobile Menu Items - Clean Staggered Reveal */}
+              <motion.nav
+                className="flex-1 py-4"
+                aria-label="Mobile navigation"
               >
                 {navData.items.map((item, index) => (
                   <motion.button
                     key={index}
                     variants={menuItemVariants}
-                    whileHover={{
-                      scale: 1.02,
-                      x: 8,
-                      transition: { type: 'spring', stiffness: 400, damping: 25 }
-                    }}
-                    whileTap={{
-                      scale: 0.98,
-                      transition: { type: 'spring', stiffness: 600, damping: 30 }
-                    }}
                     onClick={() => handleNavigation(item.href, item.isExternal)}
                     className={`
-                      block w-full text-left px-6 py-4 rounded-r-xl mx-2
-                      font-[var(--font-nunito)]
+                      block w-full text-left px-6 py-4
+                      font-[var(--font-nunito)] text-lg
                       transition-colors duration-200
-                      border-l-4 border-transparent hover:border-[var(--color-primary)]
                       ${item.isActive
-                        ? 'text-[var(--color-primary)] border-[var(--color-primary)] bg-[var(--color-primary)]/10'
-                        : 'text-gray-900 hover:text-[var(--color-primary)] hover:bg-gray-50'
+                        ? 'text-[var(--color-primary)] bg-[var(--color-primary)]/5'
+                        : 'text-gray-900 hover:text-[var(--color-primary)] hover:bg-gray-50 active:bg-gray-100'
                       }
                     `}
                     style={{ fontWeight: '500' }}
@@ -487,58 +492,41 @@ export default function Navbar() {
                     <span className="flex items-center justify-between">
                       {item.label}
                       {item.isExternal && (
-                        <motion.svg
-                          initial={{ opacity: 0, scale: 0 }}
-                          animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: index * 0.1 + 0.3 }}
+                        <svg
                           className="w-4 h-4 text-gray-400"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
                         >
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </motion.svg>
+                        </svg>
                       )}
                     </span>
                   </motion.button>
                 ))}
-              </motion.div>
+              </motion.nav>
 
-              {/* Enhanced Mobile CTA Button */}
+              {/* Mobile CTA Button */}
               <motion.div
-                className="p-6 border-t border-gray-200"
+                className="p-6 border-t border-gray-100"
                 variants={ctaButtonVariants}
               >
-                <motion.button
-                  whileHover={{
-                    scale: 1.02,
-                    transition: {
-                      duration: 0.2,
-                      ease: [0.0, 0.0, 0.2, 1] // Smooth ease-out for hover
-                    }
-                  }}
-                  whileTap={{
-                    scale: 0.98,
-                    transition: {
-                      duration: 0.15,
-                      ease: [0.4, 0.0, 0.6, 1] // Quick ease for tap
-                    }
-                  }}
+                <button
                   onClick={handleCTAClick}
                   className="
-                    w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary)]/90
+                    w-full bg-[var(--color-primary)]
                     text-black font-[var(--font-nunito)]
-                    px-6 py-4 rounded-full
+                    px-6 py-4 rounded-full text-lg
                     transition-all duration-200
-                    hover:shadow-lg hover:shadow-[var(--color-primary)]/20
-                    text-center focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2
+                    hover:brightness-110 active:scale-[0.98]
+                    focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] focus:ring-offset-2
                     motion-reduce:transition-none motion-reduce:transform-none
                   "
                   style={{ fontWeight: '600' }}
                   aria-label={`${navData.cta.label} - Find where to buy Ruqma products`}
                 >
                   {navData.cta.label}
-                </motion.button>
+                </button>
               </motion.div>
             </motion.div>
           </>

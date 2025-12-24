@@ -80,12 +80,12 @@ export default async function Testimonials() {
                 tablet: {
                   columns: 2,
                   maxWidth: '100%',
-                  cardSpacing: '1rem',
+                  cardSpacing: '1.5rem',
                 },
                 desktop: {
-                  columns: 4,
+                  columns: 3,
                   maxWidth: '1200px',
-                  cardSpacing: '1rem',
+                  cardSpacing: '1.5rem',
                 },
               }}
             />

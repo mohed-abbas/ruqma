@@ -53,6 +53,7 @@ export function generateGridStyles(
     display: 'grid',
     gridTemplateColumns: `repeat(${layout.columns}, 1fr)`,
     gridTemplateAreas: generateGridTemplate(layout),
+    gridAutoRows: 'minmax(200px, auto)',
     gap: config.cardSpacing,
     maxWidth: config.maxWidth,
     margin: '0 auto',

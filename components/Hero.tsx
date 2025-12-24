@@ -14,22 +14,8 @@ export default function Hero() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navHeight = 80; // Fixed navbar height
-      let scrollOffset = navHeight;
-      
-      // Add enhanced offset for sections that need visual prominence
-      if (sectionId === 'products') {
-        // Additional offset to show more of Products white background
-        scrollOffset += 200; // Total offset: 280px
-      }
-      // Future sections can be added here with custom offsets
-      
-      const elementPosition = element.offsetTop - scrollOffset;
-      
-      window.scrollTo({
-        top: Math.max(0, elementPosition), // Prevent negative scroll
-        behavior: 'smooth'
-      });
+      // Use scrollIntoView - CSS scrollMarginTop on target sections handles navbar offset
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

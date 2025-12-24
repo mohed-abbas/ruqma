@@ -40,7 +40,7 @@ const TallTestimonial: React.FC<TallTestimonialProps> = ({
     return (
       <article
         className={`
-          w-[319px] h-[429px]
+          w-full h-full min-h-[400px]
           bg-[var(--testimonials-card-bg)]
           border border-[var(--testimonials-border)]
           rounded-[var(--testimonials-card-radius)]
@@ -76,7 +76,7 @@ const TallTestimonial: React.FC<TallTestimonialProps> = ({
   return (
     <article
       className={`
-        w-[319px] h-[429px]
+        w-full h-full min-h-[400px]
         bg-[var(--testimonials-card-bg)]
         border border-[var(--testimonials-border)]
         rounded-[var(--testimonials-card-radius)]
