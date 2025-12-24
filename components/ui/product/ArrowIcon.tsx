@@ -12,9 +12,9 @@ export default function ArrowIcon({ className = "w-8 h-8" }: ArrowIconProps) {
       aria-hidden="true"
     >
       <path
-        d="M10 30L30 10M30 10H14M30 10V26"
+        d="M11.6667 28.3333L28.3333 11.6667M28.3333 11.6667H11.6667M28.3333 11.6667V28.3333"
         stroke="#d4af37"
-        strokeWidth="2.5"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

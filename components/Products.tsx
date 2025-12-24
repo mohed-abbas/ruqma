@@ -32,7 +32,7 @@ export default async function Products() {
           {/* Dynamically render products in rows of 2 */}
           {Array.from({ length: Math.ceil(sanityProducts.length / 2) }, (_, rowIndex) => (
             <div key={rowIndex} className="flex flex-col md:flex-row gap-6 md:gap-8 lg:gap-[150px] items-center justify-center w-full">
-              {sanityProducts.slice(rowIndex * 2, rowIndex * 2 + 2).map((product: SanityProduct) => (
+              {sanityProducts.slice(rowIndex * 2, rowIndex * 2 + 2).map((product: SanityProduct, indexInRow: number) => (
                 <ProductCard
                   key={product._id}
                   id={product.slug}
@@ -41,7 +41,7 @@ export default async function Products() {
                   imageUrl={urlForImage(product.mainImage).width(800).url()}
                   href={`/products/${product.slug}`}
                   brand={product.brand}
-                  additionalDescription={product.additionalDescription}
+                  index={rowIndex * 2 + indexInRow}
                 />
               ))}
             </div>
