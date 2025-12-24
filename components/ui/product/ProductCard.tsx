@@ -9,7 +9,6 @@ interface ProductCardProps {
   href?: string;
   brand?: string;
   className?: string;
-  index?: number;
 }
 
 // Truncate text to max words with ellipsis
@@ -17,6 +16,16 @@ function truncateWords(text: string, maxWords: number): string {
   const words = text.split(/\s+/);
   if (words.length <= maxWords) return text;
   return words.slice(0, maxWords).join(' ') + '...';
+}
+
+// Split name into main part and last letter (uppercase, gold-styled)
+function formatProductName(name: string): { main: string; lastLetter: string } {
+  if (!name || name.length === 0) return { main: '', lastLetter: '' };
+  const trimmed = name.trim();
+  return {
+    main: trimmed.slice(0, -1),
+    lastLetter: trimmed.slice(-1).toUpperCase(),
+  };
 }
 
 export default function ProductCard({
@@ -27,11 +36,7 @@ export default function ProductCard({
   href = '#',
   brand = 'Ruqma',
   className = '',
-  index = 0,
 }: ProductCardProps) {
-  // Stagger delay: 150ms per card for smooth sequential reveal
-  const animationDelay = `${index * 150}ms`;
-
   // Truncate description to 30 words max
   const truncatedText = truncateWords(description, 30);
 
@@ -41,8 +46,7 @@ export default function ProductCard({
                   w-full max-w-[542px] mx-auto lg:mx-0
                   h-auto min-h-[400px] sm:min-h-[480px] lg:min-h-[552px] lg:h-[552px]
                   cursor-pointer transition-transform duration-300 hover:scale-[1.02]
-                  product-card-animate ${className}`}
-      style={{ animationDelay }}
+                  ${className}`}
       data-product-id={id}
     >
       {/* Clickable card overlay - entire card is now clickable */}
@@ -78,12 +82,15 @@ export default function ProductCard({
           </div>
         </div>
 
-        {/* Product title - responsive typography */}
+        {/* Product title - responsive typography with gold-styled last letter */}
         <header className="w-full lg:w-[476px]">
           <h2 className="font-[var(--font-ibm)] font-medium
                          text-2xl sm:text-[32px] lg:text-[39px]
                          leading-[1.2] text-[#2e3340]">
-            {name}
+            {formatProductName(name).main}
+            <span className="text-[var(--color-primary)] uppercase">
+              {formatProductName(name).lastLetter}
+            </span>
           </h2>
         </header>
 

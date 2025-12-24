@@ -223,7 +223,6 @@ export interface SanityProduct {
   model: string
   slug: string
   description: string
-  additionalDescription?: string
   mainImage: {
     asset: SanityAssetReference
     alt: string

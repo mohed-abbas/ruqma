@@ -108,28 +108,5 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Product Card Entrance Animation */
-@keyframes productCardEnter {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.product-card-animate {
-  opacity: 0;
-  animation: productCardEnter 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Respect reduced motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .product-card-animate {
-    opacity: 1;
-    animation: none;
-    transform: none;
-  }
-}
+/* Product Card animations are now handled by Framer Motion in ProductsClient.tsx */
+/* Using whileInView for scroll-triggered reveal with reduced-motion support */

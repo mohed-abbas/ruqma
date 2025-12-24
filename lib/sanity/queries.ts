@@ -20,7 +20,6 @@ export const productsQuery = `
     model,
     "slug": slug.current,
     description,
-    additionalDescription,
     mainImage {
       asset->,
       alt
@@ -40,7 +39,6 @@ export const allProductsQuery = `
     model,
     "slug": slug.current,
     description,
-    additionalDescription,
     mainImage {
       asset->,
       alt
@@ -61,7 +59,6 @@ export const productBySlugQuery = `
     model,
     "slug": slug.current,
     description,
-    additionalDescription,
     mainImage {
       asset->,
       alt
