@@ -65,7 +65,7 @@ function WideCard({ testimonial, className = '', animated = false }: Testimonial
   return (
     <CardWrapper {...wrapperProps}>
       {testimonial.imageUrl && (
-        <div className="relative w-full md:w-1/3 h-64 rounded-l-xl overflow-hidden flex-shrink-0">
+        <div className="relative w-full md:w-1/3 h-64 md:h-auto rounded-l-xl overflow-hidden flex-shrink-0">
           <Image
             src={testimonial.imageUrl}
             alt={testimonial.name}
