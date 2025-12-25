@@ -10,8 +10,6 @@ import {
   productsQuery,
   allProductsQuery,
   productBySlugQuery,
-  testimonialsQuery,
-  featuredTestimonialsQuery,
   partnersQuery,
   productSlugsQuery,
   contentCountsQuery,
@@ -103,52 +101,6 @@ export async function getProductSlugs() {
 }
 
 // ============================================================================
-// TESTIMONIAL FETCHING
-// ============================================================================
-
-/**
- * Get all testimonials ordered by priority and date
- */
-export async function getTestimonials() {
-  try {
-    return await client.fetch(
-      testimonialsQuery,
-      {},
-      {
-        next: {
-          revalidate: 60,
-          tags: ['testimonials'],
-        },
-      }
-    )
-  } catch (error) {
-    console.error('Error fetching testimonials:', error)
-    return []
-  }
-}
-
-/**
- * Get featured testimonials for homepage (priority <= 3, max 6)
- */
-export async function getFeaturedTestimonials() {
-  try {
-    return await client.fetch(
-      featuredTestimonialsQuery,
-      {},
-      {
-        next: {
-          revalidate: 60,
-          tags: ['testimonials', 'featured-testimonials'],
-        },
-      }
-    )
-  } catch (error) {
-    console.error('Error fetching featured testimonials:', error)
-    return []
-  }
-}
-
-// ============================================================================
 // PARTNER FETCHING
 // ============================================================================
 
@@ -196,7 +148,6 @@ export async function getContentCounts() {
     console.error('Error fetching content counts:', error)
     return {
       products: 0,
-      testimonials: 0,
       partners: 0,
     }
   }
@@ -251,23 +202,6 @@ export interface SanityProduct {
       alt: string
     }
   }
-}
-
-/**
- * Sanity Testimonial Type (matches schema)
- */
-export interface SanityTestimonial {
-  _id: string
-  name: string
-  company: string
-  rating: number
-  text: string
-  avatar: {
-    asset: SanityAssetReference
-  }
-  cardType: 'tall' | 'wide' | 'compact'
-  priority: number
-  date: string
 }
 
 /**

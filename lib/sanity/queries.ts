@@ -105,49 +105,6 @@ export const productBySlugQuery = `
 `
 
 // ============================================================================
-// TESTIMONIAL QUERIES
-// ============================================================================
-
-/**
- * Get all testimonials ordered by priority and date
- * Lower priority numbers appear first
- */
-export const testimonialsQuery = `
-  *[_type == "testimonial"] | order(priority asc, date desc) {
-    _id,
-    name,
-    company,
-    rating,
-    text,
-    avatar {
-      asset->
-    },
-    cardType,
-    priority,
-    date
-  }
-`
-
-/**
- * Get featured testimonials (priority <= 3) for homepage
- */
-export const featuredTestimonialsQuery = `
-  *[_type == "testimonial" && priority <= 3] | order(priority asc) [0...6] {
-    _id,
-    name,
-    company,
-    rating,
-    text,
-    avatar {
-      asset->
-    },
-    cardType,
-    priority,
-    date
-  }
-`
-
-// ============================================================================
 // PARTNER QUERIES
 // ============================================================================
 
@@ -187,7 +144,6 @@ export const productSlugsQuery = `
 export const contentCountsQuery = `
   {
     "products": count(*[_type == "product"]),
-    "testimonials": count(*[_type == "testimonial"]),
     "partners": count(*[_type == "partner" && isActive == true])
   }
 `
