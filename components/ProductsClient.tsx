@@ -84,7 +84,7 @@ export default function ProductsClient({ products, title, titleAccent }: Product
       className="bg-white py-20"
       style={{ scrollMarginTop: '56px' }}
     >
-      <div className="w-full max-w-[1234px] mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4">
         {/* Header section with scroll-reveal animation */}
         <motion.div
           variants={headerVariants}

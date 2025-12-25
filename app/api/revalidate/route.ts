@@ -193,8 +193,9 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    // Step 7: Also revalidate by tag (alternative strategy)
-    const tags = [`${_type}:${_id}`]
+    // Step 7: Revalidate by tag (primary strategy for static content)
+    // This invalidates all content using the tag, triggering fresh fetches
+    const tags = [_type, `${_type}:${_id}`] // e.g., ['testimonials', 'testimonials:abc123']
     try {
       for (const tag of tags) {
         revalidateTag(tag)

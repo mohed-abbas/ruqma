@@ -125,6 +125,54 @@ export const partnersQuery = `
 `
 
 // ============================================================================
+// TESTIMONIAL QUERIES
+// ============================================================================
+
+/**
+ * Get all active testimonials ordered by priority
+ * Used for homepage testimonials section
+ */
+export const testimonialsQuery = `
+  *[_type == "testimonial" && isActive == true] | order(priority asc) {
+    _id,
+    name,
+    role,
+    company,
+    content,
+    rating,
+    image {
+      asset->,
+      alt
+    },
+    cardType,
+    priority,
+    featured
+  }
+`
+
+/**
+ * Get featured testimonials only
+ * For hero sections or highlighted displays
+ */
+export const featuredTestimonialsQuery = `
+  *[_type == "testimonial" && isActive == true && featured == true] | order(priority asc) {
+    _id,
+    name,
+    role,
+    company,
+    content,
+    rating,
+    image {
+      asset->,
+      alt
+    },
+    cardType,
+    priority,
+    featured
+  }
+`
+
+// ============================================================================
 // SITEMAP & METADATA QUERIES
 // ============================================================================
 
@@ -144,6 +192,7 @@ export const productSlugsQuery = `
 export const contentCountsQuery = `
   {
     "products": count(*[_type == "product"]),
-    "partners": count(*[_type == "partner" && isActive == true])
+    "partners": count(*[_type == "partner" && isActive == true]),
+    "testimonials": count(*[_type == "testimonial" && isActive == true])
   }
 `

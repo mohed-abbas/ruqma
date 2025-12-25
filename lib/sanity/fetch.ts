@@ -13,6 +13,8 @@ import {
   partnersQuery,
   productSlugsQuery,
   contentCountsQuery,
+  testimonialsQuery,
+  featuredTestimonialsQuery,
 } from './queries'
 
 // ============================================================================
@@ -126,6 +128,62 @@ export async function getPartners() {
 }
 
 // ============================================================================
+// TESTIMONIAL FETCHING
+// ============================================================================
+
+/**
+ * Get all active testimonials ordered by priority
+ *
+ * Caching strategy:
+ * - Development: No cache (instant updates for content editing)
+ * - Production: Static cache until webhook revalidation
+ *
+ * Testimonials are near-static content that rarely changes,
+ * so we use on-demand revalidation via /api/revalidate webhook
+ * instead of time-based ISR.
+ */
+export async function getTestimonials() {
+  const isDev = process.env.NODE_ENV === 'development'
+
+  try {
+    return await client.fetch(
+      testimonialsQuery,
+      {},
+      {
+        next: isDev
+          ? { revalidate: 0 } // No cache in development
+          : { tags: ['testimonials'] }, // Static + on-demand revalidation in production
+      }
+    )
+  } catch (error) {
+    console.error('Error fetching testimonials:', error)
+    return []
+  }
+}
+
+/**
+ * Get featured testimonials only
+ */
+export async function getFeaturedTestimonials() {
+  const isDev = process.env.NODE_ENV === 'development'
+
+  try {
+    return await client.fetch(
+      featuredTestimonialsQuery,
+      {},
+      {
+        next: isDev
+          ? { revalidate: 0 }
+          : { tags: ['testimonials'] },
+      }
+    )
+  } catch (error) {
+    console.error('Error fetching featured testimonials:', error)
+    return []
+  }
+}
+
+// ============================================================================
 // ANALYTICS & METADATA
 // ============================================================================
 
@@ -216,4 +274,23 @@ export interface SanityPartner {
   website?: string
   description?: string
   displayOrder: number
+}
+
+/**
+ * Sanity Testimonial Type (matches schema)
+ */
+export interface SanityTestimonial {
+  _id: string
+  name: string
+  role: string
+  company: string
+  content: string
+  rating: number
+  image?: {
+    asset: SanityAssetReference
+    alt?: string
+  }
+  cardType: 'tall' | 'wide' | 'compact'
+  priority: number
+  featured?: boolean
 }
