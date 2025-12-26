@@ -54,7 +54,7 @@ export default function ProductPage({
       onLearnMoreClick();
     } else {
       // Scroll to more information or navigate to product details
-      const element = document.getElementById('product-details');
+      const element = document.getElementById('product-features');
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       } else {
