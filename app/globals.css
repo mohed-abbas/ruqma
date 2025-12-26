@@ -84,3 +84,113 @@ body {
 
 /* Product Card animations are now handled by Framer Motion in ProductsClient.tsx */
 /* Using whileInView for scroll-triggered reveal with reduced-motion support */
+
+/* ============================================
+   Loading Animation System
+   Premium skeleton loaders and progress indicators
+   ============================================ */
+
+/* Skeleton base styles */
+.bg-skeleton {
+  background-color: rgba(212, 175, 55, 0.08);
+}
+
+/* Golden shimmer animation */
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.15) 20%,
+    rgba(212, 175, 55, 0.25) 50%,
+    rgba(212, 175, 55, 0.15) 80%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite ease-in-out;
+  transform: translateX(-100%);
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Dark mode skeleton adjustments */
+@media (prefers-color-scheme: dark) {
+  .bg-skeleton {
+    background-color: rgba(212, 175, 55, 0.12);
+  }
+
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(212, 175, 55, 0.2) 20%,
+      rgba(212, 175, 55, 0.35) 50%,
+      rgba(212, 175, 55, 0.2) 80%,
+      transparent 100%
+    );
+  }
+}
+
+/* Dark background variant (for product pages) */
+.dark .bg-skeleton,
+[data-theme="dark"] .bg-skeleton {
+  background-color: rgba(212, 175, 55, 0.12);
+}
+
+.dark .skeleton-shimmer,
+[data-theme="dark"] .skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.2) 20%,
+    rgba(212, 175, 55, 0.35) 50%,
+    rgba(212, 175, 55, 0.2) 80%,
+    transparent 100%
+  );
+}
+
+/* Reduced motion - disable shimmer animation */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    transform: none;
+    background: rgba(212, 175, 55, 0.15);
+  }
+}
+
+/* Spinner animation override for consistent speed */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin {
+    animation: none;
+  }
+}
+
+/* Image loading blur-to-sharp transition */
+.image-loading {
+  filter: blur(10px);
+  transform: scale(1.02);
+  transition: filter 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.image-loaded {
+  filter: blur(0);
+  transform: scale(1);
+}

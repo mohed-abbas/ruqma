@@ -16,6 +16,7 @@
   "dependencies": {
     "@sanity/image-url": "^1.2.0",
     "@sanity/vision": "^4.12.0",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.23.13",
     "next": "15.5.9",
     "next-sanity": "^11.6.2",
@@ -23,7 +24,8 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sanity": "^4.12.0",
-    "sanity-plugin-media": "^4.0.0"
+    "sanity-plugin-media": "^4.0.0",
+    "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

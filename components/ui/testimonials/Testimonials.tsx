@@ -2,6 +2,10 @@ import TestimonialsClient from './TestimonialsClient'
 import { getTestimonials } from '@/lib/sanity/fetch'
 import { transformSanityTestimonials } from './sanityAdapter'
 import { staticTestimonials } from './data'
+import { withMinimumLoadingTime } from '@/lib/withMinimumLoadingTime'
+
+// Minimum time to show skeleton for consistent UX (ms)
+const MINIMUM_LOADING_TIME = 400;
 
 interface TestimonialsProps {
   className?: string
@@ -20,7 +24,11 @@ export default async function Testimonials({
   let testimonials = staticTestimonials
 
   if (!useStatic) {
-    const sanityTestimonials = await getTestimonials()
+    // Fetch with minimum loading time for polished skeleton display
+    const sanityTestimonials = await withMinimumLoadingTime(
+      getTestimonials(),
+      MINIMUM_LOADING_TIME
+    )
     if (sanityTestimonials && sanityTestimonials.length > 0) {
       testimonials = transformSanityTestimonials(sanityTestimonials)
     }

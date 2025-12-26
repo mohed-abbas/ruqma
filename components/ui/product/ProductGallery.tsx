@@ -2,9 +2,9 @@
 
 import { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { ProductGalleryData, GalleryImage, GalleryBorderRadius } from './types';
 import ImageLightbox from './ImageLightbox';
+import { ImageWithSkeleton } from '@/components/ui/loading';
 
 /**
  * Auto-layout configuration for gallery images
@@ -290,15 +290,17 @@ function GalleryItem({
       onClick={onClick}
       aria-label={`View ${image.alt || `product image ${index + 1}`} in fullscreen`}
     >
-      {/* Image with optional flip transform */}
+      {/* Image with optional flip transform and skeleton loading */}
       <div className={`relative w-full h-full ${flipClass}`}>
-        <Image
+        <ImageWithSkeleton
           src={image.src}
           alt={image.alt || `Product image ${index + 1}`}
           fill
           className={`object-cover ${borderRadiusClass}`}
+          containerClassName="absolute inset-0"
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           priority={layout.priority}
+          blurTransition={true}
         />
       </div>
 

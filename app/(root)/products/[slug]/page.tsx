@@ -2,22 +2,25 @@ import { ProductPage } from '@/components/ui/product';
 import ProductDetailsSection from '@/components/ui/product/ProductDetailsSection';
 import ProductGallery from '@/components/ui/product/ProductGallery';
 import PartnerStoresCTA from '@/components/ui/product/PartnerStoresCTA';
-import { getProductBySlug, getProductSlugs } from '@/lib/sanity/fetch';
+import { getProductBySlug } from '@/lib/sanity/fetch';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { urlForImage } from '@/lib/sanity/client';
 import type { ProductFeaturesSectionData, ProductGalleryData, GalleryImage } from '@/components/ui/product/types';
+import { withMinimumLoadingTime } from '@/lib/withMinimumLoadingTime';
 
 interface ProductPageParams {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const products = await getProductSlugs();
-  return products.map((product: { slug: string; _updatedAt: string }) => ({
-    slug: product.slug,
-  }));
-}
+// Force dynamic rendering so skeleton shows during navigation
+export const dynamic = 'force-dynamic';
+
+// Minimum time to show skeleton for consistent UX (ms)
+const MINIMUM_LOADING_TIME = 400;
+
+// Note: Removed generateStaticParams to ensure fully dynamic rendering
+// This means product pages are server-rendered on each request, showing skeleton during load
 
 export async function generateMetadata({ params }: ProductPageParams): Promise<Metadata> {
   const { slug } = await params;
@@ -39,7 +42,12 @@ export async function generateMetadata({ params }: ProductPageParams): Promise<M
 
 export default async function DynamicProductPage({ params }: ProductPageParams) {
   const { slug } = await params;
-  const product = await getProductBySlug(slug);
+
+  // Fetch product with minimum loading time for polished skeleton display
+  const product = await withMinimumLoadingTime(
+    getProductBySlug(slug),
+    MINIMUM_LOADING_TIME
+  );
 
   if (!product) {
     notFound();
