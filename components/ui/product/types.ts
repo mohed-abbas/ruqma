@@ -17,10 +17,8 @@ export interface BackgroundElements {
  * Product information structure
  */
 export interface ProductInfo {
-  /** Product name (e.g., "Glide") */
+  /** Product name (e.g., "GlideX") */
   name: string;
-  /** Product model/variant (e.g., "X") */
-  model: string;
   /** Product description text */
   description: string;
   /** Main product image URL */

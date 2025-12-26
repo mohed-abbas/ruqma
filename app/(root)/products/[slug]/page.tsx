@@ -31,9 +31,9 @@ export async function generateMetadata({ params }: ProductPageParams): Promise<M
   }
 
   return {
-    title: `${product.name} - ${product.model} | Ruqma`,
+    title: `${product.name} | Ruqma`,
     description: product.description,
-    keywords: [product.name, product.model, product.brand, 'Ruqma'].join(', '),
+    keywords: [product.name, product.brand, 'Ruqma'].join(', '),
   };
 }
 
@@ -49,7 +49,6 @@ export default async function DynamicProductPage({ params }: ProductPageParams) 
   const productPageData = {
     product: {
       name: product.name,
-      model: product.model,
       description: product.description,
       image: urlForImage(product.mainImage).width(1200).url(),
       imageAlt: product.mainImage.alt || product.name,

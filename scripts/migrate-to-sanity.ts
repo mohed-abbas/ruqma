@@ -176,7 +176,7 @@ async function migrateProducts() {
     stats.productsProcessed++
 
     try {
-      log(`\nProcessing product: ${product.name} (${product.model})`, 'info')
+      log(`\nProcessing product: ${product.name}`, 'info')
 
       // Upload main image
       const mainImageId = await uploadImage(
@@ -212,7 +212,6 @@ async function migrateProducts() {
       const productDocument = {
         _type: 'product',
         name: product.name,
-        model: product.model,
         slug: {
           _type: 'slug',
           current: product.slug || generateSlug(product.name),

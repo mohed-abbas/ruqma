@@ -17,7 +17,6 @@ export const productsQuery = `
   *[_type == "product" && showOnHome == true] | order(name asc) {
     _id,
     name,
-    model,
     "slug": slug.current,
     description,
     mainImage {
@@ -36,7 +35,6 @@ export const allProductsQuery = `
   *[_type == "product"] | order(name asc) {
     _id,
     name,
-    model,
     "slug": slug.current,
     description,
     mainImage {
@@ -56,7 +54,6 @@ export const productBySlugQuery = `
   *[_type == "product" && slug.current == $slug][0] {
     _id,
     name,
-    model,
     "slug": slug.current,
     description,
     mainImage {

@@ -13,8 +13,7 @@ import type { ProductPageProps } from './types';
 export function GlideXProductExample() {
   const glideXProduct: ProductPageProps = {
     product: {
-      name: "Glide",
-      model: "X",
+      name: "GlideX",
       description: "Designed with a high-density pyramid-shaped microstructure matrix, the mouse pad minimizes the contact points between your mouse and the pad.",
       image: "/products/glidex-mousepad.png", // Replace with actual image path
       imageAlt: "GlideX premium gaming mouse pad with pyramid microstructure surface",
@@ -39,8 +38,7 @@ export function GlideXProductExample() {
 export function CustomProductExample() {
   const customProduct: ProductPageProps = {
     product: {
-      name: "Precision",
-      model: "Pro",
+      name: "Precision Pro",
       description: "Experience unparalleled accuracy with our professional-grade precision tools designed for experts who demand perfection.",
       image: "/products/precision-pro.png",
       imageAlt: "PrecisionPro professional tool set",
@@ -71,7 +69,6 @@ export function MinimalProductExample() {
   const minimalProduct: ProductPageProps = {
     product: {
       name: "Essential",
-      model: "1",
       description: "Simple, elegant, effective. Everything you need, nothing you don't.",
       image: "/products/essential.png",
       imageAlt: "Essential product minimalist design"

@@ -9,7 +9,6 @@ import type { ProductInfo, BackgroundElements, ProductDetailsData } from '@/comp
 export interface Product {
   id: string;
   name: string;
-  model?: string;
   description: string;
   imageUrl: string;
   imageAlt: string;
@@ -61,14 +60,13 @@ export function getProductPageData(product: Product): ProductPageData {
   return {
     product: {
       name: product.name,
-      model: product.model || '',
       description: product.description,
       image: product.imageUrl,
       imageAlt: product.imageAlt,
       ctaText: product.ctaText || "Learn More"
     },
     metadata: {
-      title: `${product.name}${product.model} - Premium ${getCategoryFromId(product.id)} | ${product.brand}`,
+      title: `${product.name} - Premium ${getCategoryFromId(product.id)} | ${product.brand}`,
       description: product.description,
       keywords: generateKeywords(product)
     }

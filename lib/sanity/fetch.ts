@@ -229,7 +229,6 @@ interface SanityAssetReference {
 export interface SanityProduct {
   _id: string
   name: string
-  model: string
   slug: string
   description: string
   mainImage: {

@@ -44,7 +44,6 @@ export default function ProductPage({
   const router = useRouter();
   const {
     name,
-    model,
     description,
     ctaText = "Learn More",
     image
@@ -112,8 +111,8 @@ export default function ProductPage({
                 id="product-title"
                 className="capitalize font-medium leading-[1.1] text-[clamp(3rem,10vw,6.25rem)] w-full font-heading"
               >
-                <span className="text-white">{name}</span>
-                <span className="text-primary">{model}</span>
+                <span className="text-white">{name.slice(0, -1)}</span>
+                <span className="text-primary">{name.slice(-1)}</span>
               </h1>
 
               {/* Description and Button Container */}
