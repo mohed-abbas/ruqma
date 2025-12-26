@@ -73,5 +73,14 @@ body {
   scroll-behavior: smooth;
 }
 
+/* Font utility classes using CSS variables */
+.font-heading {
+  font-family: var(--font-ibm), 'IBM Plex Sans', sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-nunito), 'Nunito Sans', sans-serif;
+}
+
 /* Product Card animations are now handled by Framer Motion in ProductsClient.tsx */
 /* Using whileInView for scroll-triggered reveal with reduced-motion support */

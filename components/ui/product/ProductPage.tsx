@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { ProductPageProps } from './types';
 
+// Animation variants
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -22,6 +23,13 @@ const scaleOnHover = {
   whileHover: { scale: 1.02 },
   transition: { duration: 0.2 }
 };
+
+// Design constants - single source of truth
+const PRODUCT_IMAGE = {
+  aspectRatio: '674/559',
+  maxWidth: 674,
+  offset: { left: -35, top: 25 },
+} as const;
 
 interface ExtendedProductPageProps extends ProductPageProps {
   productSlug: string;
@@ -62,72 +70,60 @@ export default function ProductPage({
       <section
         className="
           relative min-h-screen w-full
-          bg-[#151715]
+          bg-[var(--product-page-bg)]
           text-white
           overflow-hidden
+          flex flex-col
         "
         data-name="Product page dark"
       >
-        {/* CSS Ellipses Background */}
+        {/* CSS Ellipses Background - golden glow on left side */}
         <div
-          className="absolute h-[1372px] left-[61px] top-[117px] w-[1318px] pointer-events-none"
+          className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden"
           data-name="Ellipses"
         >
-          <div className="absolute bottom-0 left-[-69.54%] right-0 top-[-49.02%]">
-            {/* CSS Ellipses Pattern */}
-            <div
-              className="w-full h-full opacity-40"
-              style={{
-                background: `
-                  radial-gradient(ellipse 400px 300px at 20% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%),
-                  radial-gradient(ellipse 300px 400px at 80% 20%, rgba(212, 175, 55, 0.10) 0%, transparent 50%),
-                  radial-gradient(ellipse 500px 200px at 60% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-                  radial-gradient(ellipse 200px 300px at 40% 60%, rgba(212, 175, 55, 0.12) 0%, transparent 50%)
-                `
-              }}
-            />
-          </div>
+          {/* Primary golden glow - ellipse spread out for ambient effect */}
+          <div
+            className="absolute w-[1425px] h-[1625px] blur-[150px]"
+            style={{
+              left: '-511px',
+              top: '-211px',
+              background: 'radial-gradient(ellipse, rgba(212, 175, 55, 0.35) 70%, rgba(212, 175, 55, 0.5) 65%, transparent 50%)'
+            }}
+          />
         </div>
 
-        {/* Hero Content Container */}
-        <div className="absolute flex flex-col gap-[100px] items-start justify-start left-[115px] top-[149px] w-[1280px] z-10">
+        {/* Hero Content Container - vertically centered with flex-1, matches Navbar container */}
+        <div className="relative max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 flex-1 flex items-center z-10">
           {/* Hero Section */}
           <motion.div
-            className="flex gap-[265px] items-center justify-start w-full"
+            className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 xl:gap-20 w-full py-12 lg:py-0"
             initial="initial"
             animate="animate"
             variants={staggerContainer}
           >
             {/* Product Information */}
             <motion.div
-              className="flex flex-col gap-[25px] h-[359px] items-start justify-start w-[360px]"
+              className="flex flex-col gap-6 items-start justify-start w-full lg:w-auto lg:max-w-[420px] xl:max-w-[480px] shrink-0"
               variants={fadeInUp}
             >
               {/* Product Title */}
               <h1
                 id="product-title"
-                className="capitalize font-medium leading-[1.2] text-[100px] w-full"
-                style={{
-                  fontFamily: 'IBM Plex Sans, sans-serif'
-                }}
+                className="capitalize font-medium leading-[1.1] text-[clamp(3rem,10vw,6.25rem)] w-full font-heading"
               >
                 <span className="text-white">{name}</span>
-                <span className="text-[#d4af37]">{model}</span>
+                <span className="text-primary">{model}</span>
               </h1>
 
               {/* Description and Button Container */}
-              <div className="flex flex-col gap-[25px] items-start justify-center">
+              <div className="flex flex-col gap-6 items-start justify-center">
                 {/* Product Description */}
                 <motion.div
-                  className="h-[150px] w-[342px] flex items-center"
+                  className="max-w-[380px]"
                   variants={fadeInUp}
                 >
-                  <p
-                    className="font-normal leading-[1.5] text-[20px] text-white"
-                    style={{
-                      fontFamily: 'Nunito Sans, sans-serif'
-                    }}
-                  >
+                  <p className="font-normal leading-relaxed text-lg sm:text-xl text-white/90 font-body">
                     {description}
                   </p>
                 </motion.div>
@@ -135,24 +131,23 @@ export default function ProductPage({
                 {/* Learn More Button */}
                 <motion.button
                   className="
-                    bg-[#d4af37]
+                    bg-primary
                     text-black
-                    px-[24px]
-                    py-[12px]
-                    rounded-[52px]
+                    px-6
+                    py-3
+                    rounded-full
                     font-bold
-                    text-[14px]
+                    text-sm
                     capitalize
                     border
                     border-white
                     relative
                     overflow-hidden
                     min-w-[126px]
-                    h-[46px]
+                    font-body
                   "
                   style={{
-                    fontFamily: 'Nunito Sans, sans-serif',
-                    boxShadow: '0px -4px 5.8px 0px inset rgba(161,161,161,0.25), 0px 4px 2.6px 0px inset rgba(255,255,255,0.25)'
+                    boxShadow: 'var(--product-page-button-shadow)'
                   }}
                   variants={fadeInUp}
                   {...scaleOnHover}
@@ -164,39 +159,41 @@ export default function ProductPage({
               </div>
             </motion.div>
 
-            {/* Product Image */}
+            {/* Product Image Container - responsive with aspect ratio, scales on XL */}
             <motion.div
-              className="h-[559px] w-[674px] relative"
+              className="relative w-full lg:w-auto lg:flex-1 max-w-[500px] lg:max-w-[600px] xl:max-w-[750px] 2xl:max-w-[850px]"
+              style={{ aspectRatio: PRODUCT_IMAGE.aspectRatio }}
               variants={fadeInUp}
             >
-              {/* Main Product Image */}
-              <div className="absolute flex h-[559px] items-center justify-center left-0 top-0 w-[674px]">
-                <div className="flex-none">
-                  <div
-                    className="h-[559px] w-[674px]"
-                    style={{
-                      backgroundImage: `url('${image}')`,
-                      backgroundPosition: '51.59% 50.21%',
-                      backgroundSize: '118.69% 143.11%',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  />
-                </div>
+              {/* Back Product Image (behind, slightly faded) */}
+              <div className="absolute inset-0 z-0">
+                <div
+                  className="w-full h-full opacity-80"
+                  style={{
+                    backgroundImage: `url('${image}')`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                />
               </div>
 
-              {/* Secondary/Shadow Product Image */}
-              <div className="absolute flex h-[559px] items-center justify-center left-[-35px] top-[25px] w-[674px]">
-                <div className="flex-none">
-                  <div
-                    className="h-[559px] w-[674px]"
-                    style={{
-                      backgroundImage: `url('${image}')`,
-                      backgroundPosition: '51.59% 50.21%',
-                      backgroundSize: '118.69% 143.11%',
-                      backgroundRepeat: 'no-repeat'
-                    }}
-                  />
-                </div>
+              {/* Front Product Image (in front, offset left and down) */}
+              <div
+                className="absolute inset-0 z-10"
+                style={{
+                  transform: `translate(${PRODUCT_IMAGE.offset.left}px, ${PRODUCT_IMAGE.offset.top}px)`
+                }}
+              >
+                <div
+                  className="w-full h-full"
+                  style={{
+                    backgroundImage: `url('${image}')`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                  }}
+                />
               </div>
             </motion.div>
           </motion.div>
