@@ -1,15 +1,19 @@
-import { ProductDetailsData } from './types';
-import FeatureCardGrid from './FeatureCardGrid';
+import { ProductFeaturesSectionData } from './types';
+import ProductFeaturesSection from './ProductFeaturesSection';
+
+interface ProductDetailsSectionProps {
+  productDetails: ProductFeaturesSectionData | null;
+  className?: string;
+}
 
 /**
- * Product details section with card-based grid layout
- * Matches Figma design with asymmetric card positioning
- * Now receives data as props instead of fetching hardcoded data
+ * Product details section wrapper
+ * Renders the new ProductFeaturesSection component with Sanity data
  */
 export default function ProductDetailsSection({
   productDetails,
-  className
-}: { productDetails: ProductDetailsData | null; className?: string }) {
+  className,
+}: ProductDetailsSectionProps) {
   if (!productDetails) {
     return (
       <section className="w-full py-[120px] flex items-center justify-center">
@@ -19,8 +23,8 @@ export default function ProductDetailsSection({
   }
 
   return (
-    <FeatureCardGrid
-      productDetails={productDetails}
+    <ProductFeaturesSection
+      data={productDetails}
       className={className}
     />
   );

@@ -238,7 +238,31 @@ export interface SanityProduct {
   brand: string
   showOnHome: boolean
   productDetails?: {
-    mainFeature: {
+    // New two-column layout structure
+    leftColumn?: {
+      productImage?: {
+        asset: SanityAssetReference & { url?: string }
+        alt?: string
+      }
+      headline?: {
+        darkText?: string
+        goldText?: string
+      }
+      description?: string
+    }
+    featureCards?: Array<{
+      _key: string
+      id?: string
+      goldText: string
+      darkText?: string
+      description: string
+    }>
+    detailImage?: {
+      asset: SanityAssetReference & { url?: string }
+      alt?: string
+    }
+    // Legacy fields for backward compatibility
+    mainFeature?: {
       title: string
       highlight: string
       description: string
@@ -247,17 +271,13 @@ export interface SanityProduct {
         alt: string
       }
     }
-    features: Array<{
+    features?: Array<{
       _key: string
       id: string
       title: string
       highlight: string
       description: string
     }>
-    detailImage: {
-      asset: SanityAssetReference
-      alt: string
-    }
   }
 }
 

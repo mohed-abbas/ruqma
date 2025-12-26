@@ -112,7 +112,56 @@ export interface ComponentDesignSpec {
 }
 
 /**
- * Product feature information for the details section
+ * Feature card for the new two-column layout
+ */
+export interface FeatureCardData {
+  /** Unique feature identifier */
+  _key?: string;
+  /** Feature ID */
+  id?: string;
+  /** Gold/primary colored text */
+  goldText: string;
+  /** Dark colored text */
+  darkText?: string;
+  /** Feature description */
+  description: string;
+}
+
+/**
+ * Left column data for product features section
+ */
+export interface LeftColumnData {
+  /** Product image */
+  productImage?: {
+    asset?: { _ref: string; url?: string };
+    alt?: string;
+  };
+  /** Headline with mixed colors */
+  headline?: {
+    darkText?: string;
+    goldText?: string;
+  };
+  /** Description text */
+  description?: string;
+}
+
+/**
+ * New product features section data structure (matches Figma design)
+ */
+export interface ProductFeaturesSectionData {
+  /** Left column with image and headline */
+  leftColumn?: LeftColumnData;
+  /** Feature cards for right column */
+  featureCards?: FeatureCardData[];
+  /** Large detail image */
+  detailImage?: {
+    asset?: { _ref: string; url?: string };
+    alt?: string;
+  };
+}
+
+/**
+ * Product feature information for the details section (Legacy)
  */
 export interface ProductFeature {
   /** Unique feature identifier */
@@ -134,11 +183,11 @@ export interface ProductFeature {
 }
 
 /**
- * Complete product details data structure
+ * Complete product details data structure (Legacy - for backward compatibility)
  */
 export interface ProductDetailsData {
-  /** Main feature showcase */
-  mainFeature: {
+  /** Main feature showcase (Legacy) */
+  mainFeature?: {
     /** Main feature title */
     title: string;
     /** Gold-colored highlighted part of title */
@@ -150,15 +199,19 @@ export interface ProductDetailsData {
     /** Alt text for feature image */
     imageAlt: string;
   };
-  /** Array of secondary features */
-  features: ProductFeature[];
+  /** Array of secondary features (Legacy) */
+  features?: ProductFeature[];
   /** Detail image for right column */
-  detailImage: {
+  detailImage?: {
     /** Image URL */
     src: string;
     /** Alt text for detail image */
     alt: string;
   };
+  /** New two-column layout fields */
+  leftColumn?: LeftColumnData;
+  /** Feature cards for new layout */
+  featureCards?: FeatureCardData[];
 }
 
 /**

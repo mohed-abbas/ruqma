@@ -48,7 +48,7 @@ export const allProductsQuery = `
 
 /**
  * Get single product by slug with full details
- * Includes nested productDetails with features and images
+ * Includes nested productDetails with two-column layout structure
  */
 export const productBySlugQuery = `
   *[_type == "product" && slug.current == $slug][0] {
@@ -62,6 +62,30 @@ export const productBySlugQuery = `
     },
     brand,
     productDetails {
+      // New two-column layout structure
+      leftColumn {
+        productImage {
+          asset->,
+          alt
+        },
+        headline {
+          darkText,
+          goldText
+        },
+        description
+      },
+      featureCards[] {
+        _key,
+        id,
+        goldText,
+        darkText,
+        description
+      },
+      detailImage {
+        asset->,
+        alt
+      },
+      // Legacy fields for backward compatibility
       mainFeature {
         title,
         highlight,
@@ -77,10 +101,6 @@ export const productBySlugQuery = `
         title,
         highlight,
         description
-      },
-      detailImage {
-        asset->,
-        alt
       }
     },
     gallery {

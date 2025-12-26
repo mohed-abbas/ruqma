@@ -6,7 +6,7 @@ import { getProductBySlug, getProductSlugs } from '@/lib/sanity/fetch';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { urlForImage } from '@/lib/sanity/client';
-import type { ProductDetailsData, ProductGalleryData, GalleryImage } from '@/components/ui/product/types';
+import type { ProductFeaturesSectionData, ProductGalleryData, GalleryImage } from '@/components/ui/product/types';
 
 interface ProductPageParams {
   params: Promise<{ slug: string }>;
@@ -58,26 +58,77 @@ export default async function DynamicProductPage({ params }: ProductPageParams) 
     },
   };
 
-  // Transform product details data for ProductDetailsSection
-  const productDetails: ProductDetailsData | null = product.productDetails ? {
-    mainFeature: {
-      title: product.productDetails.mainFeature.title,
-      highlight: product.productDetails.mainFeature.highlight,
-      description: product.productDetails.mainFeature.description,
-      image: urlForImage(product.productDetails.mainFeature.image).width(800).url(),
-      imageAlt: product.productDetails.mainFeature.image.alt || product.productDetails.mainFeature.title,
-    },
-    features: product.productDetails.features.map((feature: { _key: string; id: string; title: string; highlight: string; description: string }) => ({
-      id: feature.id,
-      title: feature.title,
-      highlight: feature.highlight,
-      description: feature.description,
-    })),
-    detailImage: {
-      src: urlForImage(product.productDetails.detailImage).width(600).url(),
-      alt: product.productDetails.detailImage.alt || 'Product detail',
-    },
-  } : null;
+  // Transform product details data for ProductDetailsSection (new two-column layout)
+  const productDetails: ProductFeaturesSectionData | null = product.productDetails ? (() => {
+    const details = product.productDetails;
+
+    // Check if using new schema structure (leftColumn exists)
+    if (details.leftColumn) {
+      return {
+        leftColumn: {
+          productImage: details.leftColumn.productImage?.asset ? {
+            asset: {
+              _ref: details.leftColumn.productImage.asset._ref || '',
+              url: urlForImage(details.leftColumn.productImage).width(800).url(),
+            },
+            alt: details.leftColumn.productImage.alt,
+          } : undefined,
+          headline: details.leftColumn.headline,
+          description: details.leftColumn.description,
+        },
+        featureCards: details.featureCards?.map((card: { _key: string; id?: string; goldText: string; darkText?: string; description: string }) => ({
+          _key: card._key,
+          id: card.id,
+          goldText: card.goldText,
+          darkText: card.darkText,
+          description: card.description,
+        })),
+        detailImage: details.detailImage?.asset ? {
+          asset: {
+            _ref: details.detailImage.asset._ref || '',
+            url: urlForImage(details.detailImage).width(1200).url(),
+          },
+          alt: details.detailImage.alt,
+        } : undefined,
+      };
+    }
+
+    // Fallback to legacy schema structure (mainFeature/features)
+    if (details.mainFeature) {
+      return {
+        leftColumn: {
+          productImage: details.mainFeature.image?.asset ? {
+            asset: {
+              _ref: details.mainFeature.image.asset._ref || '',
+              url: urlForImage(details.mainFeature.image).width(800).url(),
+            },
+            alt: details.mainFeature.image.alt,
+          } : undefined,
+          headline: {
+            darkText: details.mainFeature.title,
+            goldText: details.mainFeature.highlight,
+          },
+          description: details.mainFeature.description,
+        },
+        featureCards: details.features?.map((feature: { _key: string; id: string; title: string; highlight: string; description: string }) => ({
+          _key: feature._key,
+          id: feature.id,
+          goldText: feature.highlight,
+          darkText: feature.title,
+          description: feature.description,
+        })),
+        detailImage: details.detailImage?.asset ? {
+          asset: {
+            _ref: details.detailImage.asset._ref || '',
+            url: urlForImage(details.detailImage).width(1200).url(),
+          },
+          alt: details.detailImage.alt,
+        } : undefined,
+      };
+    }
+
+    return null;
+  })() : null;
 
   // Transform gallery data for ProductGallery
   const galleryData: ProductGalleryData | null = product.gallery && product.gallery.images ? {

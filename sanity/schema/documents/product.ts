@@ -172,33 +172,20 @@ export default defineType({
       title: 'Product Details',
       type: 'object',
       group: 'features',
+      description: 'Product features section with two-column layout',
       fields: [
+        // Left Column
         {
-          name: 'mainFeature',
-          title: 'Main Feature',
+          name: 'leftColumn',
+          title: 'Left Column',
           type: 'object',
-          description: 'Primary highlighted feature with image',
+          description: 'Left side with product image and headline',
           fields: [
             {
-              name: 'title',
-              type: 'string',
-              title: 'Title',
-            },
-            {
-              name: 'highlight',
-              type: 'string',
-              title: 'Highlight',
-              description: 'Word or phrase to emphasize (e.g., "Premium")',
-            },
-            {
-              name: 'description',
-              type: 'text',
-              title: 'Description',
-            },
-            {
-              name: 'image',
+              name: 'productImage',
               type: 'image',
-              title: 'Feature Image',
+              title: 'Product Image',
+              description: 'Main product image (left column)',
               options: {
                 hotspot: true,
               },
@@ -210,13 +197,42 @@ export default defineType({
                 },
               ],
             },
+            {
+              name: 'headline',
+              type: 'object',
+              title: 'Headline',
+              description: 'Main headline with mixed colors',
+              fields: [
+                {
+                  name: 'darkText',
+                  type: 'string',
+                  title: 'Dark Text',
+                  description: 'Text in dark color (e.g., "Micro textured for")',
+                },
+                {
+                  name: 'goldText',
+                  type: 'string',
+                  title: 'Gold Text',
+                  description: 'Text in gold/primary color (e.g., "smooth glide")',
+                },
+              ],
+            },
+            {
+              name: 'description',
+              type: 'text',
+              title: 'Description',
+              description: 'Supporting text below headline',
+              rows: 3,
+            },
           ],
         },
+        // Right Column - Feature Cards
         {
-          name: 'features',
-          title: 'Additional Features',
+          name: 'featureCards',
+          title: 'Feature Cards',
           type: 'array',
-          description: 'List of additional product features',
+          description: 'Feature cards displayed in a row (recommended: 3 cards)',
+          validation: (Rule) => Rule.min(1).max(4),
           of: [
             {
               type: 'object',
@@ -225,46 +241,48 @@ export default defineType({
                   name: 'id',
                   type: 'string',
                   title: 'Feature ID',
-                  description: 'Unique identifier (e.g., "comfort", "durability")',
+                  description: 'Unique identifier',
                 },
                 {
-                  name: 'title',
+                  name: 'goldText',
                   type: 'string',
-                  title: 'Title',
+                  title: 'Gold Text',
+                  description: 'Highlighted text in gold (e.g., "Consistent")',
                   validation: (Rule) => Rule.required(),
                 },
                 {
-                  name: 'highlight',
+                  name: 'darkText',
                   type: 'string',
-                  title: 'Highlight Word',
-                  description: 'Word to emphasize in the title',
+                  title: 'Dark Text',
+                  description: 'Text in dark color (e.g., "surface")',
                 },
                 {
                   name: 'description',
                   type: 'text',
                   title: 'Description',
+                  rows: 2,
                 },
               ],
               preview: {
                 select: {
-                  title: 'title',
-                  id: 'id',
+                  goldText: 'goldText',
+                  darkText: 'darkText',
                 },
-                prepare({ title, id }) {
+                prepare({ goldText, darkText }) {
                   return {
-                    title: title || 'Untitled Feature',
-                    subtitle: id ? `ID: ${id}` : undefined,
+                    title: `${goldText || ''} ${darkText || ''}`.trim() || 'Untitled Feature',
                   }
                 },
               },
             },
           ],
         },
+        // Right Column - Large Image
         {
           name: 'detailImage',
-          title: 'Detail Image',
+          title: 'Large Detail Image',
           type: 'image',
-          description: 'Additional image for product details section',
+          description: 'Large product image below feature cards',
           options: {
             hotspot: true,
           },
@@ -273,6 +291,44 @@ export default defineType({
               name: 'alt',
               type: 'string',
               title: 'Alt Text',
+            },
+          ],
+        },
+        // Legacy fields (kept for backward compatibility)
+        {
+          name: 'mainFeature',
+          title: 'Main Feature (Legacy)',
+          type: 'object',
+          hidden: true,
+          description: 'Legacy field - use leftColumn instead',
+          fields: [
+            { name: 'title', type: 'string', title: 'Title' },
+            { name: 'highlight', type: 'string', title: 'Highlight' },
+            { name: 'description', type: 'text', title: 'Description' },
+            {
+              name: 'image',
+              type: 'image',
+              title: 'Feature Image',
+              options: { hotspot: true },
+              fields: [{ name: 'alt', type: 'string', title: 'Alt Text' }],
+            },
+          ],
+        },
+        {
+          name: 'features',
+          title: 'Additional Features (Legacy)',
+          type: 'array',
+          hidden: true,
+          description: 'Legacy field - use featureCards instead',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                { name: 'id', type: 'string', title: 'Feature ID' },
+                { name: 'title', type: 'string', title: 'Title' },
+                { name: 'highlight', type: 'string', title: 'Highlight Word' },
+                { name: 'description', type: 'text', title: 'Description' },
+              ],
             },
           ],
         },

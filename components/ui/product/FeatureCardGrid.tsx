@@ -9,6 +9,10 @@ interface FeatureCardGridProps {
   className?: string;
 }
 
+/**
+ * @deprecated Use ProductFeaturesSection instead for the new two-column layout
+ */
+
 // Animation variants
 const containerVariants = {
   animate: {
@@ -33,6 +37,11 @@ export default function FeatureCardGrid({
   className
 }: FeatureCardGridProps) {
   const { mainFeature, features, detailImage } = productDetails;
+
+  // Guard against missing data
+  if (!mainFeature || !features || !detailImage) {
+    return null;
+  }
 
   return (
     <section
