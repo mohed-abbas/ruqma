@@ -6,5 +6,6 @@ export { default as ProductFeaturesSection } from './ProductFeaturesSection';
 export { default as FeatureCard } from './FeatureCard';
 export { default as FeatureCardGrid } from './FeatureCardGrid';
 export { default as ProductGallery } from './ProductGallery';
+export { default as ImageLightbox } from './ImageLightbox';
 export { default as PartnerStoresCTA } from './PartnerStoresCTA';
 export type * from './types';

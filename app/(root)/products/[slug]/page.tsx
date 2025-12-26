@@ -131,16 +131,24 @@ export default async function DynamicProductPage({ params }: ProductPageParams) 
   })() : null;
 
   // Transform gallery data for ProductGallery
-  const galleryData: ProductGalleryData | null = product.gallery && product.gallery.images ? {
-    title: product.gallery.title || 'A Closer Look',
-    subtitle: product.gallery.subtitle,
-    images: product.gallery.images.map((img: { _key: string; asset: { _ref: string }; alt?: string; gridSpan?: { cols: number; rows: number }; aspectRatio?: string; priority?: boolean }, index: number): GalleryImage => ({
+  // Layout is automatically determined by the component - just pass images!
+  // Supports both new schema (direct array) and old schema (object with images array)
+  const galleryImages = (product.galleryNew && product.galleryNew.length > 0)
+    ? product.galleryNew
+    : product.galleryOld;
+
+  const galleryData: ProductGalleryData | null = galleryImages && galleryImages.length > 0 ? {
+    images: galleryImages.map((img: {
+      _key: string;
+      asset: { _ref: string };
+      alt?: string;
+    }, index: number): GalleryImage => ({
       id: img._key || `gallery-${index}`,
+      // Thumbnail for grid display (800px width)
       src: urlForImage(img).width(800).url(),
+      // Full resolution for lightbox (1920px for crisp display on large screens)
+      fullSrc: urlForImage(img).width(1920).quality(90).url(),
       alt: img.alt || `Product gallery image ${index + 1}`,
-      gridSpan: img.gridSpan || { cols: 1, rows: 1 },
-      aspectRatio: img.aspectRatio || '1/1',
-      priority: img.priority || false,
     })),
   } : null;
 

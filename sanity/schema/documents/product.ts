@@ -82,88 +82,27 @@ export default defineType({
     {
       name: 'gallery',
       title: 'Product Gallery',
-      type: 'object',
+      type: 'array',
       group: 'media',
-      description: 'Gallery images shown in the "A Closer Look" section',
-      fields: [
+      description: 'Simply upload 4-12 images for the "A Closer Look" gallery section. Images will be automatically arranged in an attractive masonry grid.',
+      of: [
         {
-          name: 'title',
-          title: 'Gallery Title',
-          type: 'string',
-          initialValue: 'A Closer Look',
-        },
-        {
-          name: 'subtitle',
-          title: 'Gallery Subtitle',
-          type: 'string',
-        },
-        {
-          name: 'images',
-          title: 'Gallery Images',
-          type: 'array',
-          of: [
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+          fields: [
             {
-              type: 'image',
-              options: {
-                hotspot: true,
-              },
-              fields: [
-                {
-                  name: 'alt',
-                  type: 'string',
-                  title: 'Alt Text',
-                  description: 'Describe the image for accessibility',
-                },
-                {
-                  name: 'gridSpan',
-                  title: 'Grid Size',
-                  type: 'object',
-                  description: 'Control image size in gallery grid',
-                  fields: [
-                    {
-                      name: 'cols',
-                      title: 'Column Span',
-                      type: 'number',
-                      validation: (Rule) => Rule.required().min(1).max(4),
-                      initialValue: 1,
-                    },
-                    {
-                      name: 'rows',
-                      title: 'Row Span',
-                      type: 'number',
-                      validation: (Rule) => Rule.required().min(1).max(2),
-                      initialValue: 1,
-                    },
-                  ],
-                },
-                {
-                  name: 'aspectRatio',
-                  title: 'Aspect Ratio',
-                  type: 'string',
-                  description: 'e.g., "1/1" for square, "16/9" for wide',
-                  initialValue: '1/1',
-                  options: {
-                    list: [
-                      { title: 'Square (1:1)', value: '1/1' },
-                      { title: 'Wide (16:9)', value: '16/9' },
-                      { title: 'Portrait (4:3)', value: '4/3' },
-                    ],
-                  },
-                },
-                {
-                  name: 'priority',
-                  title: 'Priority Loading',
-                  type: 'boolean',
-                  description: 'Enable for first 2-3 images for faster loading',
-                  initialValue: false,
-                },
-              ],
+              name: 'alt',
+              type: 'string',
+              title: 'Alt Text',
+              description: 'Describe the image for accessibility (optional but recommended)',
             },
           ],
-          validation: (Rule) =>
-            Rule.min(4).max(12).warning('Recommended: 6-10 images for optimal layout'),
         },
       ],
+      validation: (Rule) =>
+        Rule.min(4).max(12).warning('Recommended: 6-10 images for optimal layout'),
     },
 
     // ─── FEATURES GROUP ───────────────────────────────────────────

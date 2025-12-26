@@ -245,36 +245,30 @@ export interface EnhancedProductPageProps extends ProductPageProps {
 }
 
 /**
+ * Border radius options for gallery images (used internally by auto-layout)
+ */
+export type GalleryBorderRadius = 'default' | 'rounded' | 'pill' | 'none';
+
+/**
  * Gallery image information
+ * Simplified interface - layout is automatically determined by the component
  */
 export interface GalleryImage {
   /** Unique image identifier */
   id: string;
-  /** Image URL */
+  /** Thumbnail image URL (optimized for grid display, ~800px) */
   src: string;
+  /** Full resolution image URL (for lightbox, ~1920px+) */
+  fullSrc: string;
   /** Alt text for accessibility */
   alt: string;
-  /** Grid span configuration for masonry layout */
-  gridSpan: {
-    /** Number of columns to span */
-    cols: number;
-    /** Number of rows to span */
-    rows: number;
-  };
-  /** Aspect ratio for responsive behavior */
-  aspectRatio: string;
-  /** Optional priority for image loading */
-  priority?: boolean;
 }
 
 /**
  * Product gallery data structure
+ * Simplified - just an array of images, title is hardcoded as "A Closer Look"
  */
 export interface ProductGalleryData {
-  /** Gallery section title */
-  title: string;
-  /** Gallery section subtitle */
-  subtitle?: string;
   /** Array of gallery images */
   images: GalleryImage[];
 }

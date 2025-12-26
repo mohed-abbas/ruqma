@@ -103,20 +103,18 @@ export const productBySlugQuery = `
         description
       }
     },
-    gallery {
-      title,
-      subtitle,
-      images[] {
-        _key,
-        asset->,
-        alt,
-        gridSpan {
-          cols,
-          rows
-        },
-        aspectRatio,
-        priority
-      }
+    // Support both new schema (direct array) and old schema (object with images)
+    // New schema: gallery is a direct array
+    "galleryNew": gallery[] {
+      _key,
+      asset->,
+      alt
+    },
+    // Old schema: gallery is an object with images array inside
+    "galleryOld": gallery.images[] {
+      _key,
+      asset->,
+      alt
     }
   }
 `
