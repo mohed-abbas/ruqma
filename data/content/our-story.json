@@ -2,10 +2,14 @@
   "hero": {
     "title": "Our",
     "titleAccent": "Story",
-    "subtitle": "Crafting Excellence Since 2025"
+    "subtitle": "Crafting Excellence Since 2025",
+    "backgroundImage": "/images/about/hero-bg.jpg",
+    "ctaText": "Discover Our Journey",
+    "ctaAriaLabel": "Scroll to learn about Ruqma's journey"
   },
   "introduction": {
-    "heading": "Where Luxury Meets Craftsmanship",
+    "heading": "Where Luxury Meets",
+    "headingAccent": "Craftsmanship",
     "paragraphs": [
       "Ruqma was born from a vision to elevate everyday experiences beyond the ordinary. We believe that true luxury lies not just in aesthetics, but in the perfect harmony of form, function, and feeling.",
       "Every product we create embodies our commitment to quality, design, and innovation. From conception to creation, we pour our passion into crafting pieces that don't just meet expectations—they transcend them."
@@ -17,16 +21,19 @@
   },
   "values": [
     {
+      "id": "quality",
       "icon": "quality",
       "title": "Uncompromising Quality",
       "description": "Every product meets the highest standards of craftsmanship and materials. We source only the finest components and apply rigorous quality control at every stage."
     },
     {
+      "id": "innovation",
       "icon": "innovation",
       "title": "Timeless Innovation",
       "description": "Blending traditional techniques with modern design philosophy. We honor heritage while embracing cutting-edge approaches to create products that endure."
     },
     {
+      "id": "experience",
       "icon": "experience",
       "title": "Exceptional Experience",
       "description": "Creating moments that go beyond ordinary expectations. Every interaction with Ruqma is designed to delight, inspire, and leave a lasting impression."
@@ -35,33 +42,66 @@
   "timeline": [
     {
       "year": "2025",
+      "quarter": "Q1",
       "title": "The Beginning",
-      "description": "Ruqma founded with a mission to redefine luxury goods. Our journey started with a simple belief: exceptional quality should be accessible to those who appreciate it."
+      "description": "Ruqma founded with a mission to redefine luxury goods. Our journey started with a simple belief: exceptional quality should be accessible to those who appreciate it.",
+      "isFuture": false
     },
     {
       "year": "2025",
+      "quarter": "Q2",
       "title": "First Collection",
-      "description": "Launch of our signature product line, establishing Ruqma as a name synonymous with elegance and excellence in luxury goods."
+      "description": "Launch of our signature product line, establishing Ruqma as a name synonymous with elegance and excellence in luxury goods.",
+      "isFuture": false
     },
     {
       "year": "2025",
+      "quarter": "Q3",
       "title": "Global Recognition",
-      "description": "Our commitment to quality earned recognition from discerning customers worldwide, expanding our reach while maintaining our standards."
+      "description": "Our commitment to quality earned recognition from discerning customers worldwide, expanding our reach while maintaining our standards.",
+      "isFuture": false
+    },
+    {
+      "year": "2026",
+      "quarter": "Q1",
+      "title": "New Horizons",
+      "description": "Expanding our product range with innovative designs while staying true to our core values of quality and craftsmanship.",
+      "isFuture": true
     }
   ],
   "craftsmanship": {
-    "heading": "Crafted with Passion",
+    "heading": "Crafted with",
+    "headingAccent": "Passion",
     "description": "Behind every Ruqma product is a story of dedication, skill, and attention to detail. Our artisans bring decades of experience and an unwavering commitment to excellence in every piece they create.",
     "image": {
       "src": "/images/about/craftsmanship.jpg",
       "alt": "Ruqma craftsmanship process showing artisan at work"
-    }
+    },
+    "stats": [
+      {
+        "value": "100%",
+        "label": "Premium Materials"
+      },
+      {
+        "value": "50+",
+        "label": "Quality Checks"
+      },
+      {
+        "value": "∞",
+        "label": "Attention to Detail"
+      }
+    ]
   },
   "cta": {
-    "heading": "Experience Ruqma",
+    "heading": "Experience",
+    "headingAccent": "Ruqma",
     "subheading": "Discover the difference that true craftsmanship makes",
     "buttonText": "Explore Our Products",
     "buttonLink": "/#products",
-    "buttonAriaLabel": "Explore Ruqma product collection"
+    "buttonAriaLabel": "Explore Ruqma product collection",
+    "previewImage": {
+      "src": "/images/about/product-preview.jpg",
+      "alt": "Preview of Ruqma product collection"
+    }
   }
 }

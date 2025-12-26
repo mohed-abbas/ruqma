@@ -52,6 +52,36 @@
   --testimonials-text-secondary: #6b7280;
   --testimonials-star-color: #facc15;
   --testimonials-card-radius: 1rem;
+
+  /* Our Story Page Design Tokens */
+  --story-page-bg: #151715;
+  --story-page-bg-light: #f9fafb;
+  --story-page-text-primary: var(--white);
+  --story-page-text-accent: var(--color-primary);
+  --story-page-text-secondary: rgba(255, 255, 255, 0.8);
+  --story-page-text-muted: rgba(255, 255, 255, 0.6);
+
+  /* Story Glass Card Design */
+  --story-card-bg: rgba(255, 255, 255, 0.05);
+  --story-card-border: rgba(212, 175, 55, 0.2);
+  --story-card-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+  --story-card-radius: 1.5rem;
+  --story-card-backdrop-blur: 10px;
+
+  /* Story Typography */
+  --story-title-size: clamp(3rem, 8vw, 6.25rem);
+  --story-section-title-size: clamp(2rem, 5vw, 3rem);
+  --story-body-size: clamp(1rem, 2vw, 1.25rem);
+
+  /* Story Layout */
+  --story-container-max: 1234px;
+  --story-container-padding: clamp(1.25rem, 5vw, 5rem);
+  --story-section-gap: clamp(4rem, 8vw, 8rem);
+
+  /* Story Timeline */
+  --story-timeline-line: rgba(212, 175, 55, 0.3);
+  --story-timeline-dot: var(--color-primary);
+  --story-timeline-dot-size: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {

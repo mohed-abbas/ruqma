@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { motion, Variants } from 'framer-motion';
+import { motion, Variants, useReducedMotion } from 'framer-motion';
 import { TimelineMilestone } from '@/types/content';
 
 interface TimelineProps {
@@ -9,42 +9,50 @@ interface TimelineProps {
 }
 
 export default function Timeline({ milestones }: TimelineProps) {
+  const prefersReducedMotion = useReducedMotion();
+
   const containerVariants: Variants = {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: 0.2
-      }
-    }
+        staggerChildren: prefersReducedMotion ? 0 : 0.2,
+      },
+    },
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 30 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.4, 0, 0.2, 1]
-      }
-    }
+        duration: prefersReducedMotion ? 0.01 : 0.6,
+        ease: [0.4, 0, 0.2, 1],
+      },
+    },
   };
 
   return (
     <section
       id="timeline"
-      className="bg-white py-20"
+      className="bg-[var(--story-page-bg-light)] py-20 md:py-[var(--story-section-gap)] text-[#151515]"
       style={{ scrollMarginTop: '80px' }}
     >
-      <div className="max-w-[900px] mx-auto px-4">
+      <div className="max-w-[var(--story-container-max)] mx-auto px-[var(--story-container-padding)]">
         {/* Section Header */}
-        <div className="mb-16 text-center">
-          <h2 className="font-[var(--font-ibm)] font-semibold text-[clamp(2.5rem,5vw,4rem)] leading-[1.2] text-[#151715]">
+        <motion.div
+          className="mb-16 text-center"
+          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: prefersReducedMotion ? 0.01 : 0.6 }}
+        >
+          <h2 className="font-[var(--font-ibm)] font-semibold text-[var(--story-section-title-size)] leading-[1.2] text-[var(--color-text)]">
             Our <span className="text-[var(--color-primary)]">Journey</span>
           </h2>
-        </div>
+        </motion.div>
 
-        {/* Timeline */}
+        {/* Horizontal Timeline */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -52,50 +60,68 @@ export default function Timeline({ milestones }: TimelineProps) {
           viewport={{ once: true, margin: '-100px' }}
           className="relative"
         >
-          {/* Timeline Line */}
+          {/* Horizontal Timeline Line */}
           <div
-            className="absolute left-[50%] top-0 bottom-0 w-0.5 bg-[var(--color-primary)] -translate-x-1/2"
+            className="absolute left-0 right-0 top-8 h-0.5 bg-[var(--story-timeline-line)]"
             aria-hidden="true"
           />
 
-          {/* Milestones */}
-          {milestones.map((milestone, index) => {
-            const isEven = index % 2 === 0;
-
-            return (
+          {/* Milestones Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {milestones.map((milestone, index) => (
               <motion.article
                 key={index}
                 variants={itemVariants}
-                className={`relative mb-16 last:mb-0 flex items-center ${
-                  isEven ? 'flex-row' : 'flex-row-reverse'
-                }`}
+                className="relative pt-16"
               >
+                {/* Timeline Dot */}
+                <div
+                  className={`absolute top-4 left-1/2 -translate-x-1/2 w-[var(--story-timeline-dot-size)] h-[var(--story-timeline-dot-size)] rounded-full ${
+                    milestone.isFuture
+                      ? 'border-2 border-dashed border-[var(--story-timeline-dot)] bg-transparent'
+                      : 'bg-[var(--story-timeline-dot)]'
+                  }`}
+                  aria-hidden="true"
+                />
+
+                {/* Year + Quarter Badge */}
+                <div className="text-center mb-4">
+                  <span
+                    className={`inline-block px-3 py-1 rounded-full text-sm font-[var(--font-ibm)] font-semibold ${
+                      milestone.isFuture
+                        ? 'bg-transparent border border-dashed border-[var(--color-primary)] text-[var(--color-primary)]'
+                        : 'bg-[var(--color-primary)] text-white'
+                    }`}
+                  >
+                    {milestone.quarter && `${milestone.quarter} `}
+                    {milestone.year}
+                  </span>
+                </div>
+
                 {/* Content Card */}
-                <div className={`w-[calc(50%-2rem)] ${isEven ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                  <div className="bg-[#E9ECF2] p-6 rounded-xl shadow-md">
-                    <h3 className="font-[var(--font-ibm)] text-xl font-semibold text-[#151715] mb-2">
-                      {milestone.title}
-                    </h3>
-                    <p className="font-[var(--font-nunito)] text-base text-[#151715] leading-relaxed">
-                      {milestone.description}
-                    </p>
-                  </div>
+                <div className="bg-white p-6 rounded-[var(--story-card-radius)] shadow-md border border-[var(--color-gray-200)]">
+                  <h3
+                    className={`font-[var(--font-ibm)] text-lg font-semibold mb-2 ${
+                      milestone.isFuture
+                        ? 'text-[var(--color-gray-500)]'
+                        : 'text-[var(--color-text)]'
+                    }`}
+                  >
+                    {milestone.title}
+                  </h3>
+                  <p
+                    className={`font-[var(--font-nunito)] text-sm leading-relaxed ${
+                      milestone.isFuture
+                        ? 'text-[var(--color-gray-500)]'
+                        : 'text-[var(--color-text)]'
+                    }`}
+                  >
+                    {milestone.description}
+                  </p>
                 </div>
-
-                {/* Year Badge */}
-                <div className="absolute left-[50%] -translate-x-1/2 z-10">
-                  <div className="flex items-center justify-center w-16 h-16 bg-[var(--color-primary)] rounded-full shadow-lg">
-                    <span className="font-[var(--font-ibm)] text-white text-sm font-bold">
-                      {milestone.year}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Spacer */}
-                <div className="w-[calc(50%-2rem)]" />
               </motion.article>
-            );
-          })}
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>

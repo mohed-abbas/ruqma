@@ -98,6 +98,9 @@ export interface OurStoryHero {
   title: string;
   titleAccent: string;
   subtitle: string;
+  backgroundImage?: string;
+  ctaText?: string;
+  ctaAriaLabel?: string;
 }
 
 export interface ImageContent {
@@ -107,11 +110,13 @@ export interface ImageContent {
 
 export interface StoryIntroduction {
   heading: string;
+  headingAccent?: string;
   paragraphs: string[];
   image: ImageContent;
 }
 
 export interface ValueCard {
+  id?: string;
   icon: string;
   title: string;
   description: string;
@@ -119,22 +124,33 @@ export interface ValueCard {
 
 export interface TimelineMilestone {
   year: string;
+  quarter?: string;
   title: string;
   description: string;
+  isFuture?: boolean;
+}
+
+export interface CraftsmanshipStat {
+  value: string;
+  label: string;
 }
 
 export interface Craftsmanship {
   heading: string;
+  headingAccent?: string;
   description: string;
   image: ImageContent;
+  stats?: CraftsmanshipStat[];
 }
 
 export interface StoryCTA {
   heading: string;
+  headingAccent?: string;
   subheading: string;
   buttonText: string;
   buttonLink: string;
   buttonAriaLabel: string;
+  previewImage?: ImageContent;
 }
 
 export interface OurStoryContent {
