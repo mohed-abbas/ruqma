@@ -1,4 +1,7 @@
+'use client';
+
 import React from 'react';
+import { motion } from 'framer-motion';
 import StoreCard from './StoreCard';
 import { PartnerStore } from '@/types/content';
 
@@ -10,24 +13,52 @@ export default function PartnerStoresGrid({ stores }: PartnerStoresGridProps) {
   return (
     <section
       id="partner-stores"
-      className="bg-white py-20"
-      style={{ scrollMarginTop: '80px' }}
+      className="py-24 lg:py-32"
+      style={{
+        background: 'var(--wtb-bg-light)',
+        scrollMarginTop: '80px',
+      }}
     >
-      <div className="max-w-[1234px] mx-auto px-4">
+      <div
+        className="mx-auto"
+        style={{
+          maxWidth: 'var(--wtb-container-max)',
+          padding: `0 var(--wtb-container-padding)`,
+        }}
+      >
         {/* Section Header */}
-        <div className="mb-16 text-center">
-          <h2 className="font-[var(--font-ibm)] font-semibold text-[clamp(2.5rem,5vw,4rem)] leading-[1.2] text-[#151715]">
-            Our <span className="text-[var(--color-primary)]">Partner Stores</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-100px' }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-16 text-center"
+        >
+          <h2
+            className="font-semibold leading-[1.2]"
+            style={{
+              fontFamily: 'var(--font-ibm)',
+              fontSize: 'var(--wtb-section-title-size)',
+              color: 'var(--wtb-text-dark)',
+            }}
+          >
+            Our <span style={{ color: 'var(--wtb-text-accent)' }}>Partner Stores</span>
           </h2>
-          <p className="mt-4 text-lg font-[var(--font-nunito)] text-[#151715]/80 max-w-2xl mx-auto">
+          <p
+            className="mt-4 text-lg max-w-2xl mx-auto"
+            style={{
+              fontFamily: 'var(--font-nunito)',
+              color: 'var(--wtb-text-dark-secondary)',
+            }}
+          >
             Visit these carefully selected partner locations to experience Ruqma products in person
           </p>
-        </div>
+        </motion.div>
 
         {/* Stores Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {stores.map((store) => (
-            <StoreCard key={store.id} store={store} />
+          {stores.map((store, index) => (
+            <StoreCard key={store.id} store={store} index={index} />
           ))}
         </div>
       </div>

@@ -167,6 +167,8 @@ export interface WhereToBuyHero {
   title: string;
   titleAccent: string;
   subtitle: string;
+  ctaText?: string;
+  ctaAriaLabel?: string;
 }
 
 export interface StoreLocation {
@@ -198,13 +200,6 @@ export interface PartnerStore {
   featured: boolean;
 }
 
-export interface StoreLocator {
-  heading: string;
-  description: string;
-  comingSoon: boolean;
-  placeholder: string;
-}
-
 export interface StoreFeature {
   icon: string;
   title: string;
@@ -222,7 +217,6 @@ export interface PartnerCTA {
 export interface WhereToBuyContent {
   hero: WhereToBuyHero;
   introduction: StoryIntroduction;
-  storeLocator: StoreLocator;
   stores: PartnerStore[];
   features: StoreFeature[];
   partnerCTA: PartnerCTA;

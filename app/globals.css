@@ -82,6 +82,65 @@
   --story-timeline-line: rgba(212, 175, 55, 0.3);
   --story-timeline-dot: var(--color-primary);
   --story-timeline-dot-size: 1rem;
+
+  /* ============================================
+     Where to Buy Page Design Tokens
+     Premium partner store discovery experience
+     ============================================ */
+
+  /* WTB Core Colors */
+  --wtb-bg-dark: #151715;
+  --wtb-bg-light: #f9fafb;
+  --wtb-text-primary: var(--white);
+  --wtb-text-accent: var(--color-primary);
+  --wtb-text-secondary: rgba(255, 255, 255, 0.8);
+  --wtb-text-muted: rgba(255, 255, 255, 0.6);
+  --wtb-text-dark: #151715;
+  --wtb-text-dark-secondary: #6b7280;
+
+  /* WTB Card System */
+  --wtb-card-bg: var(--white);
+  --wtb-card-bg-hover: #fafafa;
+  --wtb-card-border: transparent;
+  --wtb-card-border-hover: var(--color-primary);
+  --wtb-card-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+  --wtb-card-shadow-hover: 0px 8px 30px rgba(212, 175, 55, 0.15);
+  --wtb-card-radius: 1rem;
+
+  /* WTB Feature Card System (different from store cards) */
+  --wtb-feature-bg: rgba(255, 255, 255, 0.05);
+  --wtb-feature-border: rgba(212, 175, 55, 0.2);
+  --wtb-feature-shadow: 0px 4px 30px rgba(0, 0, 0, 0.3);
+  --wtb-feature-backdrop-blur: 10px;
+
+  /* WTB Button System */
+  --wtb-button-bg: var(--color-primary);
+  --wtb-button-text: var(--black);
+  --wtb-button-shadow: 0px -4px 5.8px 0px inset rgba(161,161,161,0.25), 0px 4px 2.6px 0px inset rgba(255,255,255,0.25);
+  --wtb-button-radius: 3.25rem;
+
+  /* WTB Typography */
+  --wtb-title-size: clamp(3rem, 8vw, 6.25rem);
+  --wtb-section-title-size: clamp(2rem, 5vw, 3rem);
+  --wtb-body-size: clamp(1rem, 2vw, 1.25rem);
+  --wtb-card-title-size: 1.25rem;
+
+  /* WTB Layout */
+  --wtb-container-max: 1234px;
+  --wtb-container-padding: clamp(1.25rem, 5vw, 5rem);
+  --wtb-section-gap: clamp(4rem, 8vw, 8rem);
+
+  /* WTB Search Bar */
+  --wtb-search-bg: rgba(255, 255, 255, 0.1);
+  --wtb-search-border: rgba(212, 175, 55, 0.3);
+  --wtb-search-text: var(--white);
+  --wtb-search-placeholder: rgba(255, 255, 255, 0.5);
+
+  /* WTB Animation System */
+  --wtb-transition-fast: 200ms;
+  --wtb-transition-base: 300ms;
+  --wtb-transition-slow: 500ms;
+  --wtb-easing: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -223,4 +282,31 @@ body {
 .image-loaded {
   filter: blur(0);
   transform: scale(1);
+}
+
+/* ============================================
+   Reduced Motion - Where to Buy Page
+   Respect user preferences for motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable hover scale transforms */
+  [id="partner-stores"] .group:hover,
+  [id="store-showcase"] .group:hover {
+    transform: none !important;
+  }
+
+  /* Reduce transition durations */
+  [id="where-to-buy-hero"] *,
+  [id="store-showcase"] *,
+  [id="partner-stores"] *,
+  [id="partner-cta"] * {
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Disable image loading blur effect */
+  .image-loading {
+    filter: none;
+    transform: none;
+    transition: none;
+  }
 }

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import DarkVeil from '@/components/Background';
 import { WhereToBuyHero as WhereToBuyHeroType } from '@/types/content';
 
 interface WhereToBuyHeroProps {
@@ -9,41 +10,70 @@ interface WhereToBuyHeroProps {
 }
 
 export default function WhereToBuyHero({ content }: WhereToBuyHeroProps) {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="where-to-buy-hero"
-      className="relative w-full h-[60vh] min-h-[500px] overflow-hidden bg-black"
+      className="relative w-full h-screen overflow-hidden"
       role="banner"
       aria-labelledby="where-to-buy-hero-title"
     >
-      {/* Gradient Background */}
-      <div
-        className="absolute inset-0 w-full h-full"
-        style={{
-          background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)'
-        }}
-        aria-hidden="true"
-      />
+      {/* Background with DarkVeil */}
+      <div className="absolute inset-0 w-full h-full" aria-hidden="true">
+        <DarkVeil
+          hueShift={210}
+          speed={1.5}
+          noiseIntensity={0}
+          scanlineIntensity={0}
+          scanlineFrequency={0}
+          warpAmount={0}
+        />
+      </div>
 
       {/* Hero Content */}
       <div className="relative z-10 flex items-center justify-center h-full">
         <motion.div
-          initial={{ y: 10, opacity: 0 }}
+          initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          exit={{ y: -10, opacity: 0 }}
-          transition={{ duration: 0.8, ease: 'easeInOut' }}
+          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="text-center max-w-4xl px-4"
         >
+          {/* Main Heading */}
           <h1
             id="where-to-buy-hero-title"
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-[var(--font-ibm)] leading-[1.2] mb-6 capitalize"
+            className="text-7xl sm:text-8xl md:text-9xl lg:text-[var(--wtb-title-size)] font-[var(--font-ibm)] leading-[1.2] mb-6 capitalize"
           >
-            <span className="text-white">{content.title}</span>
-            <span className="text-[var(--color-primary)] ml-3">{content.titleAccent}</span>
+            <span className="text-[var(--wtb-text-primary)]">{content.title}</span>
+            <span className="text-[var(--wtb-text-accent)] ml-3">{content.titleAccent}</span>
           </h1>
-          <p className="text-2xl sm:text-3xl md:text-4xl text-white/80 leading-[1.3] font-[var(--font-nunito)]">
+
+          {/* Subtitle */}
+          <p className="mb-12 text-2xl sm:text-3xl md:text-4xl text-[var(--wtb-text-secondary)] leading-[1.3] font-[var(--font-nunito)]">
             {content.subtitle}
           </p>
+
+          {/* CTA Button */}
+          {content.ctaText && (
+            <button
+              onClick={() => scrollToSection('partner-stores')}
+              className="bg-[var(--wtb-button-bg)] hover:bg-[#b8951f] text-[var(--wtb-button-text)] px-6 py-3 rounded-[var(--wtb-button-radius)] font-bold text-sm capitalize transition-all duration-200 hover:shadow-lg hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-[var(--wtb-text-accent)] focus:ring-offset-2 focus:ring-offset-black"
+              style={{
+                fontFamily: 'var(--font-nunito)',
+                fontVariationSettings: "'YTLC' 500, 'wdth' 100",
+                boxShadow: 'var(--wtb-button-shadow)'
+              }}
+              aria-label={content.ctaAriaLabel || 'Scroll to explore stores'}
+              type="button"
+            >
+              {content.ctaText}
+            </button>
+          )}
         </motion.div>
       </div>
     </section>

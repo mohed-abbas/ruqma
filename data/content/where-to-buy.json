@@ -2,7 +2,9 @@
   "hero": {
     "title": "Where to",
     "titleAccent": "Buy?",
-    "subtitle": "Discover Our Trusted Partner Stores"
+    "subtitle": "Discover Our Trusted Partner Stores",
+    "ctaText": "Explore Partner Stores",
+    "ctaAriaLabel": "Scroll to explore partner stores"
   },
   "introduction": {
     "heading": "Experience Ruqma In Person",
