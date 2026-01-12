@@ -198,7 +198,7 @@ export async function POST(request: NextRequest) {
     const tags = [_type, `${_type}:${_id}`] // e.g., ['testimonials', 'testimonials:abc123']
     try {
       for (const tag of tags) {
-        revalidateTag(tag)
+        revalidateTag(tag, 'max')
       }
     } catch (error) {
       console.error('[Revalidation] Tag revalidation failed:', error)
